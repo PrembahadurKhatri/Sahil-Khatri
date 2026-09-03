@@ -33,18 +33,18 @@ import {
 // -----------------------------------------------------------------------
 
 export const profile = {
-  name: "Sahil Khatri",
+  name: "Prem Bahadur Khatri",
   initials: "SK",
   roles: ["Full-Stack Developer", "Backend-Focused Engineer", "Problem Solver"],
   tagline: "I build fast, reliable web applications from database to interface.",
   bio: "I'm a full-stack developer who enjoys the whole path from a data model to a finished interface. Most of my work lives in React on the front end and Node.js/Express on the back — with a habit of caring about the parts nobody sees, like clean APIs, sane auth, and code the next person can actually read.",
-  location: "Kathmandu, Nepal",
-  email: "hello@sahilkhatri.dev",
-  phone: "+977 98XXXXXXXX",
+  location: "Pokhara,Nepal",
+  email: "sahilkhatrii750@gmail.com",
+  phone: "+977 9827169125",
   // Digits only, country code first, no "+" or spaces — used to build the wa.me link.
-  whatsapp: "9779812345678",
-  photo: "/avatar-placeholder.svg",
-  resumeUrl: "/resume.pdf",
+  whatsapp: "9779827169125",
+  photo: "/mee.jpg",
+
   availability: "Open to freelance & full-time opportunities",
   mapEmbedUrl:
     "https://www.openstreetmap.org/export/embed.html?bbox=85.2794%2C27.6644%2C85.3794%2C27.7444&layer=mapnik&marker=27.7044%2C85.3294",

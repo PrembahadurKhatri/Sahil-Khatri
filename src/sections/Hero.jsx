@@ -14,8 +14,8 @@ export default function Hero() {
     >
       <div className="container-x relative z-10 grid gap-16 pt-28 pb-20 md:grid-cols-12 md:items-center md:pt-16">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="md:col-span-7"
         >
@@ -58,8 +58,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-sm md:col-span-5 md:max-w-none"
         >
