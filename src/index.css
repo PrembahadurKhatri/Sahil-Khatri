@@ -37,7 +37,7 @@ html {
 }
 
 body {
-  @apply bg-base text-ink font-sans antialiased;
+  @apply bg-base text-ink font-body antialiased;
   font-feature-settings: "ss01" 1, "cv11" 1;
 }
 

@@ -2,6 +2,7 @@ import { useTheme } from "./hooks/useTheme.js";
 import Navbar from "./components/Navbar.jsx";
 import ScrollProgressBar from "./components/ScrollProgressBar.jsx";
 import BackToTop from "./components/BackToTop.jsx";
+import WhatsAppButton from "./components/WhatsAppButton.jsx";
 import Hero from "./sections/Hero.jsx";
 import About from "./sections/About.jsx";
 import Skills from "./sections/Skills.jsx";
@@ -29,6 +30,7 @@ export default function App() {
       </main>
       <Footer />
       <BackToTop />
+      <WhatsAppButton />
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function BackToTop() {
           transition={{ duration: 0.25 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface border border-line text-ink shadow-card hover:text-accent hover:border-accent/50 transition-colors"
+          className="fixed bottom-24 right-6 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface border border-line text-ink shadow-card hover:text-accent hover:border-accent/50 transition-colors md:bottom-[5.5rem]"
         >
           <FiArrowUp size={18} />
         </motion.button>

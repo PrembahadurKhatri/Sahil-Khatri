@@ -52,7 +52,8 @@ Hero → About → Skills → **Education** → Experience → Projects → **Co
   `mapLinkUrl`) — update the bbox/marker coordinates to your real location.
 - **Project images** (`public/projects/*.svg`) are simple generated placeholders — swap for real
   screenshots.
-- **`profile.phone`** and social links are placeholders.
+- **`profile.phone`**, **`profile.whatsapp`** (digits only, used to build the fixed WhatsApp button's
+  `wa.me` link), and social links are all placeholders.
 
 ## Running it
 

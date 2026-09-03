@@ -41,6 +41,8 @@ export const profile = {
   location: "Kathmandu, Nepal",
   email: "hello@sahilkhatri.dev",
   phone: "+977 98XXXXXXXX",
+  // Digits only, country code first, no "+" or spaces — used to build the wa.me link.
+  whatsapp: "9779812345678",
   photo: "/avatar-placeholder.svg",
   resumeUrl: "/resume.pdf",
   availability: "Open to freelance & full-time opportunities",
