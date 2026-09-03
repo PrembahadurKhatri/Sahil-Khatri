@@ -1,5 +1,6 @@
-import { FiArrowRight, FiArrowUp, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import { FiArrowRight, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
+import CtaButton from "../components/CtaButton.jsx";
 import { profile } from "../data/content.js";
 
 const YEAR = new Date().getFullYear();
@@ -15,6 +16,8 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t border-line bg-surface">
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" aria-hidden="true" />
+
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-10 -right-6 hidden select-none font-display text-[14rem] font-medium leading-none text-ink/[0.03] md:block"
@@ -25,48 +28,52 @@ export default function Footer() {
       <div className="container-x relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-6">
+            <span className="eyebrow mb-5">Available for work</span>
             <a
               href="#hero"
               onClick={(e) => {
                 e.preventDefault();
                 scrollTo("hero");
               }}
-              className="font-display text-2xl font-medium text-ink"
+              className="block font-display text-3xl font-medium text-ink"
             >
               {profile.name}
               <span className="text-accent">.</span>
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">{profile.tagline}</p>
 
-            <button
-              type="button"
-              onClick={() => scrollTo("contact")}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
-            >
-              Let's Talk
-              <FiArrowRight size={15} />
-            </button>
+            <div className="mt-7">
+              <CtaButton onClick={() => scrollTo("contact")} icon={FiArrowRight}>
+                Let's Talk
+              </CtaButton>
+            </div>
           </Reveal>
 
-          <Reveal delay={0.08} className="md:col-span-6">
+          <Reveal delay={0.08} className="md:col-span-6 md:pl-6 lg:pl-12">
             <h3 className="text-xs font-semibold uppercase tracking-widest2 text-ink-faint">Get in Touch</h3>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-5 flex flex-col gap-4">
               {DETAILS.map((detail) => (
                 <li key={detail.value}>
                   <a
                     href={detail.href}
                     target={detail.href.startsWith("http") ? "_blank" : undefined}
                     rel={detail.href.startsWith("http") ? "noreferrer" : undefined}
-                    className="inline-flex items-center gap-2.5 text-sm text-ink-muted transition-colors hover:text-accent"
+                    className="group inline-flex items-center gap-3 text-sm text-ink-muted transition-colors hover:text-ink"
                   >
-                    <detail.icon size={14} className="shrink-0 text-accent" />
+                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform group-hover:scale-105">
+                      <detail.icon size={14} />
+                    </span>
                     {detail.value}
                   </a>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-6 flex gap-3">
+            <div className="mt-7 flex items-center gap-3">
+              <span className="text-xs uppercase tracking-widest2 text-ink-faint">Follow</span>
+              <span className="h-px flex-1 bg-line" />
+            </div>
+            <div className="mt-4 flex gap-3">
               {profile.socials.map((social) => (
                 <a
                   key={social.label}
@@ -85,18 +92,11 @@ export default function Footer() {
       </div>
 
       <div className="relative border-t border-line">
-        <div className="container-x flex flex-col items-center justify-between gap-4 py-6 text-xs text-ink-faint sm:flex-row">
+        <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-ink-faint sm:flex-row">
           <p>
             © {YEAR} {profile.name}. All rights reserved.
           </p>
-          <button
-            type="button"
-            onClick={() => scrollTo("hero")}
-            className="inline-flex items-center gap-1.5 transition-colors hover:text-accent"
-          >
-            Back to top
-            <FiArrowUp size={12} />
-          </button>
+          <p>Built with React, Tailwind CSS &amp; Framer Motion.</p>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 import { FiMail, FiMapPin, FiPhone, FiArrowUpRight } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import CtaButton from "../components/CtaButton.jsx";
 import { profile } from "../data/content.js";
 
 const FIELDS = [
@@ -42,15 +43,16 @@ export default function Contact() {
               ))}
             </ul>
 
-            <div>
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
-              >
-                Say Hello <FiArrowUpRight size={16} />
-              </a>
+            <div className="mt-8 border-t border-line pt-7">
+              <CtaButton as="a" href={`mailto:${profile.email}`} icon={FiArrowUpRight}>
+                Say Hello
+              </CtaButton>
 
-              <div className="mt-7 flex gap-3 border-t border-line pt-6">
+              <div className="mt-7 flex items-center gap-3">
+                <span className="text-xs uppercase tracking-widest2 text-ink-faint">Follow</span>
+                <span className="h-px flex-1 bg-line" />
+              </div>
+              <div className="mt-4 flex gap-3">
                 {profile.socials.map((social) => (
                   <a
                     key={social.label}

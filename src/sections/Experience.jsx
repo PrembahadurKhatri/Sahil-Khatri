@@ -26,7 +26,9 @@ export default function Experience() {
                   <span className="text-sm text-accent">{job.company}</span>
                 </div>
                 <p className="mt-3 max-w-2xl text-sm md:text-base leading-relaxed text-ink-muted">
+                 <span className="text-ink-muted dark:text-white">
                   {job.description}
+                  </span>
                 </p>
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {job.tags.map((tag) => (
