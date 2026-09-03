@@ -10,7 +10,7 @@ export default function Services() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="services" className="relative py-28 sm:py-36">
+    <section id="services" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
         <SectionHeading eyebrow="Services" title="How I can help" align="center" />
 
@@ -25,8 +25,8 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className={`overflow-hidden rounded-2xl border bg-surface/40 backdrop-blur-xl transition-colors ${
-                  isOpen ? "border-electric/50" : "border-border"
+                className={`overflow-hidden rounded-2xl border bg-surface/40 transition-colors ${
+                  isOpen ? "border-accent/50" : "border-border"
                 }`}
               >
                 <button
@@ -35,7 +35,7 @@ export default function Services() {
                   className="flex w-full items-center gap-5 p-6 text-left"
                   aria-expanded={isOpen}
                 >
-                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors ${isOpen ? "bg-electric/15 text-electric" : "bg-surface2/60 text-ink-muted"}`}>
+                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors ${isOpen ? "bg-accent/15 text-accent" : "bg-surface2/60 text-ink-muted"}`}>
                     <Icon className="h-5 w-5" />
                   </span>
                   <div className="flex-1">
@@ -58,7 +58,7 @@ export default function Services() {
                       <ul className="flex flex-col gap-2 px-6 pb-6 pl-[4.75rem]">
                         {service.points.map((point) => (
                           <li key={point} className="flex items-start gap-2 text-sm text-ink-muted">
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" />
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                             {point}
                           </li>
                         ))}

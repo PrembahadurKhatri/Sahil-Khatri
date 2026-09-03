@@ -1,43 +1,43 @@
 # Sahil Khatri — Portfolio
 
-A cinematic, dark/light-toggle personal portfolio. Fully static, frontend-only — no backend,
-no database.
+A simple, professional, dark/light-toggle personal portfolio. Fully static, frontend-only — no
+backend, no database.
 
 ## Tech stack
 
 Built with **Vite + React + Tailwind CSS + Framer Motion** — not the Next.js/Three.js/GSAP/Lenis
-stack a fully literal "Awwwards 3D portfolio" brief calls for. That was a deliberate choice: a
-real WebGL scene (React Three Fiber, floating orbs, particle systems) is a much larger, higher-risk
-build — GPU/mobile compatibility, bundle size, and 60fps aren't free — for a payoff that's mostly
-"it's real 3D," not different from what's here. Every interaction in the original brief has an
-equivalent built with CSS transforms + Framer Motion instead: 3D tilt cards use real
-`perspective`/`rotateX`/`rotateY` (no canvas), the "skills galaxy" is a floating orb grid, the
-hero's ambient lighting is blurred gradient blobs reacting to the cursor, and the contact section's
-"animated Earth" is a rotating CSS ring. Lighter, faster to load, works everywhere, and still reads
-as premium.
+stack a fully literal "Awwwards 3D portfolio" brief originally called for (see git history for that
+first pass). Two design decisions, both deliberate:
+
+- **No real 3D.** No WebGL scene, no perspective-tilt cards, no floating/rotating decorative
+  elements. Everything reads through plain, flat components and Framer Motion fades/slides.
+- **One accent color, not a gradient system.** The palette is near-black + off-white + a single
+  muted gold accent (`src/index.css`'s `--color-accent`), used sparingly — small labels, one CTA,
+  active states — never as a rainbow gradient splashed across headings or a neon glow shadow. A
+  three-color electric-blue/violet/cyan gradient look was the specific thing asked not to repeat;
+  if you want to retheme it, that one CSS variable (plus its light-mode counterpart) is the only
+  thing to touch.
 
 ## What's included
 
 - **Dark/day theme toggle** (`hooks/useTheme.js`) — persisted, defaults to dark, no flash-of-
   wrong-theme on load (see the inline script in `index.html`).
-- **Loader** — animated logo, progress percentage, ambient particles.
-- **Hero** — huge animated gradient name, typing role text, magnetic CTA buttons, cursor-reactive
-  background glow, scroll indicator.
+- **Loader** — logo, progress percentage, clean fade out.
+- **Hero** — name, typing role text, CTA buttons, subtle scroll indicator.
 - **About** — bio, animated stat counters, timeline, fun facts.
-- **Skills** — floating orb grid; click any skill for a detail card (proficiency bar, project
+- **Skills** — a flat grid of skill cards; click any for a detail card (proficiency bar, project
   count, experience, description).
-- **Projects** — horizontal scroll shelf of 3D-tilt glass cards; click for a full case-study modal
-  (features, architecture, tech stack, links).
-- **Experience** — scroll-driven animated timeline.
+- **Projects** — horizontal scroll shelf of flat cards with a hover border/shadow change; click for
+  a full case-study modal (features, architecture, tech stack, links).
+- **Experience** — scroll-driven animated timeline (a simple growing line, not a 3D effect).
 - **Services** — expandable service cards.
 - **Achievements** — animated numbers + certifications list.
-- **Testimonials** — auto-advancing 3D-rotation glass cards.
-- **Contact** — glass form (client-side only — see below), floating social icons.
+- **Testimonials** — auto-advancing cards with a plain fade/slide transition.
+- **Contact** — form (client-side only — see below), social icon links.
 - **Footer** — minimal, with a back-to-top link (there's also a floating back-to-top button
   site-wide).
-- Custom cursor glow, scroll progress bar, magnetic buttons throughout, full keyboard/ARIA
-  coverage on interactive elements, and `prefers-reduced-motion` respected everywhere animation
-  appears.
+- Scroll progress bar, full keyboard/ARIA coverage on interactive elements, and
+  `prefers-reduced-motion` respected everywhere animation appears.
 - SEO: meta description, Open Graph + Twitter cards, JSON-LD `Person` structured data, favicon,
   `robots.txt`, `sitemap.xml`.
 

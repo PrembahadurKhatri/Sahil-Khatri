@@ -22,7 +22,7 @@ export default function BackToTop() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.8 }}
           whileHover={{ y: -3 }}
-          className="fixed bottom-6 right-6 z-[110] flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/80 text-ink shadow-card backdrop-blur-xl transition-colors hover:border-electric/50 hover:text-electric sm:bottom-8 sm:right-8"
+          className="fixed bottom-6 right-6 z-[110] flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/80 text-ink shadow-card transition-colors hover:border-accent/50 hover:text-accent sm:bottom-8 sm:right-8"
           aria-label="Back to top"
         >
           <FiArrowUp className="h-4 w-4" />

@@ -3,7 +3,6 @@ import useTheme from "./hooks/useTheme.js";
 import Loader from "./components/Loader.jsx";
 import Navbar from "./components/Navbar.jsx";
 import ScrollProgressBar from "./components/ScrollProgressBar.jsx";
-import CursorGlow from "./components/CursorGlow.jsx";
 import BackToTop from "./components/BackToTop.jsx";
 import Hero from "./sections/Hero.jsx";
 import About from "./sections/About.jsx";
@@ -26,7 +25,6 @@ export default function App() {
       {!loading && (
         <>
           <ScrollProgressBar />
-          <CursorGlow />
           <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
           <main>
             <Hero />

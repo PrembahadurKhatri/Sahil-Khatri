@@ -6,7 +6,7 @@ import AnimatedCounter from "../components/AnimatedCounter.jsx";
 
 export default function Achievements() {
   return (
-    <section className="relative py-28 sm:py-36">
+    <section className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading eyebrow="Achievements" title="Numbers, badges, and proof of work" align="center" />
 
@@ -21,9 +21,9 @@ export default function Achievements() {
             <motion.div
               key={item.label}
               variants={{ hidden: { opacity: 0, scale: 0.85 }, show: { opacity: 1, scale: 1 } }}
-              className="flex flex-col items-center gap-2 rounded-2xl border border-border bg-surface/40 p-8 text-center backdrop-blur-xl"
+              className="flex flex-col items-center gap-2 rounded-2xl border border-border bg-surface/40 p-8 text-center"
             >
-              <span className="font-display text-4xl font-bold gradient-text sm:text-5xl">
+              <span className="font-display text-4xl font-bold sm:text-5xl">
                 <AnimatedCounter value={item.value} />
               </span>
               <span className="font-mono text-xs uppercase tracking-wide text-ink-faint">{item.label}</span>
@@ -41,10 +41,10 @@ export default function Achievements() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
-                className="flex items-center gap-4 rounded-2xl border border-border bg-surface/30 p-5 transition-colors hover:border-electric/40"
+                className="flex items-center gap-4 rounded-2xl border border-border bg-surface/30 p-5 transition-colors hover:border-accent/40"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-electric/15 via-violet/15 to-cyan/15">
-                  <FiAward className="h-5 w-5 text-electric" />
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-surface2">
+                  <FiAward className="h-5 w-5 text-accent" />
                 </span>
                 <div>
                   <p className="font-display text-sm font-semibold leading-snug">{cert.title}</p>

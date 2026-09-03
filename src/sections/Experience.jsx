@@ -13,7 +13,7 @@ export default function Experience() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="experience" className="relative py-28 sm:py-36">
+    <section id="experience" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-4xl px-6 lg:px-10">
         <SectionHeading eyebrow="Experience" title="Where the last few years went" align="center" />
 
@@ -21,7 +21,7 @@ export default function Experience() {
           {/* Track + animated fill, scroll-linked */}
           <div className="absolute left-[27px] top-2 bottom-2 w-px bg-border sm:left-1/2 sm:-translate-x-1/2" aria-hidden="true" />
           <motion.div
-            className="absolute left-[27px] top-2 w-px bg-gradient-to-b from-electric via-violet to-cyan sm:left-1/2 sm:-translate-x-1/2"
+            className="absolute left-[27px] top-2 w-px bg-accent sm:left-1/2 sm:-translate-x-1/2"
             style={{ height: lineHeight }}
             aria-hidden="true"
           />
@@ -38,13 +38,13 @@ export default function Experience() {
                   transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   className={`relative flex gap-6 sm:gap-0 ${isRight ? "sm:flex-row-reverse sm:text-right" : ""}`}
                 >
-                  <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-border bg-surface shadow-glow sm:absolute sm:left-1/2 sm:top-0 sm:-translate-x-1/2">
-                    <FiBriefcase className="h-5 w-5 text-electric" />
+                  <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-border bg-surface sm:absolute sm:left-1/2 sm:top-0 sm:-translate-x-1/2">
+                    <FiBriefcase className="h-5 w-5 text-accent" />
                   </span>
 
                   <div className={`flex-1 sm:w-1/2 ${isRight ? "sm:pr-14" : "sm:pl-14"}`}>
-                    <div className="rounded-2xl border border-border bg-surface/50 p-6 backdrop-blur-xl transition-colors hover:border-electric/40">
-                      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cyan">{item.year}</span>
+                    <div className="rounded-xl border border-border bg-surface/50 p-6 transition-colors hover:border-accent/40">
+                      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">{item.year}</span>
                       <h3 className="mt-2 font-display text-lg font-bold">{item.role}</h3>
                       <p className="font-mono text-xs text-ink-faint">{item.company}</p>
                       <p className="mt-3 text-sm leading-relaxed text-ink-muted">{item.description}</p>

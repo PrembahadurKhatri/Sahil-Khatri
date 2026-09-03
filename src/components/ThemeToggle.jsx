@@ -8,7 +8,7 @@ export default function ThemeToggle({ isDark, onToggle, className = "" }) {
       onClick={onToggle}
       aria-label={isDark ? "Switch to day theme" : "Switch to dark theme"}
       aria-pressed={isDark}
-      className={`group relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-surface/60 backdrop-blur-xl transition-colors hover:border-electric/50 ${className}`}
+      className={`group relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-surface/60 transition-colors hover:border-accent/50 ${className}`}
     >
       <motion.span
         key={isDark ? "moon" : "sun"}
@@ -19,7 +19,7 @@ export default function ThemeToggle({ isDark, onToggle, className = "" }) {
       >
         {isDark ? <FiMoon className="h-4 w-4" /> : <FiSun className="h-4 w-4" />}
       </motion.span>
-      <span className="pointer-events-none absolute inset-0 rounded-full opacity-0 shadow-glow transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="pointer-events-none absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
     </button>
   );
 }

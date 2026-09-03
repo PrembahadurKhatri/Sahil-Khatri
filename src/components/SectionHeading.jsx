@@ -15,8 +15,8 @@ export default function SectionHeading({ eyebrow, title, subtitle, align = "left
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
       {eyebrow && (
-        <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-electric">
-          <span className="h-px w-8 bg-electric" />
+        <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          <span className="h-px w-8 bg-accent" />
           {eyebrow}
         </span>
       )}

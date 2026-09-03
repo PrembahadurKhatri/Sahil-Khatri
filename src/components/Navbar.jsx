@@ -36,12 +36,12 @@ export default function Navbar({ isDark, onToggleTheme }) {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 ${
-        scrolled ? "border-b border-border bg-base/70 backdrop-blur-xl" : "bg-transparent"
+        scrolled ? "border-b border-border bg-base/70 " : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:h-20 lg:px-10">
         <a href="#top" className="font-display text-lg font-bold tracking-tight">
-          Sahil<span className="gradient-text">.dev</span>
+          Sahil<span className="">.dev</span>
         </a>
 
         <ul className="hidden items-center gap-8 lg:flex">
@@ -49,7 +49,7 @@ export default function Navbar({ isDark, onToggleTheme }) {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative font-mono text-xs uppercase tracking-[0.15em] text-ink-muted transition-colors hover:text-ink after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-electric after:transition-all after:duration-300 hover:after:w-full"
+                className="relative font-mono text-xs uppercase tracking-[0.15em] text-ink-muted transition-colors hover:text-ink after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -84,7 +84,7 @@ export default function Navbar({ isDark, onToggleTheme }) {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-border bg-base/95 backdrop-blur-xl lg:hidden"
+            className="overflow-hidden border-t border-border bg-base/95 lg:hidden"
           >
             <ul className="flex flex-col gap-1 px-6 py-6">
               {LINKS.map((link) => (
