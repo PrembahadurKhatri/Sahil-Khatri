@@ -12,19 +12,19 @@ export default function Hero() {
       id="hero"
       className="grain relative flex min-h-[100svh] items-center overflow-hidden border-b border-line"
     >
-      <div className="container-x relative z-10 grid gap-16 pt-28 pb-20 md:grid-cols-12 md:items-center md:pt-16">
+      <div className="container-x relative z-10 grid gap-16 pt-28 pb-20 md:grid-cols-12 md:items-center md:pt-16 ">
         <motion.div
           initial={{ y: 16 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="md:col-span-7 text-yellow-600"
+          className="md:col-span-7 text-yellow-600 "
         >
         
-          <span className="inline-block rounded-full bg-accent-soft px-4 py-1 text-sm font-medium text-accent"> 
+          <span className="inline-block rounded-full bg-accent-soft px-4 py-1  text-sm font-medium text-accent"> 
             {profile.availability}
          </span>
 
-          <h1 className="font-serif text-[13vw] leading-[0.95] font-medium  sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <h1 className="font-serif text-[13vw] leading-[0.95] font-medium mt-5 sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             {profile.name}
           </h1>
 
@@ -39,7 +39,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => scrollTo("projects")}
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+              className="shine inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
               View Projects
               <FiArrowUpRight size={16} />

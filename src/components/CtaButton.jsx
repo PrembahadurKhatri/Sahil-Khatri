@@ -5,7 +5,7 @@ export default function CtaButton({ as = "button", icon: Icon = FiArrowRight, ch
 
   return (
     <Component
-      className={`group inline-flex items-center gap-4 rounded-full bg-accent py-1.5 pl-6 pr-1.5 text-sm font-semibold text-white shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-hover ${className}`}
+      className={`shine group inline-flex items-center gap-4 rounded-full bg-accent py-1.5 pl-6 pr-1.5 text-sm font-semibold text-white shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-hover ${className}`}
       {...props}
     >
       {children}

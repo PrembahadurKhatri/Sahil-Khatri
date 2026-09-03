@@ -92,7 +92,7 @@ export default function Navbar({ theme, toggleTheme }) {
           <button
             type="button"
             onClick={() => scrollTo("contact")}
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+            className="shine hidden sm:inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
           >
             Let's Talk
             <FiArrowRight size={15} />
@@ -135,7 +135,7 @@ export default function Navbar({ theme, toggleTheme }) {
                 <button
                   type="button"
                   onClick={() => scrollTo("contact")}
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                  className="shine inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
                 >
                   Let's Talk
                   <FiArrowRight size={15} />

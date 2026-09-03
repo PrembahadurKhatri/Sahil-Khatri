@@ -50,7 +50,7 @@ export default function Footer() {
           </Reveal>
 
           <Reveal delay={0.08} className="md:col-span-6 md:pl-6 lg:pl-12">
-            <h3 className="text-xs font-semibold uppercase tracking-widest2 text-ink-faint">Get in Touch</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-widest2 text-yellow-600">Get in Touch</h3>
             <ul className="mt-5 flex flex-col gap-4">
               {DETAILS.map((detail) => (
                 <li key={detail.value}>
@@ -70,7 +70,7 @@ export default function Footer() {
             </ul>
 
             <div className="mt-7 flex items-center gap-3">
-              <span className="text-xs uppercase tracking-widest2 text-ink-faint">Follow</span>
+              <span className="text-xs uppercase tracking-widest2 text-yellow-600">Follow</span>
               <span className="h-px flex-1 bg-line" />
             </div>
             <div className="mt-4 flex gap-3">
@@ -92,11 +92,11 @@ export default function Footer() {
       </div>
 
       <div className="relative border-t border-line">
-        <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-ink-faint sm:flex-row">
+        <div className="container-x flex flex-col items-center justify-center gap-3 py-6 text-xs text-ink-faint sm:flex-row">
           <p>
             © {YEAR} {profile.name}. All rights reserved.
           </p>
-          <p>Built with React, Tailwind CSS &amp; Framer Motion.</p>
+       
         </div>
       </div>
     </footer>
