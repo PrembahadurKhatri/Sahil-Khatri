@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
-  <rect width="800" height="500" fill="#1d1a17" />
-  <g fill="none" stroke="#ca7447" stroke-width="1.5" opacity="0.6">
+  <rect width="800" height="500" fill="#121715" />
+  <g fill="none" stroke="#3fae82" stroke-width="1.5" opacity="0.6">
     <circle cx="400" cy="250" r="80" />
     <circle cx="400" cy="250" r="140" />
     <circle cx="400" cy="250" r="200" />
   </g>
-  <circle cx="400" cy="250" r="34" fill="#ca7447" />
-  <circle cx="580" cy="250" r="9" fill="#f3eee7" />
-  <text x="400" y="440" font-family="Georgia, serif" font-size="34" font-weight="600" fill="#f3eee7" text-anchor="middle">Orbit Commerce</text>
+  <circle cx="400" cy="250" r="34" fill="#3fae82" />
+  <circle cx="580" cy="250" r="9" fill="#ecf1ed" />
+  <text x="400" y="440" font-family="Georgia, serif" font-size="34" font-weight="600" fill="#ecf1ed" text-anchor="middle">Orbit Commerce</text>
 </svg>

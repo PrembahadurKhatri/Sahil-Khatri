@@ -3,29 +3,29 @@
 @tailwind utilities;
 
 :root {
-  /* Light (day) palette — warm paper */
-  --color-base: 250 247 242;
-  --color-surface: 255 255 255;
-  --color-surface-2: 242 236 227;
-  --color-border: 228 220 208;
-  --color-ink: 32 28 25;
-  --color-ink-muted: 92 84 75;
-  --color-ink-faint: 142 132 120;
-  --color-accent: 165 79 38;
-  --color-accent-soft: 246 231 217;
+  /* Light palette — clean white + premium emerald */
+  --color-base: 255 255 255;
+  --color-surface: 250 251 250;
+  --color-surface-2: 242 245 242;
+  --color-border: 224 229 224;
+  --color-ink: 22 25 22;
+  --color-ink-muted: 89 96 89;
+  --color-ink-faint: 138 145 137;
+  --color-accent: 21 92 63;
+  --color-accent-soft: 222 237 228;
 }
 
 .dark {
-  /* Dark (default) palette — warm charcoal */
-  --color-base: 15 14 13;
-  --color-surface: 22 20 18;
-  --color-surface-2: 29 26 23;
-  --color-border: 43 39 35;
-  --color-ink: 243 238 231;
-  --color-ink-muted: 173 164 152;
-  --color-ink-faint: 116 107 97;
-  --color-accent: 202 116 71;
-  --color-accent-soft: 43 31 24;
+  /* Dark palette — near-black + premium emerald */
+  --color-base: 11 13 12;
+  --color-surface: 18 21 19;
+  --color-surface-2: 24 28 25;
+  --color-border: 39 45 40;
+  --color-ink: 236 241 237;
+  --color-ink-muted: 166 175 167;
+  --color-ink-faint: 110 119 111;
+  --color-accent: 84 173 132;
+  --color-accent-soft: 24 39 31;
 }
 
 * {

@@ -1,29 +1,23 @@
 import { motion } from "framer-motion";
-import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
+import { FiArrowDown, FiArrowUpRight, FiCode } from "react-icons/fi";
 import TypingText from "../components/TypingText.jsx";
-import { profile } from "../data/content.js";
+import { profile, stats } from "../data/content.js";
 
 export default function Hero() {
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const experienceStat = stats[0];
 
   return (
     <section
       id="hero"
       className="grain relative flex min-h-[100svh] items-center overflow-hidden border-b border-line"
     >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 select-none font-display text-[26vw] font-medium leading-none text-ink/[0.035] md:block"
-      >
-        {profile.initials}
-      </span>
-
-      <div className="container-x relative z-10 pt-24 pb-20 md:pt-16">
+      <div className="container-x relative z-10 grid gap-16 pt-28 pb-20 md:grid-cols-12 md:items-center md:pt-16">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl"
+          className="md:col-span-7"
         >
           <span className="eyebrow mb-8">
             <span className="relative flex h-1.5 w-1.5">
@@ -60,6 +54,32 @@ export default function Hero() {
             >
               Get in Touch
             </button>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-sm md:col-span-5 md:max-w-none"
+        >
+          <div className="absolute -top-4 -left-4 h-full w-full rounded-[2rem] bg-accent-soft" aria-hidden="true" />
+
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line shadow-card">
+            <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
+          </div>
+
+          <div className="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border border-line bg-surface px-5 py-4 shadow-card sm:-left-6">
+            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <FiCode size={18} />
+            </span>
+            <div>
+              <p className="font-display text-lg font-medium leading-none text-ink">
+                {experienceStat.value}
+                {experienceStat.suffix}
+              </p>
+              <p className="mt-1 text-xs text-ink-muted">{experienceStat.label}</p>
+            </div>
           </div>
         </motion.div>
       </div>

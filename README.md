@@ -10,8 +10,8 @@ neon gradients, no cursor/tilt gimmicks:
 
 - **Typography-led.** A serif display face (**Fraunces**) for headings paired with **Inter** for
   body/UI — the kind of pairing you'd see on an editorial site, not another dev-tool dashboard.
-- **One warm, muted accent** (a soft terracotta) over a near-black/warm-paper base, in both dark
-  (default) and light palettes — see the CSS variables at the top of `src/index.css`.
+- **Clean white / near-black base with one premium emerald-green accent**, in both dark (default)
+  and light palettes — see the CSS variables at the top of `src/index.css`.
 - **Structure over spectacle.** Hairline dividers, generous whitespace, a subtle grain texture in
   the hero, and simple scroll-fade reveals (`components/Reveal.jsx`) — no floating/rotating
   decorative shapes, no glow shadows, no parallax tilt.
@@ -41,8 +41,11 @@ Hero → About → Skills → **Education** → Experience → Projects → **Co
 - **All content lives in `src/data/content.js`** — name, bio, stats, skills, education,
   certifications, experience, projects, socials, and the map location. Nothing else needs editing
   to make this "yours."
+- **`profile.photo`** points at `/avatar-placeholder.svg`, a generated placeholder — replace with a
+  real photo (`public/your-photo.jpg`) and update the path in `content.js`.
 - **`profile.resumeUrl`** points at `/resume.pdf`, which doesn't exist yet — add your real resume
-  to `public/resume.pdf`.
+  to `public/resume.pdf` (there's currently no nav link to it; add one back in `Navbar.jsx` once
+  the file exists, if you want one).
 - **Contact form** simulates a successful submission (`sections/Contact.jsx`) — wire it to
   Formspree, Resend, EmailJS, or your own API to actually receive messages.
 - **Map** currently points at a generic Kathmandu-area location (`profile.mapEmbedUrl` /

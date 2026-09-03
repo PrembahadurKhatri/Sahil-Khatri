@@ -41,6 +41,7 @@ export const profile = {
   location: "Kathmandu, Nepal",
   email: "hello@sahilkhatri.dev",
   phone: "+977 98XXXXXXXX",
+  photo: "/avatar-placeholder.svg",
   resumeUrl: "/resume.pdf",
   availability: "Open to freelance & full-time opportunities",
   mapEmbedUrl:

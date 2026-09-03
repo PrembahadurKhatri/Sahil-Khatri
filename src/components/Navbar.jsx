@@ -81,13 +81,6 @@ export default function Navbar({ theme, toggleTheme }) {
 
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-          <a
-            href={profile.resumeUrl}
-            download
-            className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-medium text-ink hover:border-accent hover:text-accent transition-colors"
-          >
-            Resume
-          </a>
         </div>
 
         <div className="flex md:hidden items-center gap-2">
@@ -126,11 +119,6 @@ export default function Navbar({ theme, toggleTheme }) {
                   </button>
                 </li>
               ))}
-              <li className="py-3">
-                <a href={profile.resumeUrl} download className="text-base text-ink-muted">
-                  Download Resume
-                </a>
-              </li>
             </ul>
           </motion.div>
         )}
