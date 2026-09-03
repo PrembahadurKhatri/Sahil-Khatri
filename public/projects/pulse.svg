@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#0a0a0f" />
+  <rect width="800" height="500" fill="url(#b)" opacity="0.18" />
+  <polyline points="60,380 180,300 280,340 380,220 480,260 580,150 720,190" fill="none" stroke="url(#b)" stroke-width="4" opacity="0.7" />
+  <text x="400" y="260" font-family="Space Grotesk, sans-serif" font-size="42" font-weight="700" fill="#ffffff" text-anchor="middle">Pulse Analytics</text>
+</svg>

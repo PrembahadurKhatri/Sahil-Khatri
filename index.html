@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050505" />
+    <title>Sahil Khatri — Creative Developer</title>
+    <meta
+      name="description"
+      content="Sahil Khatri — Creative Developer & Full Stack Engineer building fast, polished, production-grade web experiences. Portfolio, projects, and contact."
+    />
+    <meta name="keywords" content="Sahil Khatri, Full Stack Developer, Creative Developer, Web Developer, Portfolio, React Developer, Nepal" />
+    <meta name="author" content="Sahil Khatri" />
+    <link rel="canonical" href="https://sahilkhatri.dev/" />
+
+    <!-- Open Graph — replace og-image with a real 1200x630 PNG/JPG before
+         going live; social platforms are inconsistent about rendering SVG
+         previews, so the favicon is a safe (if plain) placeholder for now. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sahil Khatri — Creative Developer" />
+    <meta property="og:description" content="Creative Developer & Full Stack Engineer building fast, polished, production-grade web experiences." />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:url" content="https://sahilkhatri.dev/" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sahil Khatri — Creative Developer" />
+    <meta name="twitter:description" content="Creative Developer & Full Stack Engineer building fast, polished, production-grade web experiences." />
+    <meta name="twitter:image" content="/favicon.svg" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sahil Khatri",
+        "jobTitle": "Creative Developer",
+        "url": "https://sahilkhatri.dev/",
+        "sameAs": [
+          "https://github.com/",
+          "https://linkedin.com/",
+          "https://twitter.com/",
+          "https://instagram.com/"
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Runs before React mounts so the correct theme class is already on
+         <html> for the very first paint — otherwise the page would flash
+         the default dark theme for a frame even on a stored "light"
+         preference. Kept in sync with hooks/useTheme.js's storage key and
+         default. -->
+    <script>
+      (function () {
+        var stored = localStorage.getItem("sahilkhatri-theme");
+        var isDark = stored === "light" ? false : true;
+        document.documentElement.classList.toggle("dark", isDark);
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

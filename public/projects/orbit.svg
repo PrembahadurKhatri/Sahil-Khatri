@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="c" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#0a0a0f" />
+  <rect width="800" height="500" fill="url(#c)" opacity="0.18" />
+  <g opacity="0.6" fill="none" stroke="url(#c)" stroke-width="1.5">
+    <ellipse cx="400" cy="250" rx="220" ry="80" />
+    <ellipse cx="400" cy="250" rx="80" ry="220" />
+  </g>
+  <circle cx="400" cy="250" r="18" fill="url(#c)" />
+  <text x="400" y="380" font-family="Space Grotesk, sans-serif" font-size="42" font-weight="700" fill="#ffffff" text-anchor="middle">Orbit Commerce</text>
+</svg>
