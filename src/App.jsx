@@ -1,46 +1,34 @@
-import { useState } from "react";
-import useTheme from "./hooks/useTheme.js";
-import Loader from "./components/Loader.jsx";
+import { useTheme } from "./hooks/useTheme.js";
 import Navbar from "./components/Navbar.jsx";
 import ScrollProgressBar from "./components/ScrollProgressBar.jsx";
 import BackToTop from "./components/BackToTop.jsx";
 import Hero from "./sections/Hero.jsx";
 import About from "./sections/About.jsx";
 import Skills from "./sections/Skills.jsx";
-import Projects from "./sections/Projects.jsx";
+import Education from "./sections/Education.jsx";
 import Experience from "./sections/Experience.jsx";
-import Services from "./sections/Services.jsx";
-import Achievements from "./sections/Achievements.jsx";
-import Testimonials from "./sections/Testimonials.jsx";
+import Projects from "./sections/Projects.jsx";
 import Contact from "./sections/Contact.jsx";
 import Footer from "./sections/Footer.jsx";
 
 export default function App() {
-  const { isDark, toggleTheme } = useTheme();
-  const [loading, setLoading] = useState(true);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <>
-      <Loader onDone={() => setLoading(false)} />
-      {!loading && (
-        <>
-          <ScrollProgressBar />
-          <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
-          <main>
-            <Hero />
-            <About />
-            <Skills />
-            <Projects />
-            <Experience />
-            <Services />
-            <Achievements />
-            <Testimonials />
-            <Contact />
-          </main>
-          <Footer />
-          <BackToTop />
-        </>
-      )}
-    </>
+    <div className="min-h-screen bg-base text-ink">
+      <ScrollProgressBar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Education />
+        <Experience />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+      <BackToTop />
+    </div>
   );
 }

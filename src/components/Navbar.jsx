@@ -2,77 +2,103 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import ThemeToggle from "./ThemeToggle.jsx";
-import MagneticButton from "./MagneticButton.jsx";
+import { profile } from "../data/content.js";
 
 const LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#services", label: "Services" },
-  { href: "#contact", label: "Contact" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "education", label: "Education" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
 ];
 
-export default function Navbar({ isDark, onToggleTheme }) {
+export default function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+    const sections = LINKS.map((l) => document.getElementById(l.id)).filter(Boolean);
+    if (!sections.length) return;
 
-  const handleLinkClick = () => setOpen(false);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleNavClick = (id) => {
+    setOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 ${
-        scrolled ? "border-b border-border bg-base/70 " : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
+        scrolled ? "bg-base/85 backdrop-blur-md border-b border-line" : "bg-transparent border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:h-20 lg:px-10">
-        <a href="#top" className="font-display text-lg font-bold tracking-tight">
-          Sahil<span className="">.dev</span>
+      <nav className="container-x flex items-center justify-between h-16 md:h-20">
+        <a
+          href="#hero"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick("hero");
+          }}
+          className="font-display text-lg font-medium text-ink tracking-tight"
+        >
+          {profile.initials}<span className="text-accent">.</span>
         </a>
 
-        <ul className="hidden items-center gap-8 lg:flex">
+        <ul className="hidden md:flex items-center gap-1">
           {LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="relative font-mono text-xs uppercase tracking-[0.15em] text-ink-muted transition-colors hover:text-ink after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
+            <li key={link.id}>
+              <button
+                type="button"
+                onClick={() => handleNavClick(link.id)}
+                className={`px-4 py-2 text-sm rounded-full transition-colors ${
+                  active === link.id ? "text-accent" : "text-ink-muted hover:text-ink"
+                }`}
               >
                 {link.label}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
-          <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
-          <MagneticButton as="a" href="#contact" className="hidden shrink-0 lg:inline-block">
-            <span className="inline-flex items-center rounded-full bg-ink px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wide text-base transition-transform hover:scale-105">
-              Let's Talk
-            </span>
-          </MagneticButton>
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+          <a
+            href={profile.resumeUrl}
+            download
+            className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-medium text-ink hover:border-accent hover:text-accent transition-colors"
+          >
+            Resume
+          </a>
+        </div>
 
+        <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           <button
             type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((o) => !o)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-ink lg:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={open}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink"
           >
-            {open ? <FiX className="h-5 w-5" /> : <FiMenu className="h-5 w-5" />}
+            {open ? <FiX size={18} /> : <FiMenu size={18} />}
           </button>
         </div>
       </nav>
@@ -80,24 +106,31 @@ export default function Navbar({ isDark, onToggleTheme }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-border bg-base/95 lg:hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden overflow-hidden bg-base border-b border-line"
           >
-            <ul className="flex flex-col gap-1 px-6 py-6">
+            <ul className="container-x flex flex-col py-2">
               {LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={handleLinkClick}
-                    className="block rounded-lg px-3 py-3 font-mono text-sm uppercase tracking-wide text-ink-muted transition-colors hover:bg-surface hover:text-ink"
+                <li key={link.id}>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick(link.id)}
+                    className={`w-full text-left py-3 text-base ${
+                      active === link.id ? "text-accent" : "text-ink-muted"
+                    }`}
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
+              <li className="py-3">
+                <a href={profile.resumeUrl} download className="text-base text-ink-muted">
+                  Download Resume
+                </a>
+              </li>
             </ul>
           </motion.div>
         )}

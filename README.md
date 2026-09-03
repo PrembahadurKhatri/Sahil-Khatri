@@ -1,62 +1,55 @@
 # Sahil Khatri — Portfolio
 
-A simple, professional, dark/light-toggle personal portfolio. Fully static, frontend-only — no
-backend, no database.
+A static, professional personal developer portfolio with a dark/light theme toggle. No backend,
+no database — everything ships as plain HTML/CSS/JS.
 
-## Tech stack
+## Design
 
-Built with **Vite + React + Tailwind CSS + Framer Motion** — not the Next.js/Three.js/GSAP/Lenis
-stack a fully literal "Awwwards 3D portfolio" brief originally called for (see git history for that
-first pass). Two design decisions, both deliberate:
+A ground-up rebuild with an original, editorial visual language — not a SaaS-tool look, no 3D, no
+neon gradients, no cursor/tilt gimmicks:
 
-- **No real 3D.** No WebGL scene, no perspective-tilt cards, no floating/rotating decorative
-  elements. Everything reads through plain, flat components and Framer Motion fades/slides.
-- **One accent color, not a gradient system.** The palette is near-black + off-white + a single
-  muted gold accent (`src/index.css`'s `--color-accent`), used sparingly — small labels, one CTA,
-  active states — never as a rainbow gradient splashed across headings or a neon glow shadow. A
-  three-color electric-blue/violet/cyan gradient look was the specific thing asked not to repeat;
-  if you want to retheme it, that one CSS variable (plus its light-mode counterpart) is the only
-  thing to touch.
+- **Typography-led.** A serif display face (**Fraunces**) for headings paired with **Inter** for
+  body/UI — the kind of pairing you'd see on an editorial site, not another dev-tool dashboard.
+- **One warm, muted accent** (a soft terracotta) over a near-black/warm-paper base, in both dark
+  (default) and light palettes — see the CSS variables at the top of `src/index.css`.
+- **Structure over spectacle.** Hairline dividers, generous whitespace, a subtle grain texture in
+  the hero, and simple scroll-fade reveals (`components/Reveal.jsx`) — no floating/rotating
+  decorative shapes, no glow shadows, no parallax tilt.
 
-## What's included
+## Sections
 
-- **Dark/day theme toggle** (`hooks/useTheme.js`) — persisted, defaults to dark, no flash-of-
-  wrong-theme on load (see the inline script in `index.html`).
-- **Loader** — logo, progress percentage, clean fade out.
-- **Hero** — name, typing role text, CTA buttons, subtle scroll indicator.
-- **About** — bio, animated stat counters, timeline, fun facts.
-- **Skills** — a flat grid of skill cards; click any for a detail card (proficiency bar, project
-  count, experience, description).
-- **Projects** — horizontal scroll shelf of flat cards with a hover border/shadow change; click for
-  a full case-study modal (features, architecture, tech stack, links).
-- **Experience** — scroll-driven animated timeline (a simple growing line, not a 3D effect).
-- **Services** — expandable service cards.
-- **Achievements** — animated numbers + certifications list.
-- **Testimonials** — auto-advancing cards with a plain fade/slide transition.
-- **Contact** — form (client-side only — see below), social icon links.
-- **Footer** — minimal, with a back-to-top link (there's also a floating back-to-top button
-  site-wide).
-- Scroll progress bar, full keyboard/ARIA coverage on interactive elements, and
-  `prefers-reduced-motion` respected everywhere animation appears.
-- SEO: meta description, Open Graph + Twitter cards, JSON-LD `Person` structured data, favicon,
-  `robots.txt`, `sitemap.xml`.
+Hero → About → Skills → **Education** → Experience → Projects → **Contact (with an embedded map)**
+→ Footer. Education and Experience are deliberately separate sections with distinct treatments
+(a dotted timeline vs. a role list), not merged into one generic timeline.
+
+- **Hero** — name, typing role text, one-line bio, CTAs.
+- **About** — bio, quick facts, animated stat counters.
+- **Skills** — grouped by category (Frontend / Backend / Data & Infra / Tools) as clean tag lists.
+- **Education** — degree timeline + a certifications list.
+- **Experience** — role history with tech tags per role.
+- **Projects** — a card grid (first project featured, spans two columns) linking out to live/
+  GitHub — no modal, direct links.
+- **Contact** — a message form (client-side only, see below), contact info card with socials, and
+  a real embedded **OpenStreetMap** iframe (no API key required).
+- Scroll progress bar, back-to-top button, keyboard/ARIA coverage on interactive elements, and
+  `prefers-reduced-motion` respected everywhere.
+- SEO: meta description, Open Graph/Twitter tags, JSON-LD `Person` data, favicon, `robots.txt`,
+  `sitemap.xml`.
 
 ## Known placeholders — replace before going live
 
-- **All content** lives in one file: **`src/data/content.js`** — name, bio, stats, skills,
-  projects, experience, services, achievements, certificates, testimonials, social links. Nothing
-  else needs editing to make this "yours."
-- **`profile.resumeUrl`** points at `/resume.pdf`, which doesn't exist yet — drop your real resume
-  into `public/resume.pdf`.
-- **Contact form** doesn't send anywhere — it simulates a successful submission (see
-  `sections/Contact.jsx`). Wire it up to a form service (Formspree, Resend, EmailJS, your own API)
-  when you're ready to actually receive messages.
-- **Project images** (`public/projects/*.svg`) are generated placeholder graphics, not real
-  screenshots — swap them for actual project screenshots.
-- **`og-image`** meta tags point at the favicon as a safe placeholder — add a real 1200×630
-  image before sharing links on social platforms.
-- The brief's "interactive map" in Contact wasn't built — there's no real address to embed yet;
-  add a Google Maps/Mapbox embed once you have one.
+- **All content lives in `src/data/content.js`** — name, bio, stats, skills, education,
+  certifications, experience, projects, socials, and the map location. Nothing else needs editing
+  to make this "yours."
+- **`profile.resumeUrl`** points at `/resume.pdf`, which doesn't exist yet — add your real resume
+  to `public/resume.pdf`.
+- **Contact form** simulates a successful submission (`sections/Contact.jsx`) — wire it to
+  Formspree, Resend, EmailJS, or your own API to actually receive messages.
+- **Map** currently points at a generic Kathmandu-area location (`profile.mapEmbedUrl` /
+  `mapLinkUrl`) — update the bbox/marker coordinates to your real location.
+- **Project images** (`public/projects/*.svg`) are simple generated placeholders — swap for real
+  screenshots.
+- **`profile.phone`** and social links are placeholders.
 
 ## Running it
 
@@ -72,9 +65,9 @@ npm run lint
 
 ```
 src/
-├─ components/     # Reusable UI: Navbar, Loader, ThemeToggle, MagneticButton, TiltCard, ...
-├─ sections/       # One file per page section (Hero, About, Skills, Projects, ...)
-├─ hooks/          # useTheme, useMousePosition
+├─ components/     # Navbar, Reveal, SectionHeading, AnimatedCounter, TypingText, ThemeToggle, ...
+├─ sections/       # One file per page section (Hero, About, Skills, Education, ...)
+├─ hooks/          # useTheme
 ├─ data/           # content.js — the single source of truth for all copy
 ├─ App.jsx
 ├─ main.jsx

@@ -1,34 +1,35 @@
-import { useEffect, useRef } from "react";
-import { animate, useInView, useMotionValue, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "framer-motion";
 
-// Counts up from 0 to `value` once the element scrolls into view — used
-// by the About stats strip and the Achievements section.
-export default function AnimatedCounter({ value, suffix = "", duration = 1.6, className = "" }) {
+export default function AnimatedCounter({ value, suffix = "", duration = 1.4, className = "" }) {
   const ref = useRef(null);
-  const spanRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const prefersReducedMotion = useReducedMotion();
-  const motionValue = useMotionValue(0);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const reduceMotion = useReducedMotion();
+  const [display, setDisplay] = useState(reduceMotion ? value : 0);
 
   useEffect(() => {
     if (!isInView) return;
-    if (prefersReducedMotion) {
-      if (spanRef.current) spanRef.current.textContent = `${value}${suffix}`;
+    if (reduceMotion) {
+      setDisplay(value);
       return;
     }
-    const controls = animate(motionValue, value, {
-      duration,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (latest) => {
-        if (spanRef.current) spanRef.current.textContent = `${Math.round(latest).toLocaleString()}${suffix}`;
-      },
-    });
-    return () => controls.stop();
-  }, [isInView, value, suffix, duration, prefersReducedMotion, motionValue]);
+
+    let raf;
+    const start = performance.now();
+    const animate = (now) => {
+      const progress = Math.min((now - start) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(eased * value));
+      if (progress < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [isInView, value, duration, reduceMotion]);
 
   return (
     <span ref={ref} className={className}>
-      <span ref={spanRef}>0{suffix}</span>
+      {display}
+      {suffix}
     </span>
   );
 }

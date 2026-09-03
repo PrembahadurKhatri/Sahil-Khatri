@@ -1,16 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
-  <defs>
-    <linearGradient id="a" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#3b82f6" />
-      <stop offset="100%" stop-color="#8b5cf6" />
-    </linearGradient>
-  </defs>
-  <rect width="800" height="500" fill="#0a0a0f" />
-  <rect width="800" height="500" fill="url(#a)" opacity="0.18" />
-  <g opacity="0.5" stroke="url(#a)" stroke-width="1.5">
-    <circle cx="400" cy="250" r="120" />
-    <circle cx="400" cy="250" r="180" />
-    <circle cx="400" cy="250" r="60" />
+  <rect width="800" height="500" fill="#1d1a17" />
+  <g stroke="#ca7447" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="125" x2="800" y2="125" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    <line x1="0" y1="375" x2="800" y2="375" />
+    <line x1="200" y1="0" x2="200" y2="500" />
+    <line x1="400" y1="0" x2="400" y2="500" />
+    <line x1="600" y1="0" x2="600" y2="500" />
   </g>
-  <text x="400" y="260" font-family="Space Grotesk, sans-serif" font-size="42" font-weight="700" fill="#ffffff" text-anchor="middle">Aurora CMS</text>
+  <rect x="300" y="180" width="200" height="140" rx="10" fill="#ca7447" opacity="0.85" />
+  <text x="400" y="420" font-family="Georgia, serif" font-size="34" font-weight="600" fill="#f3eee7" text-anchor="middle">Aurora CMS</text>
 </svg>

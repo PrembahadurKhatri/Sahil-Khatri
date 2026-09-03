@@ -1,130 +1,151 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { FiCheckCircle, FiMapPin, FiSend } from "react-icons/fi";
-import { profile } from "../data/content.js";
+import { FiMail, FiMapPin, FiPhone, FiCheck, FiArrowUpRight } from "react-icons/fi";
+import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
-import MagneticButton from "../components/MagneticButton.jsx";
+import { profile } from "../data/content.js";
 
-const EMPTY_FORM = { name: "", email: "", message: "" };
+const FIELDS = [
+  { icon: FiMail, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+  { icon: FiPhone, label: "Phone", value: profile.phone, href: `tel:${profile.phone.replace(/\s+/g, "")}` },
+  { icon: FiMapPin, label: "Location", value: profile.location, href: profile.mapLinkUrl },
+];
 
 export default function Contact() {
-  const [form, setForm] = useState(EMPTY_FORM);
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | sent
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      setStatus("error");
-      return;
-    }
     setStatus("sending");
-    // Static site, no backend — simulates a real submission. Wire this up
-    // to a form service (Formspree, Resend, EmailJS, ...) or your own API
-    // when you're ready to actually receive these.
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    setStatus("sent");
-    setForm(EMPTY_FORM);
+    // Static site — no backend to send to yet. Simulated success for now;
+    // wire this up to Formspree / Resend / EmailJS / your own API.
+    setTimeout(() => {
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    }, 900);
   };
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-6 lg:px-10">
-        <SectionHeading eyebrow="Contact" title="Let's build something great" subtitle="Have a project in mind, or just want to say hi? My inbox is open." />
+    <section id="contact" className="py-24 md:py-32">
+      <div className="container-x">
+        <SectionHeading
+          eyebrow="Contact"
+          title="Let's build something"
+          description="Have a project in mind, or just want to say hello? My inbox is open."
+        />
 
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col gap-8">
-            <div className="rounded-2xl border border-border bg-surface/40 p-8">
-              <p className="text-balance text-sm leading-relaxed text-ink-muted sm:text-base">{profile.bio}</p>
-
-              <div className="mt-6 flex items-center gap-2 font-mono text-sm text-ink-muted">
-                <FiMapPin className="h-4 w-4 text-accent" />
-                {profile.location}
-              </div>
-
-              <a href={`mailto:${profile.email}`} className="mt-2 block font-mono text-sm text-ink-muted transition-colors hover:text-accent">
-                {profile.email}
-              </a>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              {profile.socials.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <MagneticButton
-                    key={social.label}
-                    as="a"
-                    href={social.href}
-                    target={social.href.startsWith("http") ? "_blank" : undefined}
-                    rel={social.href.startsWith("http") ? "noreferrer" : undefined}
-                    aria-label={social.label}
-                  >
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-ink-muted transition-colors hover:border-accent/50 hover:text-accent">
-                      <Icon className="h-4 w-4" />
-                    </span>
-                  </MagneticButton>
-                );
-              })}
-            </div>
-          </div>
-
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col gap-5 rounded-2xl border border-border bg-surface/40 p-8"
-          >
-            {status === "sent" ? (
-              <div className="flex flex-col items-center gap-3 py-10 text-center">
-                <FiCheckCircle className="h-10 w-10 text-accent" />
-                <p className="font-display text-lg font-semibold">Message sent — thank you!</p>
-                <p className="text-sm text-ink-muted">I'll get back to you as soon as I can.</p>
-              </div>
-            ) : (
-              <>
-                <div>
-                  <label className="mb-1.5 block font-mono text-xs uppercase tracking-wide text-ink-faint">Name</label>
+        <div className="grid gap-8 md:grid-cols-12">
+          <Reveal className="md:col-span-7 rounded-2xl border border-line bg-surface p-7 md:p-9">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="flex flex-col gap-2 text-sm">
+                  <span className="text-ink-muted">Name</span>
                   <input
-                    type="text"
+                    required
+                    name="name"
                     value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full rounded-lg border border-border bg-base/40 px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent/60"
+                    onChange={handleChange}
                     placeholder="Your name"
+                    className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none focus:border-accent"
                   />
-                </div>
-                <div>
-                  <label className="mb-1.5 block font-mono text-xs uppercase tracking-wide text-ink-faint">Email</label>
+                </label>
+                <label className="flex flex-col gap-2 text-sm">
+                  <span className="text-ink-muted">Email</span>
                   <input
+                    required
                     type="email"
+                    name="email"
                     value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full rounded-lg border border-border bg-base/40 px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent/60"
-                    placeholder="you@example.com"
+                    onChange={handleChange}
+                    placeholder="you@email.com"
+                    className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none focus:border-accent"
                   />
-                </div>
-                <div>
-                  <label className="mb-1.5 block font-mono text-xs uppercase tracking-wide text-ink-faint">Message</label>
-                  <textarea
-                    rows={5}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full resize-none rounded-lg border border-border bg-base/40 px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent/60"
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
+                </label>
+              </div>
+              <label className="flex flex-col gap-2 text-sm">
+                <span className="text-ink-muted">Message</span>
+                <textarea
+                  required
+                  rows={5}
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="Tell me a little about what you're building..."
+                  className="resize-none rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none focus:border-accent"
+                />
+              </label>
 
-                {status === "error" && <p className="font-mono text-xs text-red-400">Please fill in every field.</p>}
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+              >
+                {status === "sent" ? (
+                  <>
+                    <FiCheck size={16} /> Message Sent
+                  </>
+                ) : status === "sending" ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    Send Message <FiArrowUpRight size={16} />
+                  </>
+                )}
+              </button>
+            </form>
+          </Reveal>
 
-                <MagneticButton as="button" type="submit" disabled={status === "sending"} className="mt-2 w-full">
-                  <span className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-wide text-base transition-colors hover:bg-accent hover:text-ink disabled:opacity-60">
-                    {status === "sending" ? "Sending..." : "Send Message"}
-                    {status !== "sending" && <FiSend className="h-3.5 w-3.5" />}
-                  </span>
-                </MagneticButton>
-              </>
-            )}
-          </motion.form>
+          <div className="md:col-span-5 flex flex-col gap-6">
+            <Reveal delay={0.06} className="rounded-2xl border border-line bg-surface p-7 md:p-9">
+              <ul className="flex flex-col gap-6">
+                {FIELDS.map((field) => (
+                  <li key={field.label} className="flex items-start gap-4">
+                    <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+                      <field.icon size={16} />
+                    </span>
+                    <div>
+                      <p className="text-xs uppercase tracking-widest2 text-ink-faint">{field.label}</p>
+                      <a
+                        href={field.href}
+                        target={field.label === "Location" ? "_blank" : undefined}
+                        rel={field.label === "Location" ? "noreferrer" : undefined}
+                        className="text-sm font-medium text-ink hover:text-accent"
+                      >
+                        {field.value}
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-7 flex gap-3 border-t border-line pt-6">
+                {profile.socials.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={social.label}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-muted hover:border-accent hover:text-accent transition-colors"
+                  >
+                    <social.icon size={15} />
+                  </a>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1} className="overflow-hidden rounded-2xl border border-line">
+              <iframe
+                title="Location map"
+                src={profile.mapEmbedUrl}
+                className="h-56 w-full grayscale-[0.2]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

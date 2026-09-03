@@ -1,16 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
-  <defs>
-    <linearGradient id="d" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#3b82f6" />
-      <stop offset="50%" stop-color="#8b5cf6" />
-      <stop offset="100%" stop-color="#22d3ee" />
-    </linearGradient>
-  </defs>
-  <rect width="800" height="500" fill="#0a0a0f" />
-  <rect width="800" height="500" fill="url(#d)" opacity="0.18" />
-  <g opacity="0.6" stroke="url(#d)" stroke-width="2" fill="none">
-    <path d="M120,250 Q400,80 680,250" />
-    <path d="M120,250 Q400,420 680,250" />
+  <rect width="800" height="500" fill="#1d1a17" />
+  <g fill="none" stroke="#ca7447" stroke-width="3" opacity="0.85">
+    <path d="M120,250 a130,130 0 0,1 260,0" />
+    <path d="M180,250 a70,70 0 0,1 140,0" />
   </g>
-  <text x="400" y="260" font-family="Space Grotesk, sans-serif" font-size="48" font-weight="700" fill="#ffffff" text-anchor="middle">Signal</text>
+  <circle cx="250" cy="250" r="12" fill="#ca7447" />
+  <text x="440" y="420" font-family="Georgia, serif" font-size="34" font-weight="600" fill="#f3eee7" text-anchor="middle">Signal</text>
 </svg>

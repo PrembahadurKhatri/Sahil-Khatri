@@ -2,31 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------------------------------------------------------------------
-   Theme tokens — restrained, two-tone palettes (near-black/off-white +
-   ONE accent color), not a multi-color neon gradient system. Swapped by
-   toggling the `dark` class on <html> (see hooks/useTheme.js).
------------------------------------------------------------------------- */
 :root {
-  --color-base: 250 250 249; /* day background */
+  /* Light (day) palette — warm paper */
+  --color-base: 250 247 242;
   --color-surface: 255 255 255;
-  --color-surface-2: 244 244 242;
-  --color-border: 15 15 15 / 0.1;
-  --color-ink: 23 23 22;
-  --color-ink-muted: 90 90 87;
-  --color-ink-faint: 140 140 136;
-  --color-accent: 141 105 47; /* deeper gold, for contrast on light bg */
+  --color-surface-2: 242 236 227;
+  --color-border: 228 220 208;
+  --color-ink: 32 28 25;
+  --color-ink-muted: 92 84 75;
+  --color-ink-faint: 142 132 120;
+  --color-accent: 165 79 38;
+  --color-accent-soft: 246 231 217;
 }
 
 .dark {
-  --color-base: 12 12 13; /* near-black, slightly warm */
-  --color-surface: 20 20 22;
-  --color-surface-2: 27 27 30;
-  --color-border: 255 255 255 / 0.08;
-  --color-ink: 240 240 238;
-  --color-ink-muted: 160 160 156;
-  --color-ink-faint: 108 108 105;
-  --color-accent: 201 166 107; /* soft gold */
+  /* Dark (default) palette — warm charcoal */
+  --color-base: 15 14 13;
+  --color-surface: 22 20 18;
+  --color-surface-2: 29 26 23;
+  --color-border: 43 39 35;
+  --color-ink: 243 238 231;
+  --color-ink-muted: 173 164 152;
+  --color-ink-faint: 116 107 97;
+  --color-accent: 202 116 71;
+  --color-accent-soft: 43 31 24;
 }
 
 * {
@@ -37,27 +36,25 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+body {
+  @apply bg-base text-ink font-sans antialiased;
+  font-feature-settings: "ss01" 1, "cv11" 1;
 }
 
-body {
-  @apply bg-base text-ink font-sans antialiased transition-colors duration-300;
+h1, h2, h3, h4, .font-display {
+  font-family: "Fraunces", ui-serif, Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
 ::selection {
-  background: rgb(var(--color-accent) / 0.3);
+  background: rgb(var(--color-accent) / 0.22);
   color: rgb(var(--color-ink));
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar {
@@ -67,18 +64,57 @@ body {
   background: rgb(var(--color-base));
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--color-ink-faint) / 0.4);
+  background: rgb(var(--color-border));
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--color-accent) / 0.6);
+  background: rgb(var(--color-ink-faint));
 }
 
 @layer utilities {
-  .glass {
-    @apply border border-border bg-surface/70 backdrop-blur-md;
+  .container-x {
+    @apply mx-auto max-w-content px-6 md:px-10;
   }
-  .text-balance {
-    text-wrap: balance;
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-widest2 text-accent;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-8 bg-accent;
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .link-underline {
+    background-image: linear-gradient(rgb(var(--color-accent)), rgb(var(--color-accent)));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.3s ease;
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

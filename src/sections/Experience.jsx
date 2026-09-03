@@ -1,66 +1,46 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { FiBriefcase } from "react-icons/fi";
-import { experience } from "../data/content.js";
+import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import { experience } from "../data/content.js";
 
 export default function Experience() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.8", "end 0.4"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
   return (
-    <section id="experience" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-4xl px-6 lg:px-10">
-        <SectionHeading eyebrow="Experience" title="Where the last few years went" align="center" />
+    <section id="experience" className="py-24 md:py-32 border-b border-line bg-surface">
+      <div className="container-x">
+        <SectionHeading
+          eyebrow="Experience"
+          title="Where I've worked"
+          description="Roughly chronological, most recent first — the throughline is always shipping things that work."
+        />
 
-        <div ref={containerRef} className="relative">
-          {/* Track + animated fill, scroll-linked */}
-          <div className="absolute left-[27px] top-2 bottom-2 w-px bg-border sm:left-1/2 sm:-translate-x-1/2" aria-hidden="true" />
-          <motion.div
-            className="absolute left-[27px] top-2 w-px bg-accent sm:left-1/2 sm:-translate-x-1/2"
-            style={{ height: lineHeight }}
-            aria-hidden="true"
-          />
-
-          <div className="flex flex-col gap-12">
-            {experience.map((item, i) => {
-              const isRight = i % 2 === 1;
-              return (
-                <motion.div
-                  key={item.role}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className={`relative flex gap-6 sm:gap-0 ${isRight ? "sm:flex-row-reverse sm:text-right" : ""}`}
-                >
-                  <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-border bg-surface sm:absolute sm:left-1/2 sm:top-0 sm:-translate-x-1/2">
-                    <FiBriefcase className="h-5 w-5 text-accent" />
-                  </span>
-
-                  <div className={`flex-1 sm:w-1/2 ${isRight ? "sm:pr-14" : "sm:pl-14"}`}>
-                    <div className="rounded-xl border border-border bg-surface/50 p-6 transition-colors hover:border-accent/40">
-                      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">{item.year}</span>
-                      <h3 className="mt-2 font-display text-lg font-bold">{item.role}</h3>
-                      <p className="font-mono text-xs text-ink-faint">{item.company}</p>
-                      <p className="mt-3 text-sm leading-relaxed text-ink-muted">{item.description}</p>
-                      <div className={`mt-4 flex flex-wrap gap-2 ${isRight ? "sm:justify-end" : ""}`}>
-                        {item.tags.map((tag) => (
-                          <span key={tag} className="rounded-full border border-border bg-surface2/60 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide text-ink-faint">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+        <div className="flex flex-col">
+          {experience.map((job, i) => (
+            <Reveal
+              key={job.role + job.period}
+              delay={i * 0.08}
+              className="grid gap-3 border-t border-line py-9 first:border-t-0 md:grid-cols-[10rem,1fr] md:gap-10"
+            >
+              <span className="text-sm font-medium text-ink-faint">{job.period}</span>
+              <div>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 className="font-display text-xl md:text-2xl font-medium text-ink">{job.role}</h3>
+                  <span className="text-sm text-accent">{job.company}</span>
+                </div>
+                <p className="mt-3 max-w-2xl text-sm md:text-base leading-relaxed text-ink-muted">
+                  {job.description}
+                </p>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {job.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="rounded-full border border-line bg-base px-3 py-1 text-xs text-ink-muted"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

@@ -1,48 +1,34 @@
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
-// Cycles through `words`, typing and deleting each one — the hero's
-// "Creative Developer / Full Stack Engineer / AI Enthusiast" line. Under
-// prefers-reduced-motion it just shows the first word, static.
-export default function TypingText({ words, typingSpeed = 70, deletingSpeed = 40, pause = 1600, className = "" }) {
-  const prefersReducedMotion = useReducedMotion();
-  const [wordIndex, setWordIndex] = useState(0);
-  const [text, setText] = useState("");
-  const [phase, setPhase] = useState("typing"); // typing | pausing | deleting
+export default function TypingText({ words, className = "", typingSpeed = 55, pause = 1800 }) {
+  const reduceMotion = useReducedMotion();
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState(reduceMotion ? words[0] : "");
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setText(words[0] || "");
-      return;
-    }
-
-    const currentWord = words[wordIndex % words.length];
+    if (reduceMotion) return;
+    const current = words[index % words.length];
     let timeout;
 
-    if (phase === "typing") {
-      if (text.length < currentWord.length) {
-        timeout = setTimeout(() => setText(currentWord.slice(0, text.length + 1)), typingSpeed);
-      } else {
-        timeout = setTimeout(() => setPhase("pausing"), pause);
-      }
-    } else if (phase === "pausing") {
-      timeout = setTimeout(() => setPhase("deleting"), 0);
-    } else if (phase === "deleting") {
-      if (text.length > 0) {
-        timeout = setTimeout(() => setText(currentWord.slice(0, text.length - 1)), deletingSpeed);
-      } else {
-        setWordIndex((i) => (i + 1) % words.length);
-        setPhase("typing");
-      }
+    if (!deleting && text === current) {
+      timeout = setTimeout(() => setDeleting(true), pause);
+    } else if (deleting && text === "") {
+      setDeleting(false);
+      setIndex((i) => (i + 1) % words.length);
+    } else {
+      const next = deleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1);
+      timeout = setTimeout(() => setText(next), deleting ? typingSpeed / 2 : typingSpeed);
     }
 
     return () => clearTimeout(timeout);
-  }, [text, phase, wordIndex, words, typingSpeed, deletingSpeed, pause, prefersReducedMotion]);
+  }, [text, deleting, index, words, typingSpeed, pause, reduceMotion]);
 
   return (
     <span className={className}>
       {text}
-      {!prefersReducedMotion && <span className="ml-0.5 inline-block w-[2px] animate-pulse bg-current align-middle" style={{ height: "1em" }} />}
+      <span className="inline-block w-[2px] h-[1em] bg-accent align-middle ml-1 animate-pulse" aria-hidden="true" />
     </span>
   );
 }
