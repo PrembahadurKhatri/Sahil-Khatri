@@ -27,7 +27,7 @@ export default function Hero() {
             {profile.availability}
           </span>
 
-          <h1 className="font-display text-[13vw] leading-[0.95] font-medium text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <h1 className="font-serif text-[13vw] leading-[0.95] font-medium  sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             {profile.name}
           </h1>
 
@@ -84,17 +84,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => scrollTo("about")}
-        aria-label="Scroll to About section"
-        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-widest2 text-ink-faint md:flex"
-      >
-        Scroll
-        <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}>
-          <FiArrowDown size={14} />
-        </motion.span>
-      </button>
+  
     </section>
   );
 }

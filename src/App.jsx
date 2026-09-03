@@ -9,7 +9,6 @@ import Education from "./sections/Education.jsx";
 import Experience from "./sections/Experience.jsx";
 import Projects from "./sections/Projects.jsx";
 import Contact from "./sections/Contact.jsx";
-import Footer from "./sections/Footer.jsx";
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
@@ -27,7 +26,6 @@ export default function App() {
         <Projects />
         <Contact />
       </main>
-      <Footer />
       <WhatsAppButton />
     </div>
   );
