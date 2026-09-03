@@ -19,13 +19,13 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="md:col-span-7"
         >
-          <span className="eyebrow mb-8">
+        
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
             {profile.availability}
-          </span>
+         
 
           <h1 className="font-serif text-[13vw] leading-[0.95] font-medium  sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             {profile.name}
