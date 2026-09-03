@@ -17,15 +17,12 @@ export default function Hero() {
           initial={{ y: 16 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="md:col-span-7"
+          className="md:col-span-7 text-yellow-600"
         >
         
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-            </span>
+          <span className="inline-block rounded-full bg-accent-soft px-4 py-1 text-sm font-medium text-accent"> 
             {profile.availability}
-         
+         </span>
 
           <h1 className="font-serif text-[13vw] leading-[0.95] font-medium  sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             {profile.name}

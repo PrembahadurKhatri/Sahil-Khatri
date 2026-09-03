@@ -4,15 +4,6 @@ import { profile } from "../data/content.js";
 
 const YEAR = new Date().getFullYear();
 
-const LINKS = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "education", label: "Education" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
-];
-
 const DETAILS = [
   { icon: FiMail, value: profile.email, href: `mailto:${profile.email}` },
   { icon: FiPhone, value: profile.phone, href: `tel:${profile.phone.replace(/\s+/g, "")}` },
@@ -33,7 +24,7 @@ export default function Footer() {
 
       <div className="container-x relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
-          <Reveal className="md:col-span-5">
+          <Reveal className="md:col-span-6">
             <a
               href="#hero"
               onClick={(e) => {
@@ -57,24 +48,7 @@ export default function Footer() {
             </button>
           </Reveal>
 
-          <Reveal delay={0.06} className="md:col-span-3">
-            <h3 className="text-xs font-semibold uppercase tracking-widest2 text-ink-faint">Navigate</h3>
-            <ul className="mt-5 flex flex-col gap-3">
-              {LINKS.map((link) => (
-                <li key={link.id}>
-                  <button
-                    type="button"
-                    onClick={() => scrollTo(link.id)}
-                    className="text-sm text-ink-muted transition-colors hover:text-accent"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-
-          <Reveal delay={0.12} className="md:col-span-4">
+          <Reveal delay={0.08} className="md:col-span-6">
             <h3 className="text-xs font-semibold uppercase tracking-widest2 text-ink-faint">Get in Touch</h3>
             <ul className="mt-5 flex flex-col gap-3">
               {DETAILS.map((detail) => (

@@ -17,8 +17,10 @@ export default function Education() {
                   <span className="text-xs uppercase tracking-widest2 text-accent">{item.period}</span>
                   <h3 className="mt-2 font-display text-xl md:text-2xl font-medium text-ink">{item.degree}</h3>
                   <p className="mt-1 text-sm font-medium text-ink-muted">{item.institution}</p>
-                  <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-muted max-w-lg">
+                  <p className="mt-3 text-sm md:text-base leading-relaxed  dark:text-white max-w-lg ">
+                    <span className="text-ink-muted dark:text-white">
                     {item.description}
+                  </span>
                   </p>
                 </Reveal>
               ))}
