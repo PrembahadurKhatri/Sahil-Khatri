@@ -42,6 +42,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
   const scrollTo = (id) => {
     setOpen(false);
+    setActive(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -117,14 +118,14 @@ export default function Navbar({ theme, toggleTheme }) {
               transition={{ duration: 0.25 }}
               className="mt-2 overflow-hidden rounded-2xl border border-line bg-surface shadow-card lg:hidden"
             >
-              <ul className="flex flex-col px-4 py-2">
+              <ul className="flex flex-col gap-1 px-4 py-2">
                 {LINKS.map((link) => (
                   <li key={link.id}>
                     <button
                       type="button"
                       onClick={() => scrollTo(link.id)}
-                      className={`w-full text-left py-3 text-base ${
-                        active === link.id ? "text-accent" : "text-ink-muted"
+                      className={`w-full rounded-xl px-3 py-3 text-left text-base font-medium transition-colors ${
+                        active === link.id ? "bg-accent-soft text-accent" : "text-ink-muted hover:text-ink"
                       }`}
                     >
                       {link.label}
