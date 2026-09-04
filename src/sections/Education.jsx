@@ -15,7 +15,7 @@ export default function Education() {
                 <Reveal as="li" key={item.degree} delay={i * 0.08} className="relative pb-12 last:pb-0">
                   <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent bg-base" />
                   <span className="text-xs uppercase tracking-widest2 text-accent">{item.period}</span>
-                  <h3 className="mt-2 font-display text-xl md:text-2xl font-medium text-ink">{item.degree}</h3>
+                  <h3 className="mt-2 font-display text-xl md:text-2xl font-medium text-yellow-600">{item.degree}</h3>
                   <p className="mt-1 text-sm font-medium text-ink-muted">{item.institution}</p>
                   <p className="mt-3 text-sm md:text-base leading-relaxed  dark:text-white max-w-lg ">
                     <span className="text-ink-muted dark:text-white">
