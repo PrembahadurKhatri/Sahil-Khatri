@@ -23,9 +23,16 @@ export default function Hero() {
             {profile.availability}
           </span>
 
-          <h1 className="font-serif text-yellow-600 mt-5 text-[13vw] leading-[0.95] font-medium text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-            {profile.name}
-          </h1>
+          <div className="mt-5 overflow-hidden">
+            <motion.h1
+              initial={{ y: "100%" }}
+              animate={{ y: "0%" }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="font-serif text-yellow-600 text-[13vw] leading-[0.95] font-medium text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            >
+              {profile.name}
+            </motion.h1>
+          </div>
 
           <div className="mt-6 flex flex-wrap items-baseline gap-2 text-xl md:text-2xl text-ink-muted">
             <span>I'm a</span>

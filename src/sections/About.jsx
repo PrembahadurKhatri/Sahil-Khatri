@@ -2,6 +2,7 @@ import { FiMapPin, FiMail, FiCheckCircle, FiClock, FiFolder, FiLayers, FiSmile }
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import AnimatedCounter from "../components/AnimatedCounter.jsx";
+import { useSpotlight } from "../hooks/useSpotlight.js";
 import { profile, stats } from "../data/content.js";
 
 const FACTS = [
@@ -11,6 +12,28 @@ const FACTS = [
 ];
 
 const STAT_ICONS = [FiClock, FiFolder, FiLayers, FiSmile];
+
+function StatCard({ stat, delay, Icon }) {
+  const spotlight = useSpotlight();
+
+  return (
+    <Reveal
+      ref={spotlight.ref}
+      onMouseMove={spotlight.onMouseMove}
+      delay={delay}
+      whileHover={{ y: -6 }}
+      className="spotlight group rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-card"
+    >
+      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110">
+        <Icon size={16} />
+      </span>
+      <div className="mt-4 font-display text-4xl font-medium text-ink">
+        <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+      </div>
+      <p className="mt-2 text-sm text-ink-muted leading-snug">{stat.label}</p>
+    </Reveal>
+  );
+}
 
 export default function About() {
   return (
@@ -47,25 +70,9 @@ export default function About() {
 
           <div className="md:col-span-5">
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, i) => {
-                const Icon = STAT_ICONS[i % STAT_ICONS.length];
-                return (
-                  <Reveal
-                    key={stat.label}
-                    delay={0.06 * i}
-                    whileHover={{ y: -6 }}
-                    className="group rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-card"
-                  >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110">
-                      <Icon size={16} />
-                    </span>
-                    <div className="mt-4 font-display text-4xl font-medium text-ink">
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                    </div>
-                    <p className="mt-2 text-sm text-ink-muted leading-snug">{stat.label}</p>
-                  </Reveal>
-                );
-              })}
+              {stats.map((stat, i) => (
+                <StatCard key={stat.label} stat={stat} delay={0.06 * i} Icon={STAT_ICONS[i % STAT_ICONS.length]} />
+              ))}
             </div>
           </div>
         </div>

@@ -1,21 +1,17 @@
+import { forwardRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-export default function Reveal({
-  children,
-  as = "div",
-  delay = 0,
-  y = 22,
-  className = "",
-  once = true,
-  ...props
-}) {
+const Reveal = forwardRef(function Reveal(
+  { children, as = "div", delay = 0, y = 22, className = "", once = true, ...props },
+  ref
+) {
   const reduceMotion = useReducedMotion();
   const Component = motion[as] || motion.div;
 
   if (reduceMotion) {
     const Plain = as;
     return (
-      <Plain className={className} {...props}>
+      <Plain ref={ref} className={className} {...props}>
         {children}
       </Plain>
     );
@@ -23,6 +19,7 @@ export default function Reveal({
 
   return (
     <Component
+      ref={ref}
       initial={{ y }}
       whileInView={{ y: 0 }}
       viewport={{ once, margin: "-40px", amount: 0.3 }}
@@ -33,4 +30,6 @@ export default function Reveal({
       {children}
     </Component>
   );
-}
+});
+
+export default Reveal;

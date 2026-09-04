@@ -4,6 +4,7 @@ import emailjs from "@emailjs/browser";
 import { FiMail, FiMapPin, FiPhone, FiClock, FiCheck, FiAlertCircle, FiArrowRight } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import { useSpotlight } from "../hooks/useSpotlight.js";
 import { profile } from "../data/content.js";
 import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, isEmailjsConfigured } from "../config/emailjs.js";
 
@@ -19,10 +20,44 @@ const DETAILS = [
   { icon: FiClock, label: "Hours", value: profile.hours },
 ];
 
+function DetailRow({ detail, delay }) {
+  const spotlight = useSpotlight();
+
+  return (
+    <Reveal
+      ref={spotlight.ref}
+      onMouseMove={spotlight.onMouseMove}
+      delay={delay}
+      whileHover={{ y: -3 }}
+      className="spotlight group flex items-center gap-4 rounded-xl border border-line bg-surface px-5 py-4 transition-colors duration-300 hover:border-accent/50"
+    >
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110">
+        <detail.icon size={17} />
+      </span>
+      <div>
+        <p className="text-xs uppercase tracking-wide text-ink-faint">{detail.label}</p>
+        {detail.href ? (
+          <a
+            href={detail.href}
+            target={detail.href.startsWith("http") ? "_blank" : undefined}
+            rel={detail.href.startsWith("http") ? "noreferrer" : undefined}
+            className="text-sm font-medium text-ink hover:text-accent"
+          >
+            {detail.value}
+          </a>
+        ) : (
+          <p className="text-sm font-medium text-ink">{detail.value}</p>
+        )}
+      </div>
+    </Reveal>
+  );
+}
+
 export default function Contact() {
   const formRef = useRef(null);
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [errorMessage, setErrorMessage] = useState("");
+  const formSpotlight = useSpotlight();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,37 +95,15 @@ export default function Contact() {
         <div className="grid gap-8 md:grid-cols-12">
           <div className="flex flex-col gap-3 md:col-span-5">
             {DETAILS.map((detail, i) => (
-              <Reveal
-                key={detail.label}
-                delay={0.05 * i}
-                whileHover={{ y: -3 }}
-                className="group flex items-center gap-4 rounded-xl border border-line bg-surface px-5 py-4 transition-colors duration-300 hover:border-accent/50"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110">
-                  <detail.icon size={17} />
-                </span>
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-ink-faint">{detail.label}</p>
-                  {detail.href ? (
-                    <a
-                      href={detail.href}
-                      target={detail.href.startsWith("http") ? "_blank" : undefined}
-                      rel={detail.href.startsWith("http") ? "noreferrer" : undefined}
-                      className="text-sm font-medium text-ink hover:text-accent"
-                    >
-                      {detail.value}
-                    </a>
-                  ) : (
-                    <p className="text-sm font-medium text-ink">{detail.value}</p>
-                  )}
-                </div>
-              </Reveal>
+              <DetailRow key={detail.label} detail={detail} delay={0.05 * i} />
             ))}
           </div>
 
           <Reveal
+            ref={formSpotlight.ref}
+            onMouseMove={formSpotlight.onMouseMove}
             delay={0.1}
-            className="rounded-2xl border border-line bg-surface p-7 transition-all duration-300 hover:shadow-card focus-within:border-accent/50 focus-within:shadow-card md:col-span-7 md:p-9"
+            className="spotlight rounded-2xl border border-line bg-surface p-7 transition-all duration-300 hover:shadow-card focus-within:border-accent/50 focus-within:shadow-card md:col-span-7 md:p-9"
           >
             <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5">
               <label className="flex flex-col gap-2 text-sm">
