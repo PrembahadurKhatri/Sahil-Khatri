@@ -7,7 +7,8 @@ function ProjectCard({ project, delay, featured }) {
   return (
     <Reveal
       delay={delay}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-shadow hover:shadow-card ${
+      whileHover={{ y: -6 }}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/40 hover:shadow-card-hover ${
         featured ? "md:col-span-2 md:flex-row" : ""
       }`}
     >
@@ -16,19 +17,24 @@ function ProjectCard({ project, delay, featured }) {
           src={project.image}
           alt={project.title}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
         />
       </div>
 
       <div className={`flex flex-1 flex-col p-7 ${featured ? "md:w-1/2 md:justify-center" : ""}`}>
-        {featured && <span className="eyebrow mb-4">Featured</span>}
-        <h3 className="font-display text-xl md:text-2xl font-medium text-ink">{project.title}</h3>
+        {featured && <span className="eyebrow mb-4 w-fit">Featured</span>}
+        <h3 className="font-display text-xl font-medium text-ink transition-colors duration-300 group-hover:text-accent md:text-2xl">
+          {project.title}
+        </h3>
         <p className="mt-1 text-sm font-medium text-accent">{project.tagline}</p>
         <p className="mt-3 text-sm leading-relaxed text-ink-muted">{project.description}</p>
 
         <ul className="mt-4 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
-            <li key={tag} className="rounded-full border border-line px-3 py-1 text-xs text-ink-muted">
+            <li
+              key={tag}
+              className="rounded-full border border-line px-3 py-1 text-xs text-ink-muted transition-colors duration-300 group-hover:border-accent/30 group-hover:bg-accent-soft group-hover:text-accent"
+            >
               {tag}
             </li>
           ))}
@@ -39,18 +45,19 @@ function ProjectCard({ project, delay, featured }) {
             href={project.live}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-ink link-underline hover:text-accent"
+            className="group/live inline-flex items-center gap-1.5 text-ink link-underline hover:text-accent"
           >
-            Live Site <FiArrowUpRight size={14} />
+            Live Site
+            <FiArrowUpRight size={14} className="transition-transform duration-300 group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5" />
           </a>
           <a
             href={project.github}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-ink-muted hover:text-accent"
+            className="group/gh inline-flex items-center gap-1.5 text-ink-muted transition-colors hover:text-accent"
             aria-label={`${project.title} source on GitHub`}
           >
-            <FiGithub size={14} /> Source
+            <FiGithub size={14} className="transition-transform duration-300 group-hover/gh:rotate-12" /> Source
           </a>
         </div>
       </div>

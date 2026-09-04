@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { FiMail, FiMapPin, FiPhone, FiClock, FiCheck, FiAlertCircle, FiArrowRight } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
@@ -87,7 +88,10 @@ export default function Contact() {
             ))}
           </div>
 
-          <Reveal delay={0.1} className="rounded-2xl border border-line bg-surface p-7 md:col-span-7 md:p-9">
+          <Reveal
+            delay={0.1}
+            className="rounded-2xl border border-line bg-surface p-7 transition-all duration-300 hover:shadow-card focus-within:border-accent/50 focus-within:shadow-card md:col-span-7 md:p-9"
+          >
             <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5">
               <label className="flex flex-col gap-2 text-sm">
                 <span className="font-medium text-ink">Your Name</span>
@@ -96,7 +100,7 @@ export default function Contact() {
                   type="text"
                   name="from_name"
                   placeholder="What should I call you?"
-                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none focus:border-accent"
+                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
                 />
               </label>
 
@@ -107,7 +111,7 @@ export default function Contact() {
                   type="email"
                   name="from_email"
                   placeholder="Where can I reach you?"
-                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none focus:border-accent"
+                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
                 />
               </label>
 
@@ -118,7 +122,7 @@ export default function Contact() {
                   rows={5}
                   name="message"
                   placeholder="Tell me about your project and goals..."
-                  className="resize-none rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none focus:border-accent"
+                  className="resize-none rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
                 />
               </label>
 
@@ -128,7 +132,7 @@ export default function Contact() {
                   type="text"
                   name="budget"
                   placeholder="e.g., NPR 50,000 - 100,000"
-                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none focus:border-accent"
+                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
                 />
               </label>
 
@@ -150,20 +154,41 @@ export default function Contact() {
                 )}
               </button>
 
-              {status === "error" && (
-                <p className="flex items-start gap-2 text-sm text-red-500">
-                  <FiAlertCircle size={16} className="mt-0.5 shrink-0" />
-                  {errorMessage}
-                </p>
-              )}
-              {status === "sent" && (
-                <p className="text-sm text-accent">Thanks for reaching out — I'll get back to you within 24 hours.</p>
-              )}
+              <AnimatePresence mode="wait">
+                {status === "error" && (
+                  <motion.p
+                    key="error"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex items-start gap-2 text-sm text-red-500"
+                  >
+                    <FiAlertCircle size={16} className="mt-0.5 shrink-0" />
+                    {errorMessage}
+                  </motion.p>
+                )}
+                {status === "sent" && (
+                  <motion.p
+                    key="sent"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    className="text-sm text-accent"
+                  >
+                    Thanks for reaching out — I'll get back to you within 24 hours.
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </form>
           </Reveal>
         </div>
 
-        <Reveal delay={0.14} className="mt-6 overflow-hidden rounded-2xl border border-line">
+        <Reveal
+          delay={0.14}
+          className="mt-6 overflow-hidden rounded-2xl border border-line transition-shadow duration-300 hover:shadow-card"
+        >
           <iframe
             title="Location map"
             src={profile.mapEmbedUrl}
