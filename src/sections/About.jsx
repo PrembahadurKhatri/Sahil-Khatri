@@ -44,7 +44,7 @@ export default function About() {
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7">
             <Reveal>
-              <p className="text-lg md:text-xl leading-relaxed text-ink">{profile.bio}</p>
+              <p className="text-lg md:text-xl leading-relaxed text-ink text-serif">{profile.bio}</p>
             </Reveal>
 
             <dl className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
