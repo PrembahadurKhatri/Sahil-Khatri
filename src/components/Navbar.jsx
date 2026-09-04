@@ -125,7 +125,7 @@ export default function Navbar({ theme, toggleTheme }) {
                       type="button"
                       onClick={() => scrollTo(link.id)}
                       className={`w-full rounded-xl px-3 py-3 text-left text-base font-medium transition-colors ${
-                        active === link.id ? "bg-accent-soft text-accent" : "text-ink-muted hover:text-ink"
+                        active === link.id ? "bg-accent-soft text-accent" : "text-ink hover:text-accent"
                       }`}
                     >
                       {link.label}
