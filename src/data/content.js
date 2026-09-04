@@ -44,6 +44,7 @@ export const profile = {
   // Digits only, country code first, no "+" or spaces — used to build the wa.me link.
   whatsapp: "9779827169125",
   photo: "/mee.jpg",
+  hours: "Mon – Sat, 10am – 7pm (NPT)",
 
   availability: "Open to freelance & full-time opportunities",
   mapEmbedUrl:

@@ -46,10 +46,15 @@ Hero → About → Skills → **Education** → Experience → Projects → **Co
 - **`profile.resumeUrl`** points at `/resume.pdf`, which doesn't exist yet — add your real resume
   to `public/resume.pdf` (there's currently no nav link to it; add one back in `Navbar.jsx` once
   the file exists, if you want one).
-- **Contact form** simulates a successful submission (`sections/Contact.jsx`) — wire it to
-  Formspree, Resend, EmailJS, or your own API to actually receive messages.
-- **Map** currently points at a generic Kathmandu-area location (`profile.mapEmbedUrl` /
-  `mapLinkUrl`) — update the bbox/marker coordinates to your real location.
+- **Contact form sends through EmailJS** — but the three keys in `src/config/emailjs.js` are still
+  placeholders, so submissions will show a "not configured yet" error until you fill them in. Setup
+  steps are written out in that file's top comment: create a free account at emailjs.com, connect
+  an email service, create a template using the variables `{{from_name}}`, `{{from_email}}`,
+  `{{message}}`, `{{budget}}`, then copy the Service ID / Template ID / Public Key in. No backend or
+  server-side secret needed — EmailJS's public key is designed to be used client-side like this;
+  just set the template's allowed origins in the EmailJS dashboard before going live.
+- **Map** currently points at Pokhara, Nepal (`profile.mapEmbedUrl` / `mapLinkUrl`) — update the
+  bbox/marker coordinates if your location changes.
 - **Project images** (`public/projects/*.svg`) are simple generated placeholders — swap for real
   screenshots.
 - **`profile.phone`**, **`profile.whatsapp`** (digits only, used to build the fixed WhatsApp button's
