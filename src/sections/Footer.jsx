@@ -12,7 +12,7 @@ export default function Footer() {
           © {YEAR} {profile.name}. All rights reserved.
         </p>
 
-        <div className="flex flex-col items-center gap-2 sm:items-end">
+        <div className="flex flex-col items-start gap-2">
           <span className="text-xs font-semibold uppercase tracking-wide text-yellow-600">Follow on:</span>
           <div className="flex gap-3">
             {profile.socials.map((social) => (
