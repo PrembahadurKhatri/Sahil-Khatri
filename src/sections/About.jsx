@@ -60,7 +60,7 @@ export default function About() {
                     <fact.icon size={15} />
                   </span>
                   <div>
-                    <dt className="text-xs uppercase tracking-wide text-ink-faint">{fact.label}</dt>
+                    <dt className="text-xs uppercase tracking-wide text-yellow-600">{fact.label}</dt>
                     <dd className="text-sm font-medium text-ink">{fact.value}</dd>
                   </div>
                 </Reveal>
