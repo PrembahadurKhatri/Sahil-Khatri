@@ -102,7 +102,7 @@ export default function Navbar({ theme, toggleTheme }) {
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((o) => !o)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink lg:hidden"
+              className="inline-flex h-9 w-9 touch-manipulation items-center justify-center rounded-full border border-line text-ink active:bg-base lg:hidden"
             >
               {open ? <FiX size={18} /> : <FiMenu size={18} />}
             </button>
@@ -121,26 +121,28 @@ export default function Navbar({ theme, toggleTheme }) {
               <ul className="flex flex-col gap-1 px-4 py-2">
                 {LINKS.map((link) => (
                   <li key={link.id}>
-                    <button
+                    <motion.button
                       type="button"
                       onClick={() => scrollTo(link.id)}
-                      className={`w-full rounded-xl px-3 py-3 text-left text-base font-medium transition-colors ${
+                      whileTap={{ scale: 0.96 }}
+                      className={`w-full touch-manipulation rounded-xl px-3 py-3 text-left text-base font-medium transition-colors active:bg-accent-soft active:text-accent ${
                         active === link.id ? "bg-accent-soft text-accent" : "text-ink hover:text-accent"
                       }`}
                     >
                       {link.label}
-                    </button>
+                    </motion.button>
                   </li>
                 ))}
                 <li className="py-3 sm:hidden">
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => scrollTo("contact")}
-                    className="shine inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                    whileTap={{ scale: 0.96 }}
+                    className="shine inline-flex touch-manipulation items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
                   >
                     Let's Talk
                     <FiArrowRight size={15} />
-                  </button>
+                  </motion.button>
                 </li>
               </ul>
             </motion.div>
