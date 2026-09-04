@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { useTheme } from "./hooks/useTheme.js";
+import Loader from "./components/Loader.jsx";
 import Navbar from "./components/Navbar.jsx";
 import ScrollProgressBar from "./components/ScrollProgressBar.jsx";
 import WhatsAppButton from "./components/WhatsAppButton.jsx";
@@ -13,6 +15,18 @@ import Footer from "./sections/Footer.jsx";
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.body.style.overflow = loading ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loading]);
+
+  if (loading) {
+    return <Loader onComplete={() => setLoading(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-base text-ink">

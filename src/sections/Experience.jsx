@@ -24,7 +24,7 @@ export default function Experience() {
                 className="absolute left-0 top-9 h-6 w-[3px] scale-y-0 rounded-full bg-accent transition-transform duration-300 group-hover:scale-y-100"
                 aria-hidden="true"
               />
-              <span className="text-sm font-medium text-ink-faint">{job.period}</span>
+              <span className="text-sm font-medium text-yellow-600">{job.period}</span>
               <div>
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 className="font-display text-xl font-medium text-ink transition-colors duration-300 group-hover:text-accent md:text-2xl">
