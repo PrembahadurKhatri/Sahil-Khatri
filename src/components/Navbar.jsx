@@ -46,105 +46,108 @@ export default function Navbar({ theme, toggleTheme }) {
   };
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-base/85 backdrop-blur-md border-b border-line" : "bg-transparent border-b border-transparent"
-      }`}
-    >
-      <nav className="container-x flex items-center justify-between h-16 md:h-20">
-        <a
-          href="#hero"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollTo("hero");
-          }}
-          className="shrink-0 font-display text-lg font-medium text-ink tracking-tight"
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
+      <div className="mx-auto max-w-content">
+        <nav
+          className={`flex h-16 items-center justify-between rounded-2xl border border-line bg-surface/90 px-4 backdrop-blur-md transition-shadow duration-300 md:h-[4.25rem] md:px-6 ${
+            scrolled ? "shadow-card-hover" : "shadow-card"
+          }`}
         >
-          {profile.initials}
-          <span className="text-accent">.</span>
-        </a>
-
-        <ul className="hidden lg:flex items-center gap-1 rounded-full border border-line bg-surface/60 px-1.5 py-1.5">
-          {LINKS.map((link) => (
-            <li key={link.id}>
-              <button
-                type="button"
-                onClick={() => scrollTo(link.id)}
-                className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${
-                  active === link.id ? "text-base" : "text-ink-muted hover:text-ink"
-                }`}
-              >
-                {active === link.id && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-accent"
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{link.label}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-2 md:gap-3">
-          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-          <button
-            type="button"
-            onClick={() => scrollTo("contact")}
-            className="shine hidden sm:inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+          <a
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollTo("hero");
+            }}
+            className="flex shrink-0 items-center gap-2.5"
           >
-            Let's Talk
-            <FiArrowRight size={15} />
-          </button>
-          <button
-            type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((o) => !o)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink lg:hidden"
-          >
-            {open ? <FiX size={18} /> : <FiMenu size={18} />}
-          </button>
-        </div>
-      </nav>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent font-display text-xs font-semibold tracking-wide text-white shadow-card md:h-10 md:w-10 md:text-sm">
+              {profile.initials}
+            </span>
+          </a>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-b border-line bg-base lg:hidden"
-          >
-            <ul className="container-x flex flex-col py-2">
-              {LINKS.map((link) => (
-                <li key={link.id}>
-                  <button
-                    type="button"
-                    onClick={() => scrollTo(link.id)}
-                    className={`w-full text-left py-3 text-base ${
-                      active === link.id ? "text-accent" : "text-ink-muted"
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-              <li className="py-3 sm:hidden">
+          <ul className="hidden lg:flex items-center gap-1 rounded-full border border-line bg-base/60 px-1.5 py-1.5">
+            {LINKS.map((link) => (
+              <li key={link.id}>
                 <button
                   type="button"
-                  onClick={() => scrollTo("contact")}
-                  className="shine inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                  onClick={() => scrollTo(link.id)}
+                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    active === link.id ? "text-base" : "text-ink-muted hover:text-ink"
+                  }`}
                 >
-                  Let's Talk
-                  <FiArrowRight size={15} />
+                  {active === link.id && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-accent"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
                 </button>
               </li>
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-2 md:gap-3">
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+            <button
+              type="button"
+              onClick={() => scrollTo("contact")}
+              className="shine hidden items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 sm:inline-flex"
+            >
+              Let's Talk
+              <FiArrowRight size={15} />
+            </button>
+            <button
+              type="button"
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => setOpen((o) => !o)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink lg:hidden"
+            >
+              {open ? <FiX size={18} /> : <FiMenu size={18} />}
+            </button>
+          </div>
+        </nav>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="mt-2 overflow-hidden rounded-2xl border border-line bg-surface shadow-card lg:hidden"
+            >
+              <ul className="flex flex-col px-4 py-2">
+                {LINKS.map((link) => (
+                  <li key={link.id}>
+                    <button
+                      type="button"
+                      onClick={() => scrollTo(link.id)}
+                      className={`w-full text-left py-3 text-base ${
+                        active === link.id ? "text-accent" : "text-ink-muted"
+                      }`}
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+                <li className="py-3 sm:hidden">
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("contact")}
+                    className="shine inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                  >
+                    Let's Talk
+                    <FiArrowRight size={15} />
+                  </button>
+                </li>
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </header>
   );
 }
