@@ -112,6 +112,7 @@ export default function Navbar({ theme, toggleTheme }) {
         <AnimatePresence>
           {open && (
             <motion.div
+           
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -125,8 +126,10 @@ export default function Navbar({ theme, toggleTheme }) {
                       type="button"
                       onClick={() => scrollTo(link.id)}
                       whileTap={{ scale: 0.96 }}
-                      className={`w-full touch-manipulation rounded-xl px-3 py-3 text-left text-base font-medium transition-colors active:bg-accent-soft active:text-accent ${
-                        active === link.id ? "bg-accent-soft text-accent" : "text-ink hover:text-accent"
+                      className={`w-full touch-manipulation rounded-xl px-3 py-3 text-left text-base font-medium transition-colors active:bg-accent-soft ${
+                        active === link.id
+                          ? "bg-accent-soft text-black dark:text-white"
+                          : "text-black hover:text-accent dark:text-white"
                       }`}
                     >
                       {link.label}
