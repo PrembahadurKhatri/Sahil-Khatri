@@ -34,7 +34,7 @@ import {
 
 export const profile = {
   name: "Prem Bahadur Khatri",
-  logo: "/logo.jpg",
+  logo: "/logoss.png",
   roles: ["Full-Stack Developer", "Backend-Focused Engineer", "Problem Solver"],
   tagline: "I build fast, reliable web applications from database to interface.",
   bio: "I'm a full-stack developer who enjoys the whole path from a data model to a finished interface. Most of my work lives in React on the front end and Node.js/Express on the back — with a habit of caring about the parts nobody sees, like clean APIs, sane auth, and code the next person can actually read.",

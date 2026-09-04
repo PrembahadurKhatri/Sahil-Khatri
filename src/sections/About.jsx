@@ -1,4 +1,4 @@
-import { FiMapPin, FiMail, FiCheckCircle } from "react-icons/fi";
+import { FiMapPin, FiMail, FiCheckCircle, FiClock, FiFolder, FiLayers, FiSmile } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import AnimatedCounter from "../components/AnimatedCounter.jsx";
@@ -9,6 +9,8 @@ const FACTS = [
   { icon: FiMail, label: "Email", value: profile.email },
   { icon: FiCheckCircle, label: "Status", value: profile.availability },
 ];
+
+const STAT_ICONS = [FiClock, FiFolder, FiLayers, FiSmile];
 
 export default function About() {
   return (
@@ -22,14 +24,22 @@ export default function About() {
               <p className="text-lg md:text-xl leading-relaxed text-ink">{profile.bio}</p>
             </Reveal>
 
-            <dl className="mt-10 grid gap-6 sm:grid-cols-3">
+            <dl className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {FACTS.map((fact, i) => (
-                <Reveal key={fact.label} delay={0.05 * i} className="flex flex-col gap-2">
-                  <dt className="flex items-center gap-2 text-xs uppercase tracking-widest2 text-ink-faint">
-                    <fact.icon size={14} className="text-accent" />
-                    {fact.label}
-                  </dt>
-                  <dd className="text-sm text-ink break-words">{fact.value}</dd>
+                <Reveal
+                  as="div"
+                  key={fact.label}
+                  delay={0.05 * i}
+                  whileHover={{ y: -3 }}
+                  className="group flex items-center gap-3 rounded-xl border border-line bg-surface px-4 py-3 transition-colors duration-300 hover:border-accent/50 hover:bg-accent-soft"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110 group-hover:bg-accent group-hover:text-white">
+                    <fact.icon size={15} />
+                  </span>
+                  <div>
+                    <dt className="text-xs uppercase tracking-wide text-ink-faint">{fact.label}</dt>
+                    <dd className="text-sm font-medium text-ink">{fact.value}</dd>
+                  </div>
                 </Reveal>
               ))}
             </dl>
@@ -37,18 +47,25 @@ export default function About() {
 
           <div className="md:col-span-5">
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, i) => (
-                <Reveal
-                  key={stat.label}
-                  delay={0.06 * i}
-                  className="rounded-2xl border border-line bg-surface p-6"
-                >
-                  <div className="font-display text-4xl font-medium text-ink">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <p className="mt-2 text-sm text-ink-muted leading-snug">{stat.label}</p>
-                </Reveal>
-              ))}
+              {stats.map((stat, i) => {
+                const Icon = STAT_ICONS[i % STAT_ICONS.length];
+                return (
+                  <Reveal
+                    key={stat.label}
+                    delay={0.06 * i}
+                    whileHover={{ y: -6 }}
+                    className="group rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-card"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110">
+                      <Icon size={16} />
+                    </span>
+                    <div className="mt-4 font-display text-4xl font-medium text-ink">
+                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                    </div>
+                    <p className="mt-2 text-sm text-ink-muted leading-snug">{stat.label}</p>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </div>
