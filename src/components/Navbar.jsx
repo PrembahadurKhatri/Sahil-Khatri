@@ -61,9 +61,7 @@ export default function Navbar({ theme, toggleTheme }) {
             }}
             className="flex shrink-0 items-center gap-2.5"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent font-display text-xs font-semibold tracking-wide text-white shadow-card md:h-10 md:w-10 md:text-sm">
-              {profile.initials}
-            </span>
+            <img src={profile.logo} alt={profile.name} className="h-8 w-auto object-contain md:h-9" />
           </a>
 
           <ul className="hidden lg:flex items-center gap-1 rounded-full border border-line bg-base/60 px-1.5 py-1.5">

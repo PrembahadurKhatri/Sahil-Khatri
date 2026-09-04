@@ -34,7 +34,7 @@ import {
 
 export const profile = {
   name: "Prem Bahadur Khatri",
-  initials: "PBK",
+  logo: "/logo.jpg",
   roles: ["Full-Stack Developer", "Backend-Focused Engineer", "Problem Solver"],
   tagline: "I build fast, reliable web applications from database to interface.",
   bio: "I'm a full-stack developer who enjoys the whole path from a data model to a finished interface. Most of my work lives in React on the front end and Node.js/Express on the back — with a habit of caring about the parts nobody sees, like clean APIs, sane auth, and code the next person can actually read.",
@@ -105,19 +105,20 @@ export const skillGroups = [
 ];
 
 export const education = [
-  {
-    period: "2017 — 2021",
-    degree: "B.Sc. (Hons) Computer Science",
-    institution: "Tribhuvan University",
-    description:
-      "Coursework centered on data structures, algorithms, database systems, and distributed systems, alongside a final-year project on applied machine learning.",
-  },
+
   {
     period: "2021-2022",
     degree: "Higher Secondary Education, Science",
-    institution: "P",
+    institution: "Prativa Secondary School",
     description:
       "Physics, chemistry, and mathematics — the last of which turned out to be the most useful thing for a career that's mostly logic puzzles.",
+  },
+    {
+    period: "2023 — ongoing",
+    degree: "Bachelor in Computer Science and Information Technology(BSc.CSIT)",
+    institution: "Tribhuvan University",
+    description:
+      "Coursework centered on data structures, algorithms, database systems, and distributed systems, alongside a final-year project on applied machine learning.",
   },
 ];
 

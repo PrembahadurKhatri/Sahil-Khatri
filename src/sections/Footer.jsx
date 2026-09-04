@@ -18,12 +18,12 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-line bg-surface">
       <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" aria-hidden="true" />
 
-      <span
+      <img
+        src={profile.logo}
+        alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-10 -right-6 hidden select-none font-display text-[14rem] font-medium leading-none text-ink/[0.03] md:block"
-      >
-        {profile.initials}
-      </span>
+        className="pointer-events-none absolute -bottom-10 -right-10 hidden w-[26rem] select-none opacity-[0.04] grayscale md:block"
+      />
 
       <div className="container-x relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
