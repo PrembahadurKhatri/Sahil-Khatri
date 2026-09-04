@@ -9,7 +9,7 @@ import {
   FaLinux,
   FaGithub,
   FaLinkedin,
-  FaTwitter,
+  FaFacebook,
   FaInstagram,
   FaEnvelope,
 } from "react-icons/fa";
@@ -44,7 +44,7 @@ export const profile = {
   // Digits only, country code first, no "+" or spaces — used to build the wa.me link.
   whatsapp: "9779827169125",
   photo: "/mee.jpg",
-  hours: "Mon – Sat, 10am – 7pm (NPT)",
+  hours: "24/7 — I respond to every message personally",
 
   availability: "Open to freelance & full-time opportunities",
   mapEmbedUrl:
@@ -52,10 +52,10 @@ export const profile = {
   mapLinkUrl: "https://www.openstreetmap.org/?mlat=28.2096&mlon=83.9856#map=13/28.2096/83.9856",
   socials: [
     { label: "GitHub", href: "https://github.com/PrembahadurKhatri", icon: FaGithub },
-    { label: "LinkedIn", href: "https://linkedin.com/", icon: FaLinkedin },
-    { label: "Twitter", href: "https://twitter.com/", icon: FaTwitter },
-    { label: "Instagram", href: "https://instagram.com/", icon: FaInstagram },
-    { label: "Email", href: "mailto:hello@sahilkhatri.dev", icon: FaEnvelope },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/saahill-khatri-7499093a8?utm_source=share_via&utm_content=profile&utm_medium=member_android", icon: FaLinkedin },
+    { label: "Twitter", href: "https://www.facebook.com/saahill.khatri14/", icon: FaFacebook },
+    { label: "Instagram", href: "https://www.instagram.com/saahill.khatri_/", icon: FaInstagram },
+    { label: "Email", href: "mailto:sahilkhatrii750@gmail.com", icon: FaEnvelope },
   ],
 };
 
