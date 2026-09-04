@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowRight, FiMenu, FiX } from "react-icons/fi";
 import ThemeToggle from "./ThemeToggle.jsx";
 import { profile } from "../data/content.js";
@@ -10,7 +9,6 @@ const LINKS = [
   { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
-
 ];
 
 export default function Navbar({ theme, toggleTheme }) {
@@ -40,49 +38,52 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => observer.disconnect();
   }, []);
 
+  // Close the mobile menu automatically if the viewport is resized/rotated
+  // up past the desktop breakpoint while it's open.
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   const scrollTo = (id) => {
-    setOpen(false);
     setActive(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setOpen(false);
+    // Let the menu-close render happen before scrolling, so the section's
+    // position is measured against the final (closed) layout.
+    requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
+
+  const activeClasses = "bg-accent text-white";
+  const idleClasses = "text-ink hover:text-accent";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
       <div className="mx-auto max-w-content">
         <nav
-          className={`flex h-16 items-center justify-between rounded-2xl border border-line bg-surface/90 px-4 backdrop-blur-md transition-shadow duration-300 md:h-[4.25rem] md:px-6 ${
+          className={`relative z-10 flex h-16 items-center justify-between rounded-2xl border border-line bg-surface/90 px-4 backdrop-blur-md transition-shadow duration-300 md:h-[4.25rem] md:px-6 ${
             scrolled ? "shadow-card-hover" : "shadow-card"
           }`}
         >
-          <a
-            href="#hero"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollTo("hero");
-            }}
-            className="flex shrink-0 items-center gap-2.5"
-          >
+          <button type="button" onClick={() => scrollTo("hero")} className="flex shrink-0 items-center gap-2.5">
             <img src={profile.logo} alt={profile.name} className="h-8 w-auto object-contain md:h-9" />
-          </a>
+          </button>
 
-          <ul className="hidden lg:flex items-center gap-1 rounded-full border border-line bg-base/60 px-1.5 py-1.5">
+          <ul className="hidden items-center gap-1 rounded-full border border-line bg-base/60 px-1.5 py-1.5 lg:flex">
             {LINKS.map((link) => (
               <li key={link.id}>
                 <button
                   type="button"
                   onClick={() => scrollTo(link.id)}
-                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    active === link.id ? "text-base" : "text-ink-muted hover:text-ink"
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    active === link.id ? activeClasses : idleClasses
                   }`}
                 >
-                  {active === link.id && (
-                    <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full bg-accent"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">{link.label}</span>
+                  {link.label}
                 </button>
               </li>
             ))}
@@ -101,6 +102,7 @@ export default function Navbar({ theme, toggleTheme }) {
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
               onClick={() => setOpen((o) => !o)}
               className="inline-flex h-9 w-9 touch-manipulation items-center justify-center rounded-full border border-line text-ink active:bg-base lg:hidden"
             >
@@ -109,45 +111,44 @@ export default function Navbar({ theme, toggleTheme }) {
           </div>
         </nav>
 
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="mt-2 overflow-hidden rounded-2xl border border-line bg-surface shadow-card lg:hidden"
-            >
-              <ul className="flex flex-col gap-1 px-4 py-2">
-                {LINKS.map((link) => (
-                  <li key={link.id}>
-                    <motion.button
-                      type="button"
-                      onClick={() => scrollTo(link.id)}
-                      whileTap={{ scale: 0.96 }}
-                      className={`w-full touch-manipulation rounded-xl px-3 py-3 text-left text-base font-medium transition-colors active:bg-accent-soft active:text-accent ${
-                        active === link.id ? "bg-accent-soft text-accent" : "text-ink hover:text-accent"
-                      }`}
-                    >
-                      {link.label}
-                    </motion.button>
-                  </li>
-                ))}
-                <li className="py-3 sm:hidden">
-                  <motion.button
+        {/* Always mounted -- toggled with plain CSS transitions, not an
+            unmount/remount + height:"auto" animation, which is a documented
+            source of flaky touch interaction on mobile browsers. */}
+        <div
+          className={`grid overflow-hidden transition-all duration-300 ease-out lg:hidden ${
+            open ? "mt-2 max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="rounded-2xl border border-line bg-surface shadow-card">
+            <ul className="flex flex-col gap-1 px-4 py-2">
+              {LINKS.map((link) => (
+                <li key={link.id}>
+                  <button
                     type="button"
-                    onClick={() => scrollTo("contact")}
-                    whileTap={{ scale: 0.96 }}
-                    className="shine inline-flex touch-manipulation items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                    onClick={() => scrollTo(link.id)}
+                    tabIndex={open ? 0 : -1}
+                    className={`w-full touch-manipulation rounded-xl px-3 py-3 text-left text-base font-medium transition-colors ${
+                      active === link.id ? activeClasses : idleClasses
+                    }`}
                   >
-                    Let's Talk
-                    <FiArrowRight size={15} />
-                  </motion.button>
+                    {link.label}
+                  </button>
                 </li>
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              ))}
+              <li className="py-3 sm:hidden">
+                <button
+                  type="button"
+                  onClick={() => scrollTo("contact")}
+                  tabIndex={open ? 0 : -1}
+                  className="shine inline-flex touch-manipulation items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                >
+                  Let's Talk
+                  <FiArrowRight size={15} />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </header>
   );
