@@ -107,7 +107,8 @@ export default function Contact() {
                 src={profile.mapEmbedUrl}
                 className="h-56 w-full grayscale-[0.2]"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
               />
             </Reveal>
           </div>
