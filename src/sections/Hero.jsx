@@ -145,15 +145,15 @@ export default function Hero() {
           <motion.div
             animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-6 -right-4 z-10 hidden w-52 overflow-hidden rounded-xl border border-line bg-surface shadow-card-hover sm:block"
+            className="absolute -top-5 -right-2 z-10 w-44 overflow-hidden rounded-xl border border-line bg-surface shadow-card-hover sm:-top-6 sm:-right-4 sm:w-52"
           >
-            <div className="flex items-center gap-1.5 border-b border-line bg-base px-3 py-2">
-              <span className="h-2 w-2 rounded-full bg-line" />
-              <span className="h-2 w-2 rounded-full bg-line" />
-              <span className="h-2 w-2 rounded-full bg-accent" />
-              <span className="ml-1.5 font-mono text-[10px] text-ink-faint">developer.ts</span>
+            <div className="flex items-center gap-1.5 border-b border-line bg-base px-2.5 py-1.5 sm:px-3 sm:py-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-line sm:h-2 sm:w-2" />
+              <span className="h-1.5 w-1.5 rounded-full bg-line sm:h-2 sm:w-2" />
+              <span className="h-1.5 w-1.5 rounded-full bg-accent sm:h-2 sm:w-2" />
+              <span className="ml-1.5 font-mono text-[9px] text-ink-faint sm:text-[10px]">developer.ts</span>
             </div>
-            <pre className="px-3.5 py-3 font-mono text-[11px] leading-relaxed text-ink-muted">
+            <pre className="px-2.5 py-2.5 font-mono text-[9.5px] leading-relaxed text-ink-muted sm:px-3.5 sm:py-3 sm:text-[11px]">
               <span className="text-accent">const</span> dev = {"{"}
               {"\n  "}stack: [<span className="text-accent">"React"</span>, <span className="text-accent">"Node"</span>],
               {"\n  "}focus: <span className="text-accent">"clean code"</span>,
