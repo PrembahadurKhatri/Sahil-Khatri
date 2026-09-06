@@ -1,18 +1,10 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FiArrowUpRight, FiCode } from "react-icons/fi";
-import { FaReact, FaNodeJs } from "react-icons/fa";
-import { SiTypescript } from "react-icons/si";
 import TypingText from "../components/TypingText.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
 import { profile, stats } from "../data/content.js";
 
 const ease = [0.22, 1, 0.36, 1];
-
-const FLOATING_ICONS = [
-  { Icon: FaReact, className: "-top-5 -right-5", duration: 6, delay: 0 },
-  { Icon: SiTypescript, className: "top-1/3 -right-8", duration: 7, delay: 0.6 },
-  { Icon: FaNodeJs, className: "-bottom-5 right-8", duration: 8, delay: 1.1 },
-];
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
@@ -113,33 +105,55 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease }}
           className="relative mx-auto w-full max-w-sm md:col-span-5 md:max-w-none"
         >
+          {/* Hollow accent frame, offset behind the photo -- a gallery-frame
+              reveal instead of a solid color block. */}
           <motion.div
             animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-4 -left-4 h-full w-full rounded-[2rem] bg-accent-soft"
+            className="absolute -bottom-5 -right-5 h-full w-full rounded-[2rem] border-2 border-accent/50"
             aria-hidden="true"
+          />
+
+          {/* Corner brackets -- a viewfinder/crop-mark motif around the photo. */}
+          <span
+            aria-hidden="true"
+            className="absolute -top-2.5 -left-2.5 z-10 h-7 w-7 rounded-tl-xl border-l-2 border-t-2 border-accent"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute -bottom-2.5 -right-2.5 z-10 h-7 w-7 rounded-br-xl border-b-2 border-r-2 border-accent"
           />
 
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line shadow-card">
             <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
           </div>
 
-          {FLOATING_ICONS.map(({ Icon, className, duration, delay }, i) => (
-            <motion.span
-              key={i}
-              aria-hidden="true"
-              animate={reduceMotion ? undefined : { y: [0, -12, 0] }}
-              transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
-              className={`absolute z-10 hidden h-12 w-12 items-center justify-center rounded-2xl border border-line bg-surface text-accent shadow-card sm:flex ${className}`}
-            >
-              <Icon size={20} />
-            </motion.span>
-          ))}
+          {/* A small styled code snippet in place of scattered logo chips --
+              one deliberate, coherent decorative element. */}
+          <motion.div
+            animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-6 -right-4 z-10 hidden w-52 overflow-hidden rounded-xl border border-line bg-surface shadow-card-hover sm:block"
+          >
+            <div className="flex items-center gap-1.5 border-b border-line bg-base px-3 py-2">
+              <span className="h-2 w-2 rounded-full bg-line" />
+              <span className="h-2 w-2 rounded-full bg-line" />
+              <span className="h-2 w-2 rounded-full bg-accent" />
+              <span className="ml-1.5 font-mono text-[10px] text-ink-faint">developer.ts</span>
+            </div>
+            <pre className="px-3.5 py-3 font-mono text-[11px] leading-relaxed text-ink-muted">
+              <span className="text-accent">const</span> dev = {"{"}
+              {"\n  "}stack: [<span className="text-accent">"React"</span>, <span className="text-accent">"Node"</span>],
+              {"\n  "}focus: <span className="text-accent">"clean code"</span>,
+              {"\n"}{"}"}
+              <span className="text-accent">;</span>
+            </pre>
+          </motion.div>
 
           <div
             ref={badgeSpotlight.ref}
             onMouseMove={badgeSpotlight.onMouseMove}
-            className="spotlight absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border border-line bg-surface px-5 py-4 shadow-card transition-shadow duration-300 hover:shadow-card-hover sm:-left-6"
+            className="spotlight absolute -bottom-6 -left-4 z-10 flex items-center gap-3 rounded-2xl border border-line bg-surface px-5 py-4 shadow-card transition-shadow duration-300 hover:shadow-card-hover sm:-left-6"
           >
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
               <FiCode size={18} />
