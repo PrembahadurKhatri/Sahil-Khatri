@@ -8,9 +8,12 @@ export default function Footer() {
       <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/60 to-transparent" aria-hidden="true" />
 
       <div className="container-x relative flex flex-col items-center gap-6 py-10 text-center text-xs text-white/60 sm:flex-row sm:justify-between sm:gap-4 sm:pb-8 sm:text-left">
-        <p>
-          © {YEAR} {profile.name}. All rights reserved.
-        </p>
+        <div>
+          <p className="font-display text-sm font-medium text-white">Designed &amp; Built by {profile.name}</p>
+          <p className="mt-1">
+            © {YEAR} {profile.name}. All rights reserved.
+          </p>
+        </div>
 
         <div className="flex flex-col items-center gap-3 sm:items-start">
           <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Follow on:</span>
