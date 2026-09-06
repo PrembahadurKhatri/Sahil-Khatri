@@ -1,10 +1,18 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { FiArrowDown, FiArrowUpRight, FiCode } from "react-icons/fi";
+import { FiArrowUpRight, FiCode } from "react-icons/fi";
+import { FaReact, FaNodeJs } from "react-icons/fa";
+import { SiTypescript } from "react-icons/si";
 import TypingText from "../components/TypingText.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
 import { profile, stats } from "../data/content.js";
 
 const ease = [0.22, 1, 0.36, 1];
+
+const FLOATING_ICONS = [
+  { Icon: FaReact, className: "-top-5 -right-5", duration: 6, delay: 0 },
+  { Icon: SiTypescript, className: "top-1/3 -right-8", duration: 7, delay: 0.6 },
+  { Icon: FaNodeJs, className: "-bottom-5 right-8", duration: 8, delay: 1.1 },
+];
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
@@ -116,6 +124,18 @@ export default function Hero() {
             <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
           </div>
 
+          {FLOATING_ICONS.map(({ Icon, className, duration, delay }, i) => (
+            <motion.span
+              key={i}
+              aria-hidden="true"
+              animate={reduceMotion ? undefined : { y: [0, -12, 0] }}
+              transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
+              className={`absolute z-10 hidden h-12 w-12 items-center justify-center rounded-2xl border border-line bg-surface text-accent shadow-card sm:flex ${className}`}
+            >
+              <Icon size={20} />
+            </motion.span>
+          ))}
+
           <div
             ref={badgeSpotlight.ref}
             onMouseMove={badgeSpotlight.onMouseMove}
@@ -134,24 +154,6 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
-
-      <motion.button
-        type="button"
-        onClick={() => scrollTo("about")}
-        aria-label="Scroll to About section"
-        initial={{ y: 8 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8, ease }}
-        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-widest2 text-ink-faint transition-colors hover:text-accent md:flex"
-      >
-        Scroll
-        <motion.span
-          animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <FiArrowDown size={14} />
-        </motion.span>
-      </motion.button>
     </section>
   );
 }
