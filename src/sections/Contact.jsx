@@ -97,6 +97,19 @@ export default function Contact() {
             {DETAILS.map((detail, i) => (
               <DetailRow key={detail.label} detail={detail} delay={0.05 * i} />
             ))}
+
+            <Reveal
+              delay={0.2}
+              className="mt-1 overflow-hidden rounded-2xl border border-line transition-shadow duration-300 hover:shadow-card"
+            >
+              <iframe
+                title="Location map"
+                src={profile.mapEmbedUrl}
+                className="h-56 w-full grayscale-[0.2]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </Reveal>
           </div>
 
           <Reveal
@@ -197,19 +210,6 @@ export default function Contact() {
             </form>
           </Reveal>
         </div>
-
-        <Reveal
-          delay={0.14}
-          className="mt-6 overflow-hidden rounded-2xl border border-line transition-shadow duration-300 hover:shadow-card"
-        >
-          <iframe
-            title="Location map"
-            src={profile.mapEmbedUrl}
-            className="h-64 w-full grayscale-[0.2]"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </Reveal>
       </div>
     </section>
   );

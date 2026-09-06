@@ -47,9 +47,8 @@ export const profile = {
   hours: "24/7 — I respond to every message personally",
 
   availability: "Open to freelance & full-time opportunities",
-  mapEmbedUrl:
-    "https://www.openstreetmap.org/export/embed.html?bbox=83.9356%2C28.1596%2C84.0356%2C28.2596&layer=mapnik&marker=28.2096%2C83.9856",
-  mapLinkUrl: "https://www.openstreetmap.org/?mlat=28.2096&mlon=83.9856#map=13/28.2096/83.9856",
+  mapEmbedUrl: "https://www.google.com/maps?q=28.2096,83.9856&z=13&output=embed",
+  mapLinkUrl: "https://www.google.com/maps?q=28.2096,83.9856",
   socials: [
     { label: "GitHub", href: "https://github.com/PrembahadurKhatri", icon: FaGithub },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/saahill-khatri-7499093a8?utm_source=share_via&utm_content=profile&utm_medium=member_android", icon: FaLinkedin },
