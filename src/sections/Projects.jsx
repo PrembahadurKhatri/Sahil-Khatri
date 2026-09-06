@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
@@ -37,9 +38,9 @@ function ProjectCard({ project, delay }) {
       whileHover={{ y: -6 }}
       className="spotlight group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/40 hover:shadow-card-hover"
     >
-      <div className="relative flex aspect-[4/3] items-center justify-center bg-base p-10">
+      <div className="relative flex h-44 items-center justify-center overflow-hidden bg-base p-8 sm:h-48">
         {project.featured && (
-          <span className="eyebrow absolute left-5 top-5">
+          <span className="eyebrow absolute left-5 top-5 z-10">
             <PulseDot />
             Featured
           </span>
@@ -48,7 +49,7 @@ function ProjectCard({ project, delay }) {
           src={project.image}
           alt={project.title}
           loading="lazy"
-          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full max-w-[11rem] object-contain transition-transform duration-500 group-hover:scale-110 sm:max-w-[12rem]"
         />
       </div>
 
@@ -77,12 +78,14 @@ function ProjectCard({ project, delay }) {
 
         <ul className="mt-4 flex flex-wrap gap-1.5">
           {project.tags.slice(0, 4).map((tag) => (
-            <li
+            <motion.li
               key={tag}
-              className="rounded-full border border-line px-2.5 py-1 text-[11px] text-ink-muted transition-colors duration-300 group-hover:border-accent/30 group-hover:bg-accent-soft group-hover:text-accent"
+              whileHover={{ y: -2, scale: 1.06 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className="cursor-default rounded-full border border-line px-2.5 py-1 text-[11px] text-ink-muted transition-colors duration-300 group-hover:border-accent/30 group-hover:bg-accent-soft group-hover:text-accent"
             >
               {tag.trim()}
-            </li>
+            </motion.li>
           ))}
         </ul>
 
