@@ -22,41 +22,28 @@ function StatCard({ stat, delay, Icon }) {
       onMouseMove={spotlight.onMouseMove}
       delay={delay}
       whileHover={{ y: -6 }}
-      className="spotlight group relative overflow-hidden rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-card"
+      className="spotlight group rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-card"
     >
-      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110">
         <Icon size={16} />
       </span>
       <div className="mt-4 font-display text-4xl font-medium text-ink">
         <AnimatedCounter value={stat.value} suffix={stat.suffix} />
       </div>
       <p className="mt-2 text-sm text-ink-muted leading-snug">{stat.label}</p>
-      <span className="absolute bottom-0 left-0 h-[3px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
     </Reveal>
   );
 }
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden py-24 md:py-32 border-b border-line">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-accent/[0.06] blur-[100px]"
-      />
-
-      <div className="container-x relative">
+    <section id="about" className="py-24 md:py-32 border-b border-line">
+      <div className="container-x">
         <SectionHeading eyebrow="About Me" title="A little about how I work" />
 
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
-          <div className="relative md:col-span-7">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute -left-4 -top-10 select-none font-display text-8xl text-accent/[0.12] md:-left-6 md:-top-12 md:text-9xl"
-            >
-              "
-            </span>
-
-            <Reveal className="relative">
+          <div className="md:col-span-7">
+            <Reveal>
               <p className="text-lg md:text-xl leading-relaxed text-ink text-serif">{profile.bio}</p>
             </Reveal>
 
