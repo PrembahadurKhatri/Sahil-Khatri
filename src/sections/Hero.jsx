@@ -125,18 +125,18 @@ export default function Hero() {
 
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line shadow-card">
             <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
+          </div>
 
-            <div className="absolute bottom-4 left-4 flex w-fit max-w-[calc(100%-2rem)] items-center gap-3 rounded-2xl border border-line bg-surface px-5 py-4 shadow-card-hover">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
-                <FaLaptopCode size={18} />
-              </span>
-              <div>
-                <p className="font-display text-xl font-medium leading-none text-ink">
-                  {experienceStat.value}
-                  {experienceStat.suffix}
-                </p>
-                <p className="mt-1 text-xs text-ink-muted">{experienceStat.label}</p>
-              </div>
+          <div className="absolute -bottom-6 -left-4 z-10 flex items-center gap-3 rounded-2xl border border-line bg-surface px-5 py-4 shadow-card-hover sm:-left-6">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <FaLaptopCode size={18} />
+            </span>
+            <div>
+              <p className="font-display text-xl font-medium leading-none text-ink">
+                {experienceStat.value}
+                {experienceStat.suffix}
+              </p>
+              <p className="mt-1 text-xs text-ink-muted">{experienceStat.label}</p>
             </div>
           </div>
 
