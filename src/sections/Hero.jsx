@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { FiArrowUpRight, FiCode } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
+import { FaLaptopCode } from "react-icons/fa";
 import TypingText from "../components/TypingText.jsx";
 import { profile, stats } from "../data/content.js";
 
@@ -125,18 +126,16 @@ export default function Hero() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line shadow-card">
             <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
 
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-            <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-md">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-white">
-                <FiCode size={18} />
+            <div className="absolute bottom-4 left-4 flex w-fit max-w-[calc(100%-2rem)] items-center gap-3 rounded-2xl border border-line bg-surface px-5 py-4 shadow-card-hover">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+                <FaLaptopCode size={18} />
               </span>
               <div>
-                <p className="font-display text-xl font-medium leading-none text-white">
+                <p className="font-display text-xl font-medium leading-none text-ink">
                   {experienceStat.value}
                   {experienceStat.suffix}
                 </p>
-                <p className="mt-1 text-xs text-white/80">{experienceStat.label}</p>
+                <p className="mt-1 text-xs text-ink-muted">{experienceStat.label}</p>
               </div>
             </div>
           </div>
