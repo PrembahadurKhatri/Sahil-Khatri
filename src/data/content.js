@@ -48,7 +48,7 @@ export const profile = {
 
   availability: "Open to freelance & full-time opportunities",
   mapEmbedUrl:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d533.3607581706094!2d84.02150931258622!3d28.205470759544855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399597007eef8cbf%3A0xc979e46a6e0c2aa1!2sSahil's%20House!5e1!3m2!1sen!2snp!4v1788688199824!5m2!1sen!2snp",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d533.3607581706094!2d84.02150931258622!3d28.205470759544855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399597007eef8cbf%3A0xc979e46a6e0c2aa1!2sSahil's%20House!5e0!3m2!1sen!2snp!4v1788688199824!5m2!1sen!2snp",
   mapLinkUrl: "https://www.google.com/maps?q=28.205470759544855,84.02150931258622",
   socials: [
     { label: "GitHub", href: "https://github.com/PrembahadurKhatri", icon: FaGithub },
