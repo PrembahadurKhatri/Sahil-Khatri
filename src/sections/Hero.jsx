@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FiArrowUpRight, FiCode } from "react-icons/fi";
 import TypingText from "../components/TypingText.jsx";
-import { useSpotlight } from "../hooks/useSpotlight.js";
 import { profile, stats } from "../data/content.js";
 
 const ease = [0.22, 1, 0.36, 1];
@@ -10,7 +9,6 @@ export default function Hero() {
   const reduceMotion = useReducedMotion();
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   const experienceStat = stats[0];
-  const badgeSpotlight = useSpotlight();
 
   return (
     <section
@@ -126,6 +124,21 @@ export default function Hero() {
 
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line shadow-card">
             <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
+
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+            <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-md">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-white">
+                <FiCode size={18} />
+              </span>
+              <div>
+                <p className="font-display text-xl font-medium leading-none text-white">
+                  {experienceStat.value}
+                  {experienceStat.suffix}
+                </p>
+                <p className="mt-1 text-xs text-white/80">{experienceStat.label}</p>
+              </div>
+            </div>
           </div>
 
           {/* A small styled code snippet in place of scattered logo chips --
@@ -149,23 +162,6 @@ export default function Hero() {
               <span className="text-accent">;</span>
             </pre>
           </motion.div>
-
-          <div
-            ref={badgeSpotlight.ref}
-            onMouseMove={badgeSpotlight.onMouseMove}
-            className="spotlight absolute -bottom-6 -left-4 z-10 flex items-center gap-3 rounded-2xl border border-line bg-surface px-5 py-4 shadow-card transition-shadow duration-300 hover:shadow-card-hover sm:-left-6"
-          >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
-              <FiCode size={18} />
-            </span>
-            <div>
-              <p className="font-display text-lg font-medium leading-none text-ink">
-                {experienceStat.value}
-                {experienceStat.suffix}
-              </p>
-              <p className="mt-1 text-xs text-ink-muted">{experienceStat.label}</p>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>
