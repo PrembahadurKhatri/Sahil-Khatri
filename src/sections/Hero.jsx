@@ -104,12 +104,17 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease }}
           className="relative mx-auto w-full max-w-sm md:col-span-5 md:max-w-none"
         >
-          {/* Hollow accent frame, offset behind the photo -- a gallery-frame
-              reveal instead of a solid color block. */}
+          {/* Dot-grid panel, offset and slightly rotated behind the photo --
+              reads as a stacked layer with some texture instead of a flat
+              color block or a thin outline. */}
           <motion.div
             animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-5 -right-5 h-full w-full rounded-[2rem] border-2 border-accent/50"
+            style={{
+              backgroundImage: "radial-gradient(rgb(var(--color-accent) / 0.5) 1.5px, transparent 1.5px)",
+              backgroundSize: "18px 18px",
+            }}
+            className="absolute -bottom-5 -right-5 h-full w-full rotate-3 rounded-[2rem] bg-accent-soft"
             aria-hidden="true"
           />
 
