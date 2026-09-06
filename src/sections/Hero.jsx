@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FaLaptopCode } from "react-icons/fa";
 import TypingText from "../components/TypingText.jsx";
+import PulseDot from "../components/PulseDot.jsx";
 import { profile, stats } from "../data/content.js";
 
 const ease = [0.22, 1, 0.36, 1];
@@ -33,10 +34,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease }}
             className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-1 text-sm font-medium text-accent"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-            </span>
+            <PulseDot />
             {profile.availability}
           </motion.span>
 

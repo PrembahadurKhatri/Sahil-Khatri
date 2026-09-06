@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import PulseDot from "../components/PulseDot.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
 import { projects } from "../data/content.js";
 
@@ -16,10 +17,7 @@ function useCleanTitle(rawTitle) {
 function StatusBadge() {
   return (
     <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-base px-2.5 py-1 text-[11px] font-medium text-ink-muted">
-      <span className="relative flex h-1.5 w-1.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-      </span>
+      <PulseDot />
       In Progress
     </span>
   );
@@ -40,7 +38,12 @@ function ProjectCard({ project, delay }) {
       className="spotlight group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/40 hover:shadow-card-hover"
     >
       <div className="relative flex aspect-[4/3] items-center justify-center bg-base p-10">
-        {project.featured && <span className="eyebrow absolute left-5 top-5">Featured</span>}
+        {project.featured && (
+          <span className="eyebrow absolute left-5 top-5">
+            <PulseDot />
+            Featured
+          </span>
+        )}
         <img
           src={project.image}
           alt={project.title}
