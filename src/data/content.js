@@ -167,7 +167,7 @@ export const projects = [
     image: "/khumalogo.jpg",
     tags: ["React", "Node.js", "MongoDB", "Tailwind","Express","TypeScript","JavaScript"],
     github: "https://github.com/PrembahadurKhatri/khuma-aryal-foundation-project",
-    live: "https://khuma-aryal-foundation-project.vercel.app/",
+    live: "https://khumaaryalfoundation.org.np/",
     featured: true,
   },
   {
