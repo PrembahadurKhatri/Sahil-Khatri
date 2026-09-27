@@ -12,6 +12,10 @@ import {
   FaFacebook,
   FaInstagram,
   FaEnvelope,
+  FaCode,
+  FaServer,
+  FaCloud,
+  FaTools,
 } from "react-icons/fa";
 import {
   SiMongodb,
@@ -66,41 +70,54 @@ export const stats = [
   { label: "Client Satisfaction", value: 98, suffix: "%" },
 ];
 
+// `color` is each tool's own brand color (shown on its chip icon, see
+// Skills.jsx) instead of a single uniform accent tint on every icon —
+// truly monochrome brand marks (Next.js, Express, Linux) get a neutral
+// gray instead of forcing a fake brand hue, so they still read cleanly in
+// both the light and dark palette.
 export const skillGroups = [
   {
     category: "Frontend",
+    icon: FaCode,
+    description: "Building responsive and interactive user interfaces with modern frameworks and libraries.",
     items: [
-      { name: "React", icon: FaReact },
-      { name: "Next.js", icon: SiNextdotjs },
-      { name: "TypeScript", icon: SiTypescript },
-      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "React", icon: FaReact, color: "#61DAFB" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#71717A" },
+      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38BDF8" },
     ],
   },
   {
     category: "Backend",
+    icon: FaServer,
+    description: "Building secure and scalable server-side applications and APIs.",
     items: [
-      { name: "Node.js", icon: FaNodeJs },
-      { name: "Express", icon: SiExpress },
-      { name: "Python", icon: FaPython },
-      { name: "Java", icon: FaJava },
+      { name: "Node.js", icon: FaNodeJs, color: "#339933" },
+      { name: "Express", icon: SiExpress, color: "#71717A" },
+      { name: "Python", icon: FaPython, color: "#3776AB" },
+      { name: "Java", icon: FaJava, color: "#ED8B00" },
     ],
   },
   {
     category: "Data & Infrastructure",
+    icon: FaCloud,
+    description: "Managing data, deployment and cloud infrastructure for reliable and scalable systems.",
     items: [
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "Docker", icon: FaDocker },
-      { name: "AWS", icon: FaAws },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      { name: "Docker", icon: FaDocker, color: "#2496ED" },
+      { name: "AWS", icon: FaAws, color: "#FF9900" },
     ],
   },
   {
     category: "Tools & Other",
+    icon: FaTools,
+    description: "Essential tools and technologies I use to build, collaborate and stay productive.",
     items: [
-      { name: "Git", icon: FaGitAlt },
-      { name: "Linux", icon: FaLinux },
-      { name: "Figma", icon: SiFigma },
-      { name: "TensorFlow", icon: SiTensorflow },
+      { name: "Git", icon: FaGitAlt, color: "#F05032" },
+      { name: "Linux", icon: FaLinux, color: "#71717A" },
+      { name: "Figma", icon: SiFigma, color: "#A259FF" },
+      { name: "TensorFlow", icon: SiTensorflow, color: "#FF6F00" },
     ],
   },
 ];
