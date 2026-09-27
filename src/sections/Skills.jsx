@@ -3,10 +3,9 @@ import Reveal from "../components/Reveal.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
 import { skillGroups } from "../data/content.js";
 
-function SkillGroupCard({ group, index, delay }) {
+function SkillGroupCard({ group, delay }) {
   const spotlight = useSpotlight();
   const CategoryIcon = group.icon;
-  const number = String(index + 1).padStart(2, "0");
 
   return (
     <Reveal
@@ -14,7 +13,7 @@ function SkillGroupCard({ group, index, delay }) {
       onMouseMove={spotlight.onMouseMove}
       delay={delay}
       whileHover={{ y: -4 }}
-      className="spotlight relative overflow-hidden rounded-2xl border border-line bg-base p-7 transition-shadow duration-300 hover:shadow-card"
+      className="spotlight group relative overflow-hidden rounded-2xl border border-line bg-base p-7 transition-shadow duration-300 hover:shadow-card"
     >
       {/* Folded-corner accent, bottom-right — purely decorative, echoes the
           reference design's corner fold without needing a second asset. */}
@@ -24,18 +23,17 @@ function SkillGroupCard({ group, index, delay }) {
         aria-hidden="true"
       />
 
-      <div className="mb-5 flex items-start justify-between gap-4">
-        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent text-white shadow-card">
-          <CategoryIcon size={22} />
-        </span>
-        <span className="flex flex-1 items-center gap-2 pt-1.5 text-xs font-semibold text-accent">
-          {number}
-          <span className="h-px flex-1 bg-accent/40" />
-        </span>
-      </div>
+      <span className="mb-5 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent text-white shadow-card">
+        <CategoryIcon size={22} />
+      </span>
 
       <h3 className="font-display text-xl font-medium text-ink">{group.category}</h3>
-      <span className="mb-4 mt-2 block h-0.5 w-10 bg-accent" aria-hidden="true" />
+      {/* Hidden until the card is hovered, then grows in from the left --
+          per request, rather than always sitting there. */}
+      <span
+        className="mb-4 mt-2 block h-0.5 w-10 origin-left scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100"
+        aria-hidden="true"
+      />
       <p className="mb-5 text-sm leading-relaxed text-ink-muted">{group.description}</p>
 
       <ul className="flex flex-wrap gap-2.5">
@@ -76,7 +74,7 @@ export default function Skills() {
 
         <div className="grid gap-6 sm:grid-cols-2">
           {skillGroups.map((group, gi) => (
-            <SkillGroupCard key={group.category} group={group} index={gi} delay={gi * 0.06} />
+            <SkillGroupCard key={group.category} group={group} delay={gi * 0.06} />
           ))}
         </div>
       </div>
