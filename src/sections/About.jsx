@@ -86,32 +86,7 @@ export default function About() {
           </div>
 
           <div className="md:col-span-7">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <Reveal delay={0.1} className="sm:col-span-1 sm:row-span-2">
-                <div className="flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
-                  <div>
-                    <div className="flex items-center gap-1.5 border-b border-line bg-base px-4 py-3">
-                      <span className="h-2.5 w-2.5 rounded-full bg-line" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-line" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-                      <span className="ml-1.5 font-mono text-[11px] text-ink-faint">developer.ts</span>
-                    </div>
-                    <pre className="px-4 py-5 font-mono text-[12.5px] leading-relaxed text-ink-muted sm:text-[13px]">
-                      <span className="text-accent">const</span> developer = {"{"}
-                      {"\n  "}name: <span className="text-accent">"{profile.name}"</span>,
-                      {"\n  "}role: <span className="text-accent">"Full-Stack Developer"</span>,
-                      {"\n  "}stack: [<span className="text-accent">"MERN"</span>, <span className="text-accent">"Next.js"</span>],
-                      {"\n  "}focus: <span className="text-accent">"Clean code"</span>,
-                      {"\n"}{"}"}
-                      <span className="text-accent">;</span>
-                    </pre>
-                  </div>
-                  <p className="border-t border-line px-4 py-3 font-serif text-sm italic text-ink-faint">
-                    Code → Build → Grow
-                  </p>
-                </div>
-              </Reveal>
-
+            <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, i) => (
                 <StatCard key={stat.label} stat={stat} meta={STAT_META[i % STAT_META.length]} delay={0.06 * i} />
               ))}
