@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Reveal from "../components/Reveal.jsx";
+import PulseDot from "../components/PulseDot.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
 import { skillGroups } from "../data/content.js";
 
@@ -60,6 +61,12 @@ export default function Skills() {
       <div className="container-x">
         <div className="max-w-2xl mb-10 md:mb-14">
           <Reveal>
+            <span className="eyebrow mb-3">
+              <PulseDot />
+              Skills
+            </span>
+          </Reveal>
+          <Reveal delay={0.05}>
             <h2 className="font-display text-4xl md:text-5xl font-medium leading-[1.1] text-ink">
               Tools I <span className="text-accent">reach for</span>
             </h2>
