@@ -152,9 +152,10 @@ export default function Hero() {
               <span className="ml-1.5 font-mono text-[9px] text-ink-faint sm:text-[10px]">developer.ts</span>
             </div>
             <pre className="px-2.5 py-2.5 font-mono text-[9.5px] leading-relaxed text-ink-muted sm:px-3.5 sm:py-3 sm:text-[11px]">
-              <span className="text-accent">const</span> dev = {"{"}
-              {"\n  "}stack: [<span className="text-accent">"React"</span>, <span className="text-accent">"Node"</span>],
-              {"\n  "}focus: <span className="text-accent">"clean code"</span>,
+              <span className="text-accent">const</span> developer = {"{"}
+              {"\n  "}role: <span className="text-accent">"Full-Stack Developer"</span>,
+              {"\n  "}stack: [<span className="text-accent">"MERN"</span>, <span className="text-accent">"Next.js"</span>],
+              {"\n  "}focus: <span className="text-accent">"Clean & scalable code"</span>,
               {"\n"}{"}"}
               <span className="text-accent">;</span>
             </pre>
