@@ -101,7 +101,7 @@ export default function About() {
                       {"\n  "}name: <span className="text-accent">"{profile.name}"</span>,
                       {"\n  "}role: <span className="text-accent">"Full-Stack Developer"</span>,
                       {"\n  "}stack: [<span className="text-accent">"MERN"</span>, <span className="text-accent">"Next.js"</span>],
-                      {"\n  "}focus: <span className="text-accent">"Clean & scalable code"</span>,
+                      {"\n  "}focus: <span className="text-accent">"Clean code"</span>,
                       {"\n"}{"}"}
                       <span className="text-accent">;</span>
                     </pre>
