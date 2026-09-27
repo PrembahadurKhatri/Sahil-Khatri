@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sahilkhatri.dev/sitemap.xml
+Sitemap: https://prem-khatri.com.np/sitemap.xml
