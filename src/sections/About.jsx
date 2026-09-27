@@ -58,8 +58,8 @@ export default function About() {
       <div className="container-x">
         <SectionHeading eyebrow="About Me" title="A little about how I work" />
 
-        <div className="grid gap-12 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-5">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-6">
             <Reveal>
               <p className="text-lg md:text-xl leading-relaxed text-ink text-serif">{profile.bio}</p>
             </Reveal>
@@ -85,7 +85,7 @@ export default function About() {
             </dl>
           </div>
 
-          <div className="md:col-span-7">
+          <div className="md:col-span-6 md:pl-6">
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, i) => (
                 <StatCard key={stat.label} stat={stat} meta={STAT_META[i % STAT_META.length]} delay={0.06 * i} />
