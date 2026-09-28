@@ -210,14 +210,14 @@ export const projects = [
     live: "https://madeinnepal-khkk.vercel.app/",
   },
   {
-    id: "sports-gaming-network",
-  title: "Sports Gaming Network    (Ongoing)",
-  tagline: "A dynamic platform for sports enthusiasts and gamers",
-  description:
-    "A modern web application designed for sports fans and gaming communities to stay connected. The platform features news updates, tournament information, team and player profiles, event schedules, and an engaging user interface optimized for performance across all devices.",
-    image: "/logo.png",
-    tags: ["JavaScript", " MongoDB", "React", "TypeScript", "Tailwind","Next.js"],
-    github: "https://github.com/PrembahadurKhatri/sports-gaming-network",
-    live: "https://sports-gaming-network-flhu.vercel.app/",
+    id: "the-arena",
+    title: "The Arena",
+    tagline: "Sports community platform — teams, tournaments & grounds",
+    description:
+      "A full-stack sports community platform covering 10 sports. Players form teams, organize and compete in single-elimination tournaments with live brackets, book grounds by the hour, and climb per-sport leaderboards. Includes a real, server-enforced premium membership tier with a test-mode payment flow.",
+    image: "/thearenalogo.png",
+    tags: ["React", "Node.js", "MongoDB", "Express", "TypeScript", "Tailwind"],
+    github: "https://github.com/PrembahadurKhatri/TheArena",
+    live: "https://the-arena-eosin.vercel.app/",
   },
 ];
