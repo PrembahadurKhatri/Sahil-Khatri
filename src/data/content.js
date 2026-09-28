@@ -211,7 +211,7 @@ export const projects = [
   },
   {
     id: "the-arena",
-    title: "The Arena",
+    title: "The Arena (Ongoing)",
     tagline: "Sports community platform — teams, tournaments & grounds",
     description:
       "A full-stack sports community platform covering 10 sports. Players form teams, organize and compete in single-elimination tournaments with live brackets, book grounds by the hour, and climb per-sport leaderboards. Includes a real, server-enforced premium membership tier with a test-mode payment flow.",
