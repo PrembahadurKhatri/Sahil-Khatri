@@ -21,7 +21,7 @@
 // "not configured yet" error instead of silently failing.
 // ---------------------------------------------------------------------------
 
-export const EMAILJS_SERVICE_ID = "service_52p4yyp";
+export const EMAILJS_SERVICE_ID = "service_fznk5kn";
 export const EMAILJS_TEMPLATE_ID = "template_xyy75dl";
 export const EMAILJS_PUBLIC_KEY = "f2L8YB-FHgGV_TZAT";
 
