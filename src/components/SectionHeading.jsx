@@ -23,7 +23,7 @@ function SplitTitle({ text }) {
       {words.map((word, i) => (
         <span key={i} aria-hidden="true" className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
           <motion.span
-            className="inline-block origin-bottom"
+            className={`inline-block origin-bottom ${i === words.length - 1 ? "text-gold italic pr-[0.08em]" : ""}`}
             variants={{
               hidden: { y: "110%", rotateX: -80, opacity: 0, filter: "blur(6px)" },
               show: { y: "0%", rotateX: 0, opacity: 1, filter: "blur(0px)" },
@@ -55,7 +55,7 @@ export default function SectionHeading({ eyebrow, title, description, align = "l
 
       {description && (
         <Reveal delay={0.1}>
-          <p className="text-ink-muted text-base md:text-lg leading-relaxed">{description}</p>
+          <p className="text-ink-muted text-[1rem] md:text-lg leading-relaxed">{description}</p>
         </Reveal>
       )}
     </div>

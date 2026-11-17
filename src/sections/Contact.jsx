@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { FiMail, FiMapPin, FiPhone, FiClock, FiCheck, FiAlertCircle, FiArrowRight } from "react-icons/fi";
+import { FiCheck, FiAlertCircle, FiArrowRight } from "react-icons/fi";
+import { FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaClock } from "react-icons/fa";
+import IconTile from "../components/IconTile.jsx";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
@@ -9,15 +11,16 @@ import { profile } from "../data/content.js";
 import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, isEmailjsConfigured } from "../config/emailjs.js";
 
 const DETAILS = [
-  { icon: FiMail, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+  { icon: FaEnvelope, color: "#EA4335", label: "Email", value: profile.email, href: `mailto:${profile.email}` },
   {
-    icon: FiPhone,
+    icon: FaWhatsapp,
+    color: "#25D366",
     label: "Phone / WhatsApp",
     value: profile.phone,
     href: `tel:${profile.phone.replace(/\s+/g, "")}`,
   },
-  { icon: FiMapPin, label: "Location", value: profile.location, href: profile.mapLinkUrl },
-  { icon: FiClock, label: "Hours", value: profile.hours },
+  { icon: FaMapMarkerAlt, color: "#3E63DD", label: "Location", value: profile.location, href: profile.mapLinkUrl },
+  { icon: FaClock, color: "gold", label: "Hours", value: profile.hours },
 ];
 
 function DetailRow({ detail, delay }) {
@@ -29,13 +32,12 @@ function DetailRow({ detail, delay }) {
       onMouseMove={spotlight.onMouseMove}
       delay={delay}
       whileHover={{ y: -3 }}
-      className="spotlight group flex items-center gap-4 rounded-xl border border-line bg-surface px-5 py-4 transition-colors duration-300 hover:border-accent/50"
+      className="card-premium spotlight group flex items-center gap-4 rounded-2xl px-4 py-4"
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110">
-        <detail.icon size={17} />
-      </span>
+      <IconTile icon={detail.icon} color={detail.color} size="md" />
+
       <div>
-        <p className="text-xs uppercase tracking-wide text-ink-faint">{detail.label}</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">{detail.label}</p>
         {detail.href ? (
           <a
             href={detail.href}
@@ -84,7 +86,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32">
+    <section id="contact" className="relative py-24 md:py-32">
       <div className="container-x">
         <SectionHeading
           eyebrow="Get in Touch"
@@ -100,12 +102,12 @@ export default function Contact() {
 
             <Reveal
               delay={0.2}
-              className="mt-1 overflow-hidden rounded-2xl border border-line transition-shadow duration-300 hover:shadow-card"
+              className="card-premium mt-1 overflow-hidden rounded-3xl p-1.5"
             >
               <iframe
                 title="Location map"
                 src={profile.mapEmbedUrl}
-                className="h-56 w-full grayscale-[0.2]"
+                className="h-56 w-full rounded-[1.25rem] grayscale-[0.2]"
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="strict-origin-when-cross-origin"
@@ -117,7 +119,7 @@ export default function Contact() {
             ref={formSpotlight.ref}
             onMouseMove={formSpotlight.onMouseMove}
             delay={0.1}
-            className="spotlight rounded-2xl border border-line bg-surface p-7 transition-all duration-300 hover:shadow-card focus-within:border-accent/50 focus-within:shadow-card md:col-span-7 md:p-9"
+            className="card-premium spotlight rounded-3xl p-7 md:col-span-7 md:p-10"
           >
             <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5">
               <label className="flex flex-col gap-2 text-sm">
@@ -127,7 +129,7 @@ export default function Contact() {
                   type="text"
                   name="from_name"
                   placeholder="What should I call you?"
-                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
+                  className="rounded-xl border border-line bg-base/60 px-4 py-3.5 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:border-gold/70 focus:bg-base focus:shadow-[0_0_0_4px_rgb(var(--color-gold)/0.12)]"
                 />
               </label>
 
@@ -138,7 +140,7 @@ export default function Contact() {
                   type="email"
                   name="from_email"
                   placeholder="Where can I reach you?"
-                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
+                  className="rounded-xl border border-line bg-base/60 px-4 py-3.5 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:border-gold/70 focus:bg-base focus:shadow-[0_0_0_4px_rgb(var(--color-gold)/0.12)]"
                 />
               </label>
 
@@ -149,7 +151,7 @@ export default function Contact() {
                   rows={5}
                   name="message"
                   placeholder="Tell me about your project and goals..."
-                  className="resize-none rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
+                  className="resize-none rounded-xl border border-line bg-base/60 px-4 py-3.5 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:border-gold/70 focus:bg-base focus:shadow-[0_0_0_4px_rgb(var(--color-gold)/0.12)]"
                 />
               </label>
 
@@ -159,14 +161,14 @@ export default function Contact() {
                   type="text"
                   name="budget"
                   placeholder="e.g., NPR 50,000 - 100,000"
-                  className="rounded-lg border border-line bg-base px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:-translate-y-0.5 focus:border-accent focus:shadow-card"
+                  className="rounded-xl border border-line bg-base/60 px-4 py-3.5 text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:border-gold/70 focus:bg-base focus:shadow-[0_0_0_4px_rgb(var(--color-gold)/0.12)]"
                 />
               </label>
 
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="shine mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                className="btn-primary shine mt-2 w-full py-4 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === "sent" ? (
                   <>

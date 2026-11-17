@@ -4,8 +4,24 @@ import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub } from "react-icon
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import PulseDot from "../components/PulseDot.jsx";
+import IconTile from "../components/IconTile.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
-import { projects } from "../data/content.js";
+import { projects, skillGroups } from "../data/content.js";
+import { SiPrisma, SiZod, SiJavascript, SiCss } from "react-icons/si";
+
+// Tag -> logo lookup: every skill from the Skills section plus a few
+// project-only technologies. Matching ignores case and a trailing " CSS".
+const norm = (s) => s.trim().toLowerCase().replace(/\s+css$/, "");
+const TECH_BY_TAG = new Map(
+  [
+    ...skillGroups.flatMap((g) => g.items).map((t) => ({ ...t, label: t.name })),
+    { name: "Prisma", label: "Prisma", icon: SiPrisma, color: "#2D3748" },
+    { name: "Zod", label: "Zod", icon: SiZod, color: "#3068B7" },
+    { name: "JavaScript", label: "JavaScript", icon: SiJavascript, color: "#E4B400" },
+    { name: "CSS", label: "CSS", icon: SiCss, color: "#663399" },
+  ].map((t) => [norm(t.name), t])
+);
+const techFor = (tag) => TECH_BY_TAG.get(norm(tag));
 
 const ONGOING_RE = /\s*\(ongoing\)\s*$/i;
 const READ_MORE_THRESHOLD = 150;
@@ -17,7 +33,7 @@ function useCleanTitle(rawTitle) {
 
 function StatusBadge() {
   return (
-    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-base px-2.5 py-1 text-[11px] font-medium text-ink-muted">
+    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/40 bg-base/60 px-2.5 py-1 text-[11px] font-medium text-gold">
       <PulseDot />
       In Progress
     </span>
@@ -55,11 +71,20 @@ function ProjectCard({ project, delay, index }) {
       transition={{ type: "spring", stiffness: 70, damping: 16, mass: 0.9, delay }}
       style={{ transformPerspective: 1000 }}
       whileHover={{ y: -6 }}
-      className="spotlight group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/40 hover:shadow-card-hover"
+      className="card-premium spotlight group flex flex-col overflow-hidden rounded-3xl"
     >
-      <div className="relative flex h-44 items-center justify-center overflow-hidden bg-base p-8 sm:h-48">
+      <div className="relative m-2 flex h-48 items-center justify-center overflow-hidden rounded-[1.35rem] bg-base/70 p-8 sm:h-52">
+        <div aria-hidden="true" className="bg-grid absolute inset-0 opacity-70" />
+        <div
+          aria-hidden="true"
+          className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-60"
+          style={{ background: "radial-gradient(circle, rgb(var(--color-gold) / 0.35), rgb(var(--color-accent) / 0.2) 50%, transparent 70%)" }}
+        />
+        <span className="absolute right-4 top-4 z-10 font-mono text-[11px] text-ink-faint">
+          {String(index + 1).padStart(2, "0")}
+        </span>
         {project.featured && (
-          <span className="eyebrow absolute left-5 top-5 z-10">
+          <span className="eyebrow absolute left-4 top-4 z-10">
             <PulseDot />
             Featured
           </span>
@@ -69,14 +94,14 @@ function ProjectCard({ project, delay, index }) {
           src={project.image}
           alt={project.title}
           loading="lazy"
-          className="h-full w-full max-w-[11rem] object-contain transition-transform duration-500 group-hover:scale-110 sm:max-w-[12rem]"
+          className="relative h-full w-full max-w-[11rem] object-contain drop-shadow-[0_18px_24px_rgb(0_0_0_/_0.35)] transition-transform duration-500 group-hover:scale-110 sm:max-w-[12rem]"
         />
         </motion.div>
       </div>
 
-      <div className="flex flex-1 flex-col p-7">
+      <div className="flex flex-1 flex-col px-6 pb-6 pt-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-display text-xl font-medium text-ink transition-colors duration-300 group-hover:text-accent">
+          <h3 className="font-display text-2xl font-medium text-ink transition-colors duration-300 group-hover:text-gold">
             {title}
           </h3>
           {ongoing && <StatusBadge />}
@@ -97,31 +122,31 @@ function ProjectCard({ project, delay, index }) {
           </button>
         )}
 
-        <ul className="mt-4 flex flex-wrap gap-1.5">
-          {project.tags.slice(0, 4).map((tag) => (
-            <motion.li
-              key={tag}
-              whileHover={{ y: -2, scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="cursor-default rounded-full border border-line px-2.5 py-1 text-[11px] text-ink-muted transition-colors duration-300 group-hover:border-accent/30 group-hover:bg-accent-soft group-hover:text-accent"
-            >
-              {tag.trim()}
-            </motion.li>
-          ))}
+        <ul className="mb-6 mt-5 flex flex-wrap gap-2">
+          {project.tags.slice(0, 5).map((tag) => {
+            const tech = techFor(tag);
+            return (
+              <motion.li
+                key={tag}
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="inline-flex cursor-default items-center gap-2 rounded-full border border-line bg-base/50 py-1 pl-1 pr-3 text-[11px] font-medium text-ink-muted"
+              >
+                {tech ? (
+                  <IconTile icon={tech.icon} color={tech.color} size="2xs" />
+                ) : (
+                  <span className="ml-1.5 h-1.5 w-1.5 rounded-full bg-gold" />
+                )}
+                {tech?.label || tag.trim()}
+              </motion.li>
+            );
+          })}
         </ul>
 
-        <div className="mt-auto flex items-center gap-4 border-t border-line pt-4 text-sm font-medium">
-          <a
-            href={project.live}
-            target="_blank"
-            rel="noreferrer"
-            className="group/live inline-flex items-center gap-1.5 text-ink link-underline hover:text-accent"
-          >
+        <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-line pt-5">
+          <a href={project.live} target="_blank" rel="noreferrer" className="btn-primary shine px-5 py-2.5 text-xs">
             Live Site
-            <FiArrowUpRight
-              size={14}
-              className="transition-transform duration-300 group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5"
-            />
+            <FiArrowUpRight size={14} />
           </a>
           {project.github && (
             <a
@@ -129,9 +154,9 @@ function ProjectCard({ project, delay, index }) {
               target="_blank"
               rel="noreferrer"
               aria-label={`${project.title} source on GitHub`}
-              className="group/gh inline-flex items-center gap-1.5 text-ink-muted transition-colors hover:text-accent"
+              className="btn-ghost px-5 py-2.5 text-xs"
             >
-              <FiGithub size={14} className="transition-transform duration-300 group-hover/gh:rotate-12" />
+              <FiGithub size={14} />
               Source
             </a>
           )}
@@ -143,7 +168,7 @@ function ProjectCard({ project, delay, index }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 md:py-32 border-b border-line">
+    <section id="projects" className="relative py-24 md:py-32">
       <div className="container-x">
         <SectionHeading
           eyebrow="Selected Work"

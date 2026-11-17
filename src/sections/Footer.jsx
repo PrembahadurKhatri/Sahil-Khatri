@@ -1,36 +1,60 @@
+import IconTile from "../components/IconTile.jsx";
 import { profile } from "../data/content.js";
 
 const YEAR = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="grain relative overflow-hidden bg-gradient-to-br from-[#081a11] via-[#123524] to-[#1f6b48]">
-      <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-emerald-400/15 blur-3xl" aria-hidden="true" />
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/60 to-transparent" aria-hidden="true" />
+    <footer className="grain relative overflow-hidden bg-[#050806]">
+      <div className="hairline w-full" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full blur-3xl"
+        style={{ background: "rgb(46 160 110 / 0.18)" }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full blur-3xl"
+        style={{ background: "rgb(222 186 112 / 0.12)" }}
+        aria-hidden="true"
+      />
 
-      <div className="container-x relative flex flex-col items-center gap-6 py-10 text-center text-xs text-white/60 sm:flex-row sm:justify-between sm:gap-4 sm:pb-8 sm:text-left">
-        <p>
-          © {YEAR} {profile.name}. All rights reserved.
-        </p>
+      <div className="container-x relative flex flex-col items-center gap-8 py-14 text-center md:flex-row md:justify-between md:text-left">
+        <div>
+          <p
+            className="font-display text-3xl font-medium"
+            style={{
+              background: "linear-gradient(100deg, #a8803a, #debA70, #f6dea4, #deba70, #a8803a)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            {profile.name}
+          </p>
+          <p className="mt-2 text-sm text-white/50">{profile.tagline}</p>
+        </div>
 
-        <div className="flex flex-col items-center gap-3 sm:items-start">
-          <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Follow on:</span>
+        <div className="flex flex-col items-center gap-3 md:items-end">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#deba70]">Follow on</span>
           <div className="flex gap-3">
             {profile.socials.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
-                target="_blank"
+                target={social.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
                 aria-label={social.label}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-yellow-500 hover:text-yellow-500"
+                className="group"
               >
-                <social.icon size={15} />
+                <IconTile icon={social.icon} color={social.color} gradient={social.gradient} size="md" />
               </a>
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="container-x relative border-t border-white/10 py-6 text-center text-xs text-white/40 md:text-left">
+        © {YEAR} {profile.name}. All rights reserved.
       </div>
     </footer>
   );

@@ -39,7 +39,7 @@ export default function Loader({ onComplete }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-7 bg-base"
+          className="grain fixed inset-0 z-[100] flex flex-col items-center justify-center gap-7 bg-base"
         >
           <motion.img
             src={profile.logo}
@@ -51,9 +51,9 @@ export default function Loader({ onComplete }) {
           />
 
           <div className="flex flex-col items-center gap-3">
-            <span className="font-display text-2xl font-medium tabular-nums text-ink">{progress}%</span>
+            <span className="text-gold font-display text-3xl font-medium tabular-nums">{progress}%</span>
             <div className="h-[3px] w-40 overflow-hidden rounded-full bg-line md:w-56">
-              <div className="h-full rounded-full bg-accent transition-[width] duration-150 ease-linear" style={{ width: `${progress}%` }} />
+              <div className="h-full rounded-full transition-[width] duration-150 ease-linear" style={{ width: `${progress}%`, background: "linear-gradient(90deg, rgb(var(--color-accent)), rgb(var(--color-gold)))", boxShadow: "0 0 12px rgb(var(--color-gold) / 0.7)" }} />
             </div>
           </div>
         </motion.div>

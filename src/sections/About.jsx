@@ -2,25 +2,24 @@ import { FiMapPin, FiMail, FiCheckCircle, FiClock, FiFolder, FiLayers, FiSmile }
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import AnimatedCounter from "../components/AnimatedCounter.jsx";
+import IconTile from "../components/IconTile.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
 import { profile, stats, skillGroups } from "../data/content.js";
 
 const FACTS = [
-  { icon: FiMapPin, label: "Location", value: profile.location },
-  { icon: FiMail, label: "Email", value: profile.email },
-  { icon: FiCheckCircle, label: "Status", value: profile.availability },
+  { icon: FiMapPin, label: "Location", value: profile.location, color: "#E5484D" },
+  { icon: FiMail, label: "Email", value: profile.email, color: "#3E63DD" },
+  { icon: FiCheckCircle, label: "Status", value: profile.availability, color: "accent" },
 ];
 
-// Per-card icon color + short blurb, matched 1:1 with `stats` by index.
+// Per-card icon colour + short blurb, matched 1:1 with `stats` by index.
 const STAT_META = [
-  { icon: FiClock, iconBg: "bg-blue-50", iconColor: "text-blue-600", blurb: "Learning and building something new every day." },
-  { icon: FiFolder, iconBg: "bg-violet-50", iconColor: "text-violet-600", blurb: "Real solutions, shipped for real people." },
-  { icon: FiLayers, iconBg: "bg-teal-50", iconColor: "text-teal-600", blurb: "From frontend to backend, always exploring." },
-  { icon: FiSmile, iconBg: "bg-sky-50", iconColor: "text-sky-600", blurb: "Because good work speaks for itself." },
+  { icon: FiClock, color: "#3B82F6", blurb: "Learning and building something new every day." },
+  { icon: FiFolder, color: "#8B5CF6", blurb: "Real solutions, shipped for real people." },
+  { icon: FiLayers, color: "#14B8A6", blurb: "From frontend to backend, always exploring." },
+  { icon: FiSmile, color: "gold", blurb: "Because good work speaks for itself." },
 ];
 
-// A handful of core tools for the footer strip, pulled from the same data
-// Skills.jsx reads from so the two sections never fall out of sync.
 const STACK_NAMES = ["React", "Next.js", "Node.js", "Express", "MongoDB", "PostgreSQL", "Docker", "AWS"];
 const TECH_STACK = skillGroups
   .flatMap((group) => group.items)
@@ -28,7 +27,6 @@ const TECH_STACK = skillGroups
 
 function StatCard({ stat, meta, delay }) {
   const spotlight = useSpotlight();
-  const Icon = meta.icon;
 
   return (
     <Reveal
@@ -36,17 +34,13 @@ function StatCard({ stat, meta, delay }) {
       onMouseMove={spotlight.onMouseMove}
       delay={delay}
       whileHover={{ y: -6 }}
-      className="spotlight group rounded-2xl border border-line bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-card"
+      className="card-premium spotlight group rounded-3xl p-6"
     >
-      <span
-        className={`flex h-10 w-10 items-center justify-center rounded-full ${meta.iconBg} ${meta.iconColor} transition-transform duration-300 group-hover:scale-110`}
-      >
-        <Icon size={17} />
-      </span>
-      <div className="mt-4 font-display text-3xl font-medium text-ink">
+      <IconTile icon={meta.icon} color={meta.color} size="md" />
+      <div className="mt-5 font-display text-4xl font-medium text-ink">
         <AnimatedCounter value={stat.value} suffix={stat.suffix} />
       </div>
-      <p className="mt-1.5 text-sm font-medium text-ink leading-snug">{stat.label}</p>
+      <p className="mt-1.5 text-sm font-semibold leading-snug text-ink">{stat.label}</p>
       <p className="mt-1 text-xs leading-relaxed text-ink-faint">{meta.blurb}</p>
     </Reveal>
   );
@@ -54,30 +48,30 @@ function StatCard({ stat, meta, delay }) {
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-32 border-b border-line">
+    <section id="about" className="relative py-24 md:py-32">
       <div className="container-x">
         <SectionHeading eyebrow="About Me" title="A little about how I work" />
 
         <div className="grid gap-12 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-6">
             <Reveal>
-              <p className="text-lg md:text-xl leading-relaxed text-ink text-serif">{profile.bio}</p>
+              <p className="border-l-2 border-gold/60 pl-6 font-display text-xl leading-relaxed text-ink md:text-2xl">
+                {profile.bio}
+              </p>
             </Reveal>
 
-            <dl className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <dl className="mt-10 flex flex-col gap-3">
               {FACTS.map((fact, i) => (
                 <Reveal
                   as="div"
                   key={fact.label}
                   delay={0.05 * i}
-                  whileHover={{ y: -3 }}
-                  className="group flex items-center gap-3 rounded-xl border border-line bg-surface px-4 py-3 transition-colors duration-300 hover:border-accent/50 hover:bg-accent-soft"
+                  whileHover={{ x: 4 }}
+                  className="card-premium group flex items-center gap-4 rounded-2xl px-4 py-3"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-hover:scale-110 group-hover:bg-accent group-hover:text-white">
-                    <fact.icon size={15} />
-                  </span>
+                  <IconTile icon={fact.icon} color={fact.color} size="sm" />
                   <div>
-                    <dt className="text-xs uppercase tracking-wide text-yellow-600">{fact.label}</dt>
+                    <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">{fact.label}</dt>
                     <dd className="text-sm font-medium text-ink">{fact.value}</dd>
                   </div>
                 </Reveal>
@@ -94,14 +88,17 @@ export default function About() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-line pt-8">
-          <span className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Tech Stack</span>
-          {TECH_STACK.map((tech) => (
-            <span key={tech.name} className="inline-flex items-center gap-2 text-sm text-ink-muted">
-              <tech.icon size={16} style={{ color: tech.color }} />
-              {tech.name}
-            </span>
-          ))}
+        <div className="mt-16">
+          <div className="hairline mb-8" aria-hidden="true" />
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">Core Stack</span>
+            {TECH_STACK.map((tech) => (
+              <span key={tech.name} className="group inline-flex items-center gap-2.5 text-sm font-medium text-ink-muted">
+                <IconTile icon={tech.icon} color={tech.color} size="xs" />
+                {tech.name}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

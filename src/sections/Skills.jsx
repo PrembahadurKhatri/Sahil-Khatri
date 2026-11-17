@@ -1,52 +1,54 @@
 import { motion } from "framer-motion";
 import Reveal from "../components/Reveal.jsx";
-import PulseDot from "../components/PulseDot.jsx";
+import SectionHeading from "../components/SectionHeading.jsx";
+import IconTile from "../components/IconTile.jsx";
 import { useSpotlight } from "../hooks/useSpotlight.js";
 import { skillGroups } from "../data/content.js";
 
-function SkillGroupCard({ group, delay }) {
+const CATEGORY_COLORS = ["accent", "#6366F1", "#0EA5E9", "gold"];
+
+function SkillGroupCard({ group, delay, index }) {
   const spotlight = useSpotlight();
-  const CategoryIcon = group.icon;
 
   return (
     <Reveal
       ref={spotlight.ref}
       onMouseMove={spotlight.onMouseMove}
       delay={delay}
-      whileHover={{ y: -4 }}
-      className="spotlight group relative overflow-hidden rounded-2xl border border-line bg-base p-7 transition-shadow duration-300 hover:shadow-card"
+      whileHover={{ y: -6 }}
+      className="card-premium spotlight group relative overflow-hidden rounded-3xl p-7 md:p-8"
     >
-      {/* Folded-corner accent, bottom-right — purely decorative, echoes the
-          reference design's corner fold without needing a second asset. */}
-      <div
-        className="pointer-events-none absolute bottom-0 right-0 h-9 w-9 bg-accent/25"
-        style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }}
+      <span
         aria-hidden="true"
-      />
-
-      <span className="mb-5 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent text-white shadow-card">
-        <CategoryIcon size={22} />
+        className="pointer-events-none !absolute -top-6 right-4 font-display text-[7rem] font-medium leading-none text-ink/[0.05]"
+      >
+        0{index + 1}
       </span>
 
-      <h3 className="font-display text-xl font-medium text-ink">{group.category}</h3>
-      {/* Hidden until the card is hovered, then grows in from the left --
-          per request, rather than always sitting there. */}
-      <span
-        className="mb-4 mt-2 block h-0.5 w-10 origin-left scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100"
-        aria-hidden="true"
-      />
-      <p className="mb-5 text-sm leading-relaxed text-ink-muted">{group.description}</p>
+      <div className="flex items-center gap-4">
+        <IconTile icon={group.icon} color={CATEGORY_COLORS[index % CATEGORY_COLORS.length]} size="lg" />
+        <div>
+          <h3 className="font-display text-2xl font-medium text-ink">{group.category}</h3>
+          <span
+            className="mt-1.5 block h-px w-10 origin-left bg-gold transition-all duration-500 group-hover:w-20"
+            aria-hidden="true"
+          />
+        </div>
+      </div>
 
-      <ul className="flex flex-wrap gap-2.5">
+      <p className="mb-6 mt-5 text-sm leading-relaxed text-ink-muted">{group.description}</p>
+
+      <ul className="grid grid-cols-2 gap-3">
         {group.items.map((skill) => (
           <motion.li
             key={skill.name}
-            whileHover={{ y: -3, scale: 1.05 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={{ y: -3 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="inline-flex cursor-default items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-2 text-sm text-ink-muted"
+            className="group/chip flex cursor-default items-center gap-3 rounded-2xl border border-line/70 bg-base/40 p-2 pr-3 text-sm font-medium text-ink transition-colors duration-300 hover:border-gold/40"
           >
-            <skill.icon size={15} style={{ color: skill.color }} />
+            <span className="group">
+              <IconTile icon={skill.icon} color={skill.color} size="sm" />
+            </span>
             {skill.name}
           </motion.li>
         ))}
@@ -57,31 +59,18 @@ function SkillGroupCard({ group, delay }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-32 border-b border-line bg-surface">
-      <div className="container-x">
-        <div className="max-w-2xl mb-10 md:mb-14">
-          <Reveal>
-            <span className="eyebrow mb-3">
-              <PulseDot />
-              Skills
-            </span>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-display text-4xl md:text-5xl font-medium leading-[1.1] text-ink">
-              Tools I <span className="text-accent">reach for</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-3 text-base leading-relaxed text-ink-muted md:text-lg">
-              A working set of languages, frameworks, and infrastructure I use to take a product from idea to
-              production.
-            </p>
-          </Reveal>
-        </div>
+    <section id="skills" className="relative py-24 md:py-32">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-surface/40" />
+      <div className="container-x relative">
+        <SectionHeading
+          eyebrow="Skills"
+          title="Tools I reach for"
+          description="A working set of languages, frameworks, and infrastructure I use to take a product from idea to production."
+        />
 
         <div className="grid gap-6 sm:grid-cols-2">
           {skillGroups.map((group, gi) => (
-            <SkillGroupCard key={group.category} group={group} delay={gi * 0.06} />
+            <SkillGroupCard key={group.category} group={group} index={gi} delay={(gi % 2) * 0.08} />
           ))}
         </div>
       </div>

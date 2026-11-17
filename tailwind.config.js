@@ -23,6 +23,8 @@ export default {
         "ink-faint": "rgb(var(--color-ink-faint) / <alpha-value>)",
         accent: "rgb(var(--color-accent) / <alpha-value>)",
         "accent-soft": "rgb(var(--color-accent-soft) / <alpha-value>)",
+        "accent-2": "rgb(var(--color-accent-2) / <alpha-value>)",
+        gold: "rgb(var(--color-gold) / <alpha-value>)",
       },
       maxWidth: {
         content: "72rem",

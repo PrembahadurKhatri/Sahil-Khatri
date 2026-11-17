@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar.jsx";
 import ScrollProgressBar from "./components/ScrollProgressBar.jsx";
 import ScrollAurora from "./components/ScrollAurora.jsx";
 import ScrollScene from "./components/ScrollScene.jsx";
+import CursorGlow from "./components/CursorGlow.jsx";
 import WhatsAppButton from "./components/WhatsAppButton.jsx";
 import Hero from "./sections/Hero.jsx";
 import About from "./sections/About.jsx";
@@ -33,6 +34,7 @@ export default function App() {
   return (
     <div className="relative isolate min-h-screen bg-base text-ink">
       <ScrollAurora />
+      <CursorGlow />
       <ScrollProgressBar />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>

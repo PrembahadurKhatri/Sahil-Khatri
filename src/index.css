@@ -3,29 +3,43 @@
 @tailwind utilities;
 
 :root {
-  /* Light palette — clean white + premium emerald */
-  --color-base: 255 255 255;
-  --color-surface: 250 251 250;
-  --color-surface-2: 242 245 242;
-  --color-border: 224 229 224;
-  --color-ink: 22 25 22;
-  --color-ink-muted: 89 96 89;
-  --color-ink-faint: 138 145 137;
-  --color-accent: 21 92 63;
-  --color-accent-soft: 222 237 228;
+  /* Light palette: warm ivory + deep emerald + champagne gold */
+  --color-base: 251 250 246;
+  --color-surface: 255 255 252;
+  --color-surface-2: 244 242 235;
+  --color-border: 226 222 210;
+  --color-ink: 18 24 20;
+  --color-ink-muted: 82 90 84;
+  --color-ink-faint: 136 140 132;
+  --color-accent: 16 96 64;
+  --color-accent-2: 34 150 102;
+  --color-accent-soft: 223 238 229;
+  --color-gold: 160 116 38;
+  --color-gold-2: 206 162 82;
+  --color-gold-3: 122 84 22;
+  --glass: 255 255 255;
+  --glass-alpha: 0.7;
+  --shadow-color: 40 34 20;
 }
 
 .dark {
-  /* Dark palette — near-black + premium emerald */
-  --color-base: 11 13 12;
-  --color-surface: 18 21 19;
-  --color-surface-2: 24 28 25;
-  --color-border: 39 45 40;
-  --color-ink: 236 241 237;
-  --color-ink-muted: 166 175 167;
-  --color-ink-faint: 110 119 111;
-  --color-accent: 84 173 132;
-  --color-accent-soft: 24 39 31;
+  /* Dark palette: obsidian green + luminous emerald + champagne gold */
+  --color-base: 7 10 9;
+  --color-surface: 13 18 15;
+  --color-surface-2: 19 25 21;
+  --color-border: 36 44 39;
+  --color-ink: 240 242 236;
+  --color-ink-muted: 168 176 168;
+  --color-ink-faint: 112 120 113;
+  --color-accent: 70 186 134;
+  --color-accent-2: 128 222 176;
+  --color-accent-soft: 18 38 28;
+  --color-gold: 222 186 112;
+  --color-gold-2: 246 222 164;
+  --color-gold-3: 168 128 58;
+  --glass: 20 27 23;
+  --glass-alpha: 0.55;
+  --shadow-color: 0 0 0;
 }
 
 * {
@@ -43,18 +57,18 @@ body {
 
 h1, h2, h3, h4, .font-display {
   font-family: "Fraunces", ui-serif, Georgia, serif;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 ::selection {
-  background: rgb(var(--color-accent) / 0.22);
+  background: rgb(var(--color-gold) / 0.3);
   color: rgb(var(--color-ink));
 }
 
 :focus-visible {
-  outline: 2px solid rgb(var(--color-accent));
+  outline: 2px solid rgb(var(--color-gold));
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar {
@@ -64,11 +78,19 @@ h1, h2, h3, h4, .font-display {
   background: rgb(var(--color-base));
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--color-border));
+  background: linear-gradient(rgb(var(--color-gold) / 0.6), rgb(var(--color-accent) / 0.6));
   border-radius: 999px;
+  border: 2px solid rgb(var(--color-base));
 }
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--color-ink-faint));
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
 }
 
 @layer utilities {
@@ -76,8 +98,117 @@ h1, h2, h3, h4, .font-display {
     @apply mx-auto max-w-content px-6 md:px-10;
   }
 
+  /* Section label: glass pill with a gold hairline and dot. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-accent;
+    @apply inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em];
+    color: rgb(var(--color-gold));
+    background:
+      linear-gradient(rgb(var(--glass) / var(--glass-alpha)), rgb(var(--glass) / var(--glass-alpha))) padding-box,
+      linear-gradient(120deg, rgb(var(--color-gold) / 0.6), rgb(var(--color-border)), rgb(var(--color-accent) / 0.5)) border-box;
+    border: 1px solid transparent;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Champagne-gold metallic text. */
+  .text-gold {
+    background: linear-gradient(
+      100deg,
+      rgb(var(--color-gold-3)) 0%,
+      rgb(var(--color-gold)) 25%,
+      rgb(var(--color-gold-2)) 50%,
+      rgb(var(--color-gold)) 75%,
+      rgb(var(--color-gold-3)) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  .text-emerald {
+    background: linear-gradient(100deg, rgb(var(--color-accent)), rgb(var(--color-accent-2)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Frosted glass card with a gradient hairline border and layered shadow. */
+  .card-premium {
+    background:
+      linear-gradient(160deg, rgb(var(--glass) / calc(var(--glass-alpha) + 0.15)), rgb(var(--glass) / var(--glass-alpha))) padding-box,
+      linear-gradient(140deg, rgb(var(--color-gold) / 0.45), rgb(var(--color-border) / 0.9) 35%, rgb(var(--color-border) / 0.9) 65%, rgb(var(--color-accent) / 0.45)) border-box;
+    border: 1px solid transparent;
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 1px 2px rgb(var(--shadow-color) / 0.06),
+      0 24px 48px -24px rgb(var(--shadow-color) / 0.35);
+    transition: box-shadow 0.4s ease;
+  }
+  .card-premium:hover {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      0 0 0 1px rgb(var(--color-gold) / 0.25),
+      0 30px 60px -24px rgb(var(--shadow-color) / 0.45),
+      0 0 40px -10px rgb(var(--color-accent) / 0.25);
+  }
+
+  /* Primary button: polished emerald with inner highlight and glow. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white;
+    background: linear-gradient(180deg, rgb(var(--color-accent-2)) -40%, rgb(var(--color-accent)) 55%, rgb(var(--color-accent) / 0.9));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.35),
+      inset 0 -2px 6px rgb(0 0 0 / 0.2),
+      0 10px 28px -10px rgb(var(--color-accent) / 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.4),
+      inset 0 -2px 6px rgb(0 0 0 / 0.2),
+      0 16px 36px -10px rgb(var(--color-accent) / 0.9);
+  }
+
+  /* Secondary button: glass with gold hairline. */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-ink;
+    background:
+      linear-gradient(rgb(var(--glass) / var(--glass-alpha)), rgb(var(--glass) / var(--glass-alpha))) padding-box,
+      linear-gradient(120deg, rgb(var(--color-gold) / 0.7), rgb(var(--color-border)), rgb(var(--color-gold) / 0.4)) border-box;
+    border: 1px solid transparent;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  .btn-ghost:hover {
+    transform: translateY(-2px);
+    color: rgb(var(--color-gold));
+  }
+
+  /* Fine architectural grid that fades out toward the edges. */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgb(var(--color-ink) / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--color-ink) / 0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(var(--color-gold) / 0.5), transparent);
+  }
+
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
   }
 
   .grain {
@@ -88,13 +219,13 @@ h1, h2, h3, h4, .font-display {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.035;
+    opacity: 0.05;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
 
   .link-underline {
-    background-image: linear-gradient(rgb(var(--color-accent)), rgb(var(--color-accent)));
+    background-image: linear-gradient(rgb(var(--color-gold)), rgb(var(--color-gold)));
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 0% 1px;
@@ -114,9 +245,9 @@ h1, h2, h3, h4, .font-display {
     inset: 0;
     left: -60%;
     width: 40%;
-    background: linear-gradient(115deg, transparent 0%, rgb(255 255 255 / 0.55) 50%, transparent 100%);
+    background: linear-gradient(115deg, transparent 0%, rgb(255 255 255 / 0.45) 50%, transparent 100%);
     transform: skewX(-20deg);
-    transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: left 0.75s cubic-bezier(0.22, 1, 0.36, 1);
     pointer-events: none;
   }
   .shine:hover::after {
@@ -133,8 +264,9 @@ h1, h2, h3, h4, .font-display {
     z-index: 0;
     border-radius: inherit;
     background: radial-gradient(
-      360px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      rgb(var(--color-accent) / 0.1),
+      380px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      rgb(var(--color-gold) / 0.1),
+      rgb(var(--color-accent) / 0.05) 40%,
       transparent 70%
     );
     opacity: 0;

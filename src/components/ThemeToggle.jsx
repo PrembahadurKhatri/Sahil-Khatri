@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 export default function ThemeToggle({ theme, toggleTheme, className = "" }) {
@@ -9,9 +10,21 @@ export default function ThemeToggle({ theme, toggleTheme, className = "" }) {
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       aria-pressed={isDark}
-      className={`inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-muted transition-colors hover:text-accent hover:border-accent/50 ${className}`}
+      className={`btn-ghost relative !h-10 !w-10 overflow-hidden !p-0 ${className}`}
     >
-      {isDark ? <FiSun size={16} /> : <FiMoon size={16} />}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={theme}
+          initial={{ y: 14, rotate: -90, opacity: 0 }}
+          animate={{ y: 0, rotate: 0, opacity: 1 }}
+          exit={{ y: -14, rotate: 90, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          style={{ color: "rgb(var(--color-gold))" }}
+          className="inline-flex"
+        >
+          {isDark ? <FiSun size={16} /> : <FiMoon size={16} />}
+        </motion.span>
+      </AnimatePresence>
     </button>
   );
 }
