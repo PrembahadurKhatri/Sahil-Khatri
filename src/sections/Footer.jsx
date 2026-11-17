@@ -11,7 +11,11 @@ export default function Footer() {
 
       <div className="container-x relative flex flex-col items-center gap-8 py-12 text-center md:flex-row md:justify-between md:py-14 md:text-left">
         <div>
-          <p className="text-2xl font-semibold tracking-tight text-[#deba70] md:text-3xl">{profile.name}</p>
+          <img
+            src={profile.logo}
+            alt={profile.name}
+            className="mx-auto h-12 w-auto object-contain brightness-[2.2] saturate-[1.3] drop-shadow-[0_0_12px_rgb(70_186_134_/_0.45)] md:mx-0 md:h-14"
+          />
           <p className="mt-2 text-sm text-white/60">{profile.tagline}</p>
         </div>
 

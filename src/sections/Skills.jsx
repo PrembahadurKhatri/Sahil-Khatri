@@ -18,13 +18,6 @@ function SkillGroupCard({ group, delay, index }) {
       whileHover={{ y: -6 }}
       className="card-premium spotlight group relative overflow-hidden rounded-3xl p-5 sm:p-7 md:p-8"
     >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none !absolute -top-6 right-4 font-display text-[7rem] font-medium leading-none text-ink/[0.05]"
-      >
-        0{index + 1}
-      </span>
-
       <div className="flex items-center gap-4">
         <IconTile icon={group.icon} color={CATEGORY_COLORS[index % CATEGORY_COLORS.length]} size="lg" />
         <div>

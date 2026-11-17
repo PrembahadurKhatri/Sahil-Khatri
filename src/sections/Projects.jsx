@@ -60,9 +60,6 @@ function ProjectCard({ project, index }) {
           className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-60"
           style={{ background: "radial-gradient(circle, rgb(var(--color-gold) / 0.35), rgb(var(--color-accent) / 0.2) 50%, transparent 70%)" }}
         />
-        <span className="absolute right-4 top-4 z-10 font-mono text-[11px] text-ink-faint">
-          {String(index + 1).padStart(2, "0")}
-        </span>
         {project.featured && (
           <span className="eyebrow absolute left-4 top-4 z-10">
             <PulseDot />
