@@ -220,4 +220,25 @@ export const projects = [
     github: "https://github.com/PrembahadurKhatri/TheArena",
     live: "https://the-arena-eosin.vercel.app/",
   },
+  {
+    id: "sanjeevani-group-of-companies",
+    title: "Sanjeevani Group of Companies",
+    tagline: "Official website for a group of 18+ companies",
+    description:
+      "The official website of Sanjeevani Group, bringing together 18–19 companies under one umbrella. Each company gets its own presence alongside group-wide information, news and contact details, backed by a database-driven admin with secure authentication.",
+    image: "/sanjeevani.jpg",
+    tags: ["Next.js", "React", "Prisma", "PostgreSQL", "Zod", "TypeScript"],
+    github: "https://github.com/PrembahadurKhatri/Sanjeevani-Group-of-Companies",
+    live: "https://sanjeevani-group-of-companies.vercel.app",
+  },
+  {
+    id: "wedding-invitation",
+    title: "Digital Wedding Invitation",
+    tagline: "Animated online wedding invitation",
+    description:
+      "A digital wedding invitation built as an elegant, mobile-first web experience. Guests open a personal invitation with the couple's story, event schedule, venue details and directions — shareable with a single link instead of a printed card.",
+    image: "/wedding.png",
+    tags: ["Next.js", "React", "JavaScript", "CSS"],
+    live: "https://aashmadiwasweddinginvitation.vercel.app/",
+  },
 ];

@@ -102,16 +102,18 @@ function ProjectCard({ project, delay }) {
               className="transition-transform duration-300 group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5"
             />
           </a>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${project.title} source on GitHub`}
-            className="group/gh inline-flex items-center gap-1.5 text-ink-muted transition-colors hover:text-accent"
-          >
-            <FiGithub size={14} className="transition-transform duration-300 group-hover/gh:rotate-12" />
-            Source
-          </a>
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${project.title} source on GitHub`}
+              className="group/gh inline-flex items-center gap-1.5 text-ink-muted transition-colors hover:text-accent"
+            >
+              <FiGithub size={14} className="transition-transform duration-300 group-hover/gh:rotate-12" />
+              Source
+            </a>
+          )}
         </div>
       </div>
     </Reveal>
