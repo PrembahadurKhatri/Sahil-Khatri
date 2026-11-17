@@ -116,28 +116,6 @@ export default function Hero() {
             </button>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-8 flex items-center gap-4 md:mt-10"
-          >
-            <div className="flex -space-x-2">
-              {profile.socials.slice(0, 4).map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={s.label}
-                  className="group rounded-[11px] ring-2 ring-base transition-transform hover:z-10 hover:-translate-y-1"
-                >
-                  <IconTile icon={s.icon} color={s.color} gradient={s.gradient} size="sm" />
-                </a>
-              ))}
-            </div>
-            <span className="text-sm text-ink-faint">Find me online</span>
-          </motion.div>
         </div>
 
         <div className="relative mx-auto w-full max-w-[17rem] sm:max-w-sm md:col-span-5 md:max-w-none">
