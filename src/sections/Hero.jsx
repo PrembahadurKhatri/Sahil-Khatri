@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FiArrowUpRight, FiArrowDown } from "react-icons/fi";
-import { FaLaptopCode, FaCheckCircle } from "react-icons/fa";
+import { FaLaptopCode } from "react-icons/fa";
 import TypingText from "../components/TypingText.jsx";
 import PulseDot from "../components/PulseDot.jsx";
 import IconTile from "../components/IconTile.jsx";
@@ -32,14 +32,12 @@ export default function Hero() {
   const reduceMotion = useReducedMotion();
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   const experienceStat = stats[0];
-  const projectStat = stats[1];
 
   const float = (d) => (reduceMotion ? undefined : { y: [0, -10, 0], transition: { duration: d, repeat: Infinity, ease: "easeInOut" } });
 
   return (
     <section id="hero" className="grain relative flex min-h-[100svh] flex-col justify-center overflow-hidden">
       {/* Layered backdrop: architectural grid + emerald and gold light pools */}
-      <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-48 right-[-15%] h-[26rem] w-[26rem] rounded-full blur-[100px] md:h-[42rem] md:w-[42rem] md:blur-[140px]"
@@ -118,83 +116,64 @@ export default function Hero() {
 
         </div>
 
-        <div className="relative mx-auto w-full max-w-[17rem] sm:max-w-sm md:col-span-5 md:max-w-none">
+        <div className="relative mx-auto w-full max-w-[18rem] sm:max-w-sm md:col-span-5 md:max-w-none">
         <motion.div
-          initial={{ y: 30, opacity: 0, scale: 0.96 }}
-          animate={{ y: 0, opacity: 1, scale: 1 }}
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.2, ease }}
           className="relative"
         >
-          {/* Rotating gold/emerald ring framing the portrait */}
-          <div className="relative rounded-[2.4rem] p-[2px]">
-            <div aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-[2.4rem]">
-              <div
-                className="absolute left-1/2 top-1/2 aspect-square w-[160%] -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  background:
-                    "conic-gradient(from 0deg, rgb(var(--color-gold)), transparent 25%, rgb(var(--color-accent)) 50%, transparent 75%, rgb(var(--color-gold)))",
-                  animation: reduceMotion ? undefined : "spin-slow 8s linear infinite",
-                }}
-              />
-            </div>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[calc(2.4rem-2px)] bg-surface">
-              <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(180deg, transparent 55%, rgb(var(--color-base) / 0.55))" }}
-              />
-            </div>
-          </div>
-          <div
-            aria-hidden="true"
-            className="absolute -inset-6 -z-10 rounded-[3rem] blur-3xl"
-            style={{ background: "radial-gradient(circle, rgb(var(--color-accent) / 0.35), transparent 70%)" }}
-          />
-
+          {/* Solid panel, offset and slightly rotated behind the photo. */}
           <motion.div
             animate={float(7)}
-            className="card-premium group absolute -bottom-6 -left-6 z-10 flex items-center gap-3 rounded-2xl px-3 py-2.5 sm:-left-8 sm:px-4 sm:py-3.5"
-          >
-            <IconTile icon={FaLaptopCode} color="accent" size="md" />
+            className="absolute -bottom-5 -right-5 h-full w-full rotate-3 rounded-[2rem] bg-accent-soft"
+            aria-hidden="true"
+          />
+
+          {/* Corner brackets: a viewfinder / crop-mark motif around the photo. */}
+          <span
+            aria-hidden="true"
+            className="absolute -left-2.5 -top-2.5 z-10 h-7 w-7 rounded-tl-xl border-l-2 border-t-2 border-accent"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute -bottom-2.5 -right-2.5 z-10 h-7 w-7 rounded-br-xl border-b-2 border-r-2 border-accent"
+          />
+
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line shadow-card">
+            <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
+          </div>
+
+          <div className="absolute -bottom-6 -left-4 z-10 flex items-center gap-3 rounded-2xl border border-line bg-surface px-4 py-3 shadow-card-hover sm:-left-6 sm:px-5 sm:py-4">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent sm:h-11 sm:w-11">
+              <FaLaptopCode size={18} />
+            </span>
             <div>
-              <p className="font-display text-2xl font-medium leading-none text-ink">
+              <p className="text-xl font-semibold leading-none text-ink">
                 {experienceStat.value}
-                <span className="text-gold">{experienceStat.suffix}</span>
+                {experienceStat.suffix}
               </p>
               <p className="mt-1 text-xs text-ink-muted">{experienceStat.label}</p>
             </div>
-          </motion.div>
+          </div>
 
+          {/* developer.ts code card sitting on the top corner of the photo. */}
           <motion.div
             animate={float(6)}
-            className="card-premium group absolute -right-6 top-8 z-10 flex items-center gap-2.5 rounded-2xl px-3 py-2.5 sm:-right-8 sm:top-10 sm:gap-3 sm:px-4 sm:py-3"
+            className="absolute -right-2 -top-5 z-10 w-44 overflow-hidden rounded-xl border border-line bg-surface shadow-card-hover sm:-right-4 sm:-top-6 sm:w-52"
           >
-            <IconTile icon={FaCheckCircle} color="gold" size="sm" />
-            <div>
-              <p className="font-display text-lg font-medium leading-none text-ink">
-                {projectStat.value}
-                {projectStat.suffix}
-              </p>
-              <p className="mt-0.5 text-[11px] text-ink-muted">{projectStat.label}</p>
+            <div className="flex items-center gap-1.5 border-b border-line bg-base px-2.5 py-1.5 sm:px-3 sm:py-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-line sm:h-2 sm:w-2" />
+              <span className="h-1.5 w-1.5 rounded-full bg-line sm:h-2 sm:w-2" />
+              <span className="h-1.5 w-1.5 rounded-full bg-accent sm:h-2 sm:w-2" />
+              <span className="ml-1.5 font-mono text-[9px] text-ink-faint sm:text-[10px]">developer.ts</span>
             </div>
-          </motion.div>
-
-          <motion.div
-            animate={float(8)}
-            className="card-premium absolute -right-2 bottom-24 z-10 hidden w-52 overflow-hidden rounded-xl lg:block lg:-right-10"
-          >
-            <div className="flex items-center gap-1.5 border-b border-line px-3 py-2">
-              <span className="h-2 w-2 rounded-full bg-[#ff5f57]" />
-              <span className="h-2 w-2 rounded-full bg-[#febc2e]" />
-              <span className="h-2 w-2 rounded-full bg-[#28c840]" />
-              <span className="ml-1.5 font-mono text-[10px] text-ink-faint">developer.ts</span>
-            </div>
-            <pre className="px-3.5 py-3 font-mono text-[10.5px] leading-relaxed text-ink-muted">
-              <span className="text-gold">const</span> developer = {"{"}
+            <pre className="px-2.5 py-2.5 font-mono text-[9.5px] leading-relaxed text-ink-muted sm:px-3.5 sm:py-3 sm:text-[11px]">
+              <span className="text-accent">const</span> developer = {"{"}
               {"\n  "}stack: [<span className="text-accent">"MERN"</span>, <span className="text-accent">"Next.js"</span>],
               {"\n  "}focus: <span className="text-accent">"Clean code"</span>,
-              {"\n"}{"}"};
+              {"\n"}{"}"}
+              <span className="text-accent">;</span>
             </pre>
           </motion.div>
         </motion.div>
