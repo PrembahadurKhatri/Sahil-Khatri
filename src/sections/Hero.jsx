@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { FiArrowUpRight, FiArrowDown } from "react-icons/fi";
 import { FaLaptopCode, FaCheckCircle } from "react-icons/fa";
 import TypingText from "../components/TypingText.jsx";
@@ -34,10 +34,6 @@ export default function Hero() {
   const experienceStat = stats[0];
   const projectStat = stats[1];
 
-  const { scrollY } = useScroll();
-  const photoY = useTransform(scrollY, [0, 800], [0, 120]);
-  const textY = useTransform(scrollY, [0, 800], [0, -60]);
-
   const float = (d) => (reduceMotion ? undefined : { y: [0, -10, 0], transition: { duration: d, repeat: Infinity, ease: "easeInOut" } });
 
   return (
@@ -46,17 +42,17 @@ export default function Hero() {
       <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0" />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-48 right-[-15%] h-[42rem] w-[42rem] rounded-full blur-[140px]"
+        className="pointer-events-none absolute -top-48 right-[-15%] h-[26rem] w-[26rem] rounded-full blur-[100px] md:h-[42rem] md:w-[42rem] md:blur-[140px]"
         style={{ background: "rgb(var(--color-accent) / 0.22)" }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-56 -left-32 h-[34rem] w-[34rem] rounded-full blur-[140px]"
+        className="pointer-events-none absolute -bottom-56 -left-32 h-[22rem] w-[22rem] rounded-full blur-[100px] md:h-[34rem] md:w-[34rem] md:blur-[140px]"
         style={{ background: "rgb(var(--color-gold) / 0.14)" }}
       />
 
-      <div className="container-x relative z-10 grid gap-16 pt-36 pb-10 md:grid-cols-12 md:items-center md:pt-32">
-        <motion.div style={{ y: textY }} className="md:col-span-7">
+      <div className="container-x relative z-10 grid gap-14 pt-28 pb-6 md:grid-cols-12 md:items-center md:gap-16 md:pt-32 md:pb-10">
+        <div className="md:col-span-7">
           <motion.span
             initial={{ y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -67,12 +63,12 @@ export default function Hero() {
             <span className="text-ink-muted">{profile.availability}</span>
           </motion.span>
 
-          <div className="mt-7 overflow-hidden pb-2">
+          <div className="mt-6 overflow-hidden pb-2 md:mt-7">
             <motion.h1
               initial={{ y: "105%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 1, delay: 0.12, ease }}
-              className="text-gold font-display text-[12.5vw] font-medium leading-[0.95] sm:text-6xl md:text-7xl lg:text-[5.75rem]"
+              className="text-gold font-display text-[clamp(2.4rem,11vw,3.5rem)] font-medium leading-[1] sm:text-6xl md:text-7xl lg:text-[5.75rem]"
             >
               {profile.name}
             </motion.h1>
@@ -90,7 +86,7 @@ export default function Hero() {
             initial={{ y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3, ease }}
-            className="mt-6 flex flex-wrap items-baseline gap-2 font-display text-2xl text-ink md:text-3xl"
+            className="mt-5 flex min-h-[2.25rem] flex-wrap items-baseline gap-2 font-display text-xl text-ink sm:text-2xl md:mt-6 md:text-3xl"
           >
             <span className="italic text-ink-muted">I'm a</span>
             <TypingText words={profile.roles} className="text-emerald font-medium" />
@@ -100,7 +96,7 @@ export default function Hero() {
             initial={{ y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4, ease }}
-            className="mt-6 max-w-xl text-[1rem] leading-relaxed text-ink-muted md:text-lg"
+            className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-ink-muted md:mt-6 md:text-lg"
           >
             {profile.bio}
           </motion.p>
@@ -109,13 +105,13 @@ export default function Hero() {
             initial={{ y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5, ease }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:gap-4 md:mt-10"
           >
-            <button type="button" onClick={() => scrollTo("projects")} className="btn-primary shine px-7 py-3.5">
+            <button type="button" onClick={() => scrollTo("projects")} className="btn-primary shine whitespace-nowrap px-4 py-3.5 sm:px-7">
               View Projects
               <FiArrowUpRight size={16} />
             </button>
-            <button type="button" onClick={() => scrollTo("contact")} className="btn-ghost px-7 py-3.5">
+            <button type="button" onClick={() => scrollTo("contact")} className="btn-ghost whitespace-nowrap px-4 py-3.5 sm:px-7">
               Get in Touch
             </button>
           </motion.div>
@@ -124,7 +120,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-10 flex items-center gap-4"
+            className="mt-8 flex items-center gap-4 md:mt-10"
           >
             <div className="flex -space-x-2">
               {profile.socials.slice(0, 4).map((s) => (
@@ -142,9 +138,9 @@ export default function Hero() {
             </div>
             <span className="text-sm text-ink-faint">Find me online</span>
           </motion.div>
-        </motion.div>
+        </div>
 
-        <motion.div style={{ y: photoY }} className="relative mx-auto w-full max-w-sm md:col-span-5 md:max-w-none">
+        <div className="relative mx-auto w-full max-w-[17rem] sm:max-w-sm md:col-span-5 md:max-w-none">
         <motion.div
           initial={{ y: 30, opacity: 0, scale: 0.96 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -180,7 +176,7 @@ export default function Hero() {
 
           <motion.div
             animate={float(7)}
-            className="card-premium group absolute -bottom-7 -left-4 z-10 flex items-center gap-3 rounded-2xl px-4 py-3.5 sm:-left-8"
+            className="card-premium group absolute -bottom-6 -left-6 z-10 flex items-center gap-3 rounded-2xl px-3 py-2.5 sm:-left-8 sm:px-4 sm:py-3.5"
           >
             <IconTile icon={FaLaptopCode} color="accent" size="md" />
             <div>
@@ -194,7 +190,7 @@ export default function Hero() {
 
           <motion.div
             animate={float(6)}
-            className="card-premium group absolute -right-3 top-10 z-10 flex items-center gap-3 rounded-2xl px-4 py-3 sm:-right-8"
+            className="card-premium group absolute -right-6 top-8 z-10 flex items-center gap-2.5 rounded-2xl px-3 py-2.5 sm:-right-8 sm:top-10 sm:gap-3 sm:px-4 sm:py-3"
           >
             <IconTile icon={FaCheckCircle} color="gold" size="sm" />
             <div>
@@ -208,7 +204,7 @@ export default function Hero() {
 
           <motion.div
             animate={float(8)}
-            className="card-premium absolute -right-2 bottom-24 z-10 hidden w-52 overflow-hidden rounded-xl sm:block md:-right-10"
+            className="card-premium absolute -right-2 bottom-24 z-10 hidden w-52 overflow-hidden rounded-xl lg:block lg:-right-10"
           >
             <div className="flex items-center gap-1.5 border-b border-line px-3 py-2">
               <span className="h-2 w-2 rounded-full bg-[#ff5f57]" />
@@ -224,10 +220,10 @@ export default function Hero() {
             </pre>
           </motion.div>
         </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-      <div className="relative z-10 mt-8">
+      <div className="relative z-10 mt-10 md:mt-8">
         <TechMarquee />
       </div>
 

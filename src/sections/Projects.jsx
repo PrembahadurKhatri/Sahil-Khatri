@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
@@ -40,40 +40,20 @@ function StatusBadge() {
   );
 }
 
-function ProjectCard({ project, delay, index }) {
+function ProjectCard({ project, index }) {
   const { title, ongoing } = useCleanTitle(project.title);
   const [expanded, setExpanded] = useState(false);
   const isLong = project.description.length > READ_MORE_THRESHOLD;
   const spotlight = useSpotlight();
-  const fromLeft = index % 2 === 0;
-
-  // Image drifts against the scroll inside its frame for a parallax depth effect.
-  const { scrollYProgress } = useScroll({ target: spotlight.ref, offset: ["start end", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [-24, 24]);
-  const imgRotate = useTransform(scrollYProgress, [0, 1], [fromLeft ? -6 : 6, fromLeft ? 6 : -6]);
 
   return (
     <Reveal
       ref={spotlight.ref}
       onMouseMove={spotlight.onMouseMove}
-      delay={delay}
-      initial={{
-        opacity: 0,
-        y: 90,
-        x: fromLeft ? -60 : 60,
-        rotateX: 28,
-        rotateY: fromLeft ? 18 : -18,
-        scale: 0.85,
-        filter: "blur(12px)",
-      }}
-      whileInView={{ opacity: 1, y: 0, x: 0, rotateX: 0, rotateY: 0, scale: 1, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ type: "spring", stiffness: 70, damping: 16, mass: 0.9, delay }}
-      style={{ transformPerspective: 1000 }}
       whileHover={{ y: -6 }}
       className="card-premium spotlight group flex flex-col overflow-hidden rounded-3xl"
     >
-      <div className="relative m-2 flex h-48 items-center justify-center overflow-hidden rounded-[1.35rem] bg-base/70 p-8 sm:h-52">
+      <div className="relative m-2 flex h-48 items-center justify-center overflow-hidden rounded-[1.35rem] bg-base/70 px-6 pb-5 pt-14 sm:h-52 sm:p-8">
         <div aria-hidden="true" className="bg-grid absolute inset-0 opacity-70" />
         <div
           aria-hidden="true"
@@ -89,19 +69,19 @@ function ProjectCard({ project, delay, index }) {
             Featured
           </span>
         )}
-        <motion.div style={{ y: imgY, rotate: imgRotate }} className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center">
         <img
           src={project.image}
           alt={project.title}
           loading="lazy"
           className="relative h-full w-full max-w-[11rem] object-contain drop-shadow-[0_18px_24px_rgb(0_0_0_/_0.35)] transition-transform duration-500 group-hover:scale-110 sm:max-w-[12rem]"
         />
-        </motion.div>
+        </div>
       </div>
 
-      <div className="flex flex-1 flex-col px-6 pb-6 pt-4">
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-display text-2xl font-medium text-ink transition-colors duration-300 group-hover:text-gold">
+          <h3 className="font-display text-xl font-medium text-ink transition-colors sm:text-2xl duration-300 group-hover:text-gold">
             {title}
           </h3>
           {ongoing && <StatusBadge />}
@@ -168,7 +148,7 @@ function ProjectCard({ project, delay, index }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-24 md:py-32">
+    <section id="projects" className="relative py-16 md:py-32">
       <div className="container-x">
         <SectionHeading
           eyebrow="Selected Work"
@@ -176,9 +156,9 @@ export default function Projects() {
           description="A few real, shipped projects — client sites and products, live in production."
         />
 
-        <div className="grid gap-6 sm:grid-cols-2 sm:items-start">
+        <div className="grid gap-5 md:grid-cols-2 md:items-start md:gap-6">
           {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} delay={(i % 2) * 0.12} />
+            <ProjectCard key={project.id} project={project} index={i} />
           ))}
         </div>
       </div>

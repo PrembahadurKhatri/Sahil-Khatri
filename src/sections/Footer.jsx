@@ -18,7 +18,7 @@ export default function Footer() {
         aria-hidden="true"
       />
 
-      <div className="container-x relative flex flex-col items-center gap-8 py-14 text-center md:flex-row md:justify-between md:text-left">
+      <div className="container-x relative flex flex-col items-center gap-8 py-12 md:py-14 text-center md:flex-row md:justify-between md:text-left">
         <div>
           <p
             className="font-display text-3xl font-medium"
@@ -36,7 +36,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center gap-3 md:items-end">
           <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#deba70]">Follow on</span>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             {profile.socials.map((social) => (
               <a
                 key={social.label}
@@ -53,7 +53,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="container-x relative border-t border-white/10 py-6 text-center text-xs text-white/40 md:text-left">
+      <div className="container-x relative border-t border-white/10 py-6 pb-20 md:pb-6 text-center text-xs text-white/40 md:text-left">
         © {YEAR} {profile.name}. All rights reserved.
       </div>
     </footer>

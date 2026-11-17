@@ -22,11 +22,11 @@ function JobCard({ job, index }) {
       onMouseMove={spotlight.onMouseMove}
       delay={index * 0.06}
       whileHover={{ y: -4 }}
-      className="card-premium spotlight group grid gap-5 rounded-3xl p-6 md:grid-cols-[13rem,1fr] md:gap-10 md:p-8"
+      className="card-premium spotlight group grid gap-4 rounded-3xl p-5 md:grid-cols-[13rem,1fr] md:gap-10 md:p-8"
     >
-      <div className="flex items-start gap-4 md:flex-col">
+      <div className="flex items-center gap-4 md:flex-col md:items-start">
         <IconTile icon={meta.icon} color={meta.color} size="lg" />
-        <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold md:mt-0">{job.period}</span>
+        <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">{job.period}</span>
       </div>
       <div>
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -52,7 +52,7 @@ function JobCard({ job, index }) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-24 md:py-32">
+    <section id="experience" className="relative py-16 md:py-32">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-surface/40" />
       <div className="container-x relative">
         <SectionHeading

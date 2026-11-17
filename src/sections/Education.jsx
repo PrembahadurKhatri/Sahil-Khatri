@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
 import { FaAward, FaGraduationCap } from "react-icons/fa";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
@@ -9,38 +7,26 @@ import { education, certifications } from "../data/content.js";
 const CERT_COLORS = ["#FF9900", "#0866FF", "#FF6F00", "#47A248"];
 
 export default function Education() {
-  const timelineRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 75%", "end 60%"],
-  });
-
   return (
-    <section id="education" className="relative py-24 md:py-32">
+    <section id="education" className="relative py-16 md:py-32">
       <div className="container-x">
         <SectionHeading eyebrow="Education" title="Academic background" />
 
-        <div className="grid gap-16 md:grid-cols-12">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-7">
-            <ol ref={timelineRef} className="relative pl-12">
-              <span className="absolute left-[19px] top-0 h-full w-px bg-line" aria-hidden="true" />
-              <motion.span
-                style={{ scaleY: scrollYProgress }}
-                className="absolute left-[19px] top-0 h-full w-px origin-top"
+            <ol className="relative pl-12">
+              <span
+                className="absolute left-[19px] top-0 h-full w-px"
+                style={{ background: "linear-gradient(rgb(var(--color-gold)), rgb(var(--color-accent)))" }}
                 aria-hidden="true"
-              >
-                <span
-                  className="block h-full w-full"
-                  style={{ background: "linear-gradient(rgb(var(--color-gold)), rgb(var(--color-accent)))" }}
-                />
-              </motion.span>
+              />
 
               {education.map((item, i) => (
                 <Reveal as="li" key={item.degree} delay={i * 0.08} className="group relative pb-10 last:pb-0">
                   <span className="absolute -left-12 top-1">
                     <IconTile icon={FaGraduationCap} color={i % 2 ? "gold" : "accent"} size="md" className="!h-10 !w-10" />
                   </span>
-                  <div className="card-premium rounded-3xl p-6 md:p-7">
+                  <div className="card-premium rounded-3xl p-5 md:p-7">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">{item.period}</span>
                     <h3 className="mt-2 font-display text-xl font-medium text-ink md:text-2xl">{item.degree}</h3>
                     <p className="mt-1 text-sm font-medium text-accent">{item.institution}</p>
@@ -64,10 +50,10 @@ export default function Education() {
                   key={cert.title}
                   delay={0.05 * i}
                   whileHover={{ x: 4 }}
-                  className="card-premium group flex items-center gap-4 rounded-2xl px-4 py-4"
+                  className="card-premium group flex items-center gap-3 rounded-2xl px-4 py-4 sm:gap-4"
                 >
                   <IconTile icon={FaAward} color={CERT_COLORS[i % CERT_COLORS.length]} size="md" />
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-ink">{cert.title}</p>
                     <p className="mt-0.5 text-xs text-ink-faint">{cert.issuer}</p>
                   </div>

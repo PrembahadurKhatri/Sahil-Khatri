@@ -1,36 +1,17 @@
 import { forwardRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
-const MOTION_PROPS = ["initial", "animate", "whileInView", "whileHover", "whileTap", "viewport", "transition", "exit"];
+// Scroll-in animations were removed on purpose: content renders immediately.
+// The component is kept so sections can still pass hover props (whileHover).
+const SCROLL_PROPS = ["initial", "animate", "whileInView", "viewport", "transition", "exit", "delay", "y", "once"];
 
-const Reveal = forwardRef(function Reveal(
-  { children, as = "div", delay = 0, y = 40, className = "", once = true, ...props },
-  ref
-) {
-  const reduceMotion = useReducedMotion();
+const Reveal = forwardRef(function Reveal({ children, as = "div", className = "", ...props }, ref) {
   const Component = motion[as] || motion.div;
-
-  if (reduceMotion) {
-    const Plain = as;
-    const plainProps = { ...props };
-    MOTION_PROPS.forEach((k) => delete plainProps[k]);
-    return (
-      <Plain ref={ref} className={className} {...plainProps}>
-        {children}
-      </Plain>
-    );
-  }
+  const rest = { ...props };
+  SCROLL_PROPS.forEach((k) => delete rest[k]);
 
   return (
-    <Component
-      ref={ref}
-      initial={{ y, opacity: 0, scale: 0.96, filter: "blur(10px)" }}
-      whileInView={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
-      viewport={{ once, margin: "-40px", amount: 0.15 }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-      {...props}
-    >
+    <Component ref={ref} className={className} {...rest}>
       {children}
     </Component>
   );

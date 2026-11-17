@@ -50,6 +50,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   @apply bg-base text-ink font-body antialiased;
   font-feature-settings: "ss01" 1, "cv11" 1;
@@ -95,7 +100,7 @@ h1, h2, h3, h4, .font-display {
 
 @layer utilities {
   .container-x {
-    @apply mx-auto max-w-content px-6 md:px-10;
+    @apply mx-auto max-w-content px-5 sm:px-6 md:px-10;
   }
 
   /* Section label: glass pill with a gold hairline and dot. */
@@ -279,6 +284,27 @@ h1, h2, h3, h4, .font-display {
   .spotlight > * {
     position: relative;
     z-index: 1;
+  }
+}
+
+/* Phones: frosted-glass blur on every card makes scrolling janky, so use a
+   solid surface instead. The cursor spotlight is skipped on touch screens. */
+@media (max-width: 767px) {
+  .card-premium,
+  .eyebrow,
+  .btn-ghost {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .card-premium {
+    background:
+      linear-gradient(160deg, rgb(var(--color-surface)), rgb(var(--color-surface-2))) padding-box,
+      linear-gradient(140deg, rgb(var(--color-gold) / 0.45), rgb(var(--color-border) / 0.9) 35%, rgb(var(--color-border) / 0.9) 65%, rgb(var(--color-accent) / 0.45)) border-box;
+  }
+}
+@media (hover: none) {
+  .spotlight::before {
+    display: none;
   }
 }
 

@@ -36,14 +36,14 @@ function DetailRow({ detail, delay }) {
     >
       <IconTile icon={detail.icon} color={detail.color} size="md" />
 
-      <div>
+      <div className="min-w-0">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">{detail.label}</p>
         {detail.href ? (
           <a
             href={detail.href}
             target={detail.href.startsWith("http") ? "_blank" : undefined}
             rel={detail.href.startsWith("http") ? "noreferrer" : undefined}
-            className="text-sm font-medium text-ink hover:text-accent"
+            className="break-words text-sm font-medium text-ink hover:text-accent"
           >
             {detail.value}
           </a>
@@ -86,7 +86,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-32">
+    <section id="contact" className="relative py-16 md:py-32">
       <div className="container-x">
         <SectionHeading
           eyebrow="Get in Touch"
@@ -94,7 +94,7 @@ export default function Contact() {
           description="I'm selective about projects because I want to do great work, not just collect paychecks. Tell me what you're trying to build, and I'll give you an honest answer about whether I can help. I respond to every message personally within 24 hours."
         />
 
-        <div className="grid gap-8 md:grid-cols-12">
+        <div className="grid gap-6 md:grid-cols-12 md:gap-8">
           <div className="flex flex-col gap-3 md:col-span-5">
             {DETAILS.map((detail, i) => (
               <DetailRow key={detail.label} detail={detail} delay={0.05 * i} />
@@ -119,7 +119,7 @@ export default function Contact() {
             ref={formSpotlight.ref}
             onMouseMove={formSpotlight.onMouseMove}
             delay={0.1}
-            className="card-premium spotlight rounded-3xl p-7 md:col-span-7 md:p-10"
+            className="card-premium spotlight rounded-3xl p-5 sm:p-7 md:col-span-7 md:p-10"
           >
             <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5">
               <label className="flex flex-col gap-2 text-sm">

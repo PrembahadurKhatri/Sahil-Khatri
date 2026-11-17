@@ -34,10 +34,10 @@ function StatCard({ stat, meta, delay }) {
       onMouseMove={spotlight.onMouseMove}
       delay={delay}
       whileHover={{ y: -6 }}
-      className="card-premium spotlight group rounded-3xl p-6"
+      className="card-premium spotlight group rounded-3xl p-4 sm:p-6"
     >
       <IconTile icon={meta.icon} color={meta.color} size="md" />
-      <div className="mt-5 font-display text-4xl font-medium text-ink">
+      <div className="mt-4 font-display text-3xl font-medium text-ink sm:mt-5 sm:text-4xl">
         <AnimatedCounter value={stat.value} suffix={stat.suffix} />
       </div>
       <p className="mt-1.5 text-sm font-semibold leading-snug text-ink">{stat.label}</p>
@@ -48,14 +48,14 @@ function StatCard({ stat, meta, delay }) {
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24 md:py-32">
+    <section id="about" className="relative py-16 md:py-32">
       <div className="container-x">
         <SectionHeading eyebrow="About Me" title="A little about how I work" />
 
         <div className="grid gap-12 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-6">
             <Reveal>
-              <p className="border-l-2 border-gold/60 pl-6 font-display text-xl leading-relaxed text-ink md:text-2xl">
+              <p className="border-l-2 border-gold/60 pl-5 font-display text-lg leading-relaxed text-ink sm:text-xl md:pl-6 md:text-2xl">
                 {profile.bio}
               </p>
             </Reveal>
@@ -70,9 +70,9 @@ export default function About() {
                   className="card-premium group flex items-center gap-4 rounded-2xl px-4 py-3"
                 >
                   <IconTile icon={fact.icon} color={fact.color} size="sm" />
-                  <div>
+                  <div className="min-w-0">
                     <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">{fact.label}</dt>
-                    <dd className="text-sm font-medium text-ink">{fact.value}</dd>
+                    <dd className="break-words text-sm font-medium text-ink">{fact.value}</dd>
                   </div>
                 </Reveal>
               ))}
@@ -80,7 +80,7 @@ export default function About() {
           </div>
 
           <div className="md:col-span-6 md:pl-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {stats.map((stat, i) => (
                 <StatCard key={stat.label} stat={stat} meta={STAT_META[i % STAT_META.length]} delay={0.06 * i} />
               ))}
@@ -88,10 +88,10 @@ export default function About() {
           </div>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-12 md:mt-16">
           <div className="hairline mb-8" aria-hidden="true" />
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">Core Stack</span>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 md:gap-x-6 md:gap-y-4">
+            <span className="w-full text-[11px] font-semibold uppercase tracking-[0.22em] text-gold sm:w-auto">Core Stack</span>
             {TECH_STACK.map((tech) => (
               <span key={tech.name} className="group inline-flex items-center gap-2.5 text-sm font-medium text-ink-muted">
                 <IconTile icon={tech.icon} color={tech.color} size="xs" />
