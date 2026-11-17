@@ -6,8 +6,13 @@ export default function ScrollProgressBar() {
 
   return (
     <motion.div
-      style={{ scaleX }}
-      className="fixed top-0 left-0 right-0 h-[2px] bg-accent origin-left z-[60]"
+      style={{
+        scaleX,
+        background:
+          "linear-gradient(90deg, rgb(var(--color-accent) / 0.35), rgb(var(--color-accent)), rgb(var(--color-accent) / 0.35))",
+        boxShadow: "0 0 12px rgb(var(--color-accent) / 0.8), 0 0 2px rgb(var(--color-accent))",
+      }}
+      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[60]"
       aria-hidden="true"
     />
   );

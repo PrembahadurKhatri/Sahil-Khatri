@@ -3,6 +3,8 @@ import { useTheme } from "./hooks/useTheme.js";
 import Loader from "./components/Loader.jsx";
 import Navbar from "./components/Navbar.jsx";
 import ScrollProgressBar from "./components/ScrollProgressBar.jsx";
+import ScrollAurora from "./components/ScrollAurora.jsx";
+import ScrollScene from "./components/ScrollScene.jsx";
 import WhatsAppButton from "./components/WhatsAppButton.jsx";
 import Hero from "./sections/Hero.jsx";
 import About from "./sections/About.jsx";
@@ -29,17 +31,18 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-base text-ink">
+    <div className="relative isolate min-h-screen bg-base text-ink">
+      <ScrollAurora />
       <ScrollProgressBar />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Education />
-        <Experience />
-        <Projects />
-        <Contact />
+        <ScrollScene enter={false}><Hero /></ScrollScene>
+        <ScrollScene><About /></ScrollScene>
+        <ScrollScene><Skills /></ScrollScene>
+        <ScrollScene><Education /></ScrollScene>
+        <ScrollScene><Experience /></ScrollScene>
+        <ScrollScene><Projects /></ScrollScene>
+        <ScrollScene exit={false}><Contact /></ScrollScene>
       </main>
       <Footer />
       <WhatsAppButton />

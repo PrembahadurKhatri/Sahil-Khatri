@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
@@ -24,17 +24,36 @@ function StatusBadge() {
   );
 }
 
-function ProjectCard({ project, delay }) {
+function ProjectCard({ project, delay, index }) {
   const { title, ongoing } = useCleanTitle(project.title);
   const [expanded, setExpanded] = useState(false);
   const isLong = project.description.length > READ_MORE_THRESHOLD;
   const spotlight = useSpotlight();
+  const fromLeft = index % 2 === 0;
+
+  // Image drifts against the scroll inside its frame for a parallax depth effect.
+  const { scrollYProgress } = useScroll({ target: spotlight.ref, offset: ["start end", "end start"] });
+  const imgY = useTransform(scrollYProgress, [0, 1], [-24, 24]);
+  const imgRotate = useTransform(scrollYProgress, [0, 1], [fromLeft ? -6 : 6, fromLeft ? 6 : -6]);
 
   return (
     <Reveal
       ref={spotlight.ref}
       onMouseMove={spotlight.onMouseMove}
       delay={delay}
+      initial={{
+        opacity: 0,
+        y: 90,
+        x: fromLeft ? -60 : 60,
+        rotateX: 28,
+        rotateY: fromLeft ? 18 : -18,
+        scale: 0.85,
+        filter: "blur(12px)",
+      }}
+      whileInView={{ opacity: 1, y: 0, x: 0, rotateX: 0, rotateY: 0, scale: 1, filter: "blur(0px)" }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ type: "spring", stiffness: 70, damping: 16, mass: 0.9, delay }}
+      style={{ transformPerspective: 1000 }}
       whileHover={{ y: -6 }}
       className="spotlight group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/40 hover:shadow-card-hover"
     >
@@ -45,12 +64,14 @@ function ProjectCard({ project, delay }) {
             Featured
           </span>
         )}
+        <motion.div style={{ y: imgY, rotate: imgRotate }} className="flex h-full w-full items-center justify-center">
         <img
           src={project.image}
           alt={project.title}
           loading="lazy"
           className="h-full w-full max-w-[11rem] object-contain transition-transform duration-500 group-hover:scale-110 sm:max-w-[12rem]"
         />
+        </motion.div>
       </div>
 
       <div className="flex flex-1 flex-col p-7">
@@ -132,7 +153,7 @@ export default function Projects() {
 
         <div className="grid gap-6 sm:grid-cols-2 sm:items-start">
           {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} delay={i * 0.08} />
+            <ProjectCard key={project.id} project={project} index={i} delay={(i % 2) * 0.12} />
           ))}
         </div>
       </div>
