@@ -121,10 +121,13 @@ function ProjectCard({ project, index }) {
         </ul>
 
         <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-line pt-5">
-          <a href={project.live} target="_blank" rel="noreferrer" className="btn-primary shine px-5 py-2.5 text-xs">
-            Live Site
-            <FiArrowUpRight size={14} />
-          </a>
+          {/* A project can list several live sites (`lives`) or a single one (`live`). */}
+          {(project.lives ?? [{ label: "Live Site", url: project.live }]).map((site) => (
+            <a key={site.url} href={site.url} target="_blank" rel="noreferrer" className="btn-primary shine px-5 py-2.5 text-xs">
+              {site.label}
+              <FiArrowUpRight size={14} />
+            </a>
+          ))}
           {project.github && (
             <a
               href={project.github}

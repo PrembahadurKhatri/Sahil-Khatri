@@ -245,6 +245,10 @@ export const projects = [
       "A digital wedding invitation built as an elegant, mobile-first web experience. Guests open a personal invitation with the couple's story, event schedule, venue details and directions — shareable with a single link instead of a printed card.",
     image: "/wedding.png",
     tags: ["Next.js", "React", "JavaScript", "CSS"],
-    live: "https://aashmadiwasweddinginvitation.vercel.app/",
+    // Two live designs of the invitation.
+    lives: [
+      { label: "Live Site 1", url: "https://wedding-demo-door.vercel.app/" },
+      { label: "Live Site 2", url: "https://wedding-desing1.vercel.app/" },
+    ],
   },
 ];
